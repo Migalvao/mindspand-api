@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: connections
+#
+#  id                       :bigint           not null, primary key
+#  ended_at                 :datetime
+#  class_status             :integer          default("class_open")
+#  person_closed_connection :integer          default(0)
+#  match_id                 :bigint           not null
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#
+
+one:
+  ended_at: 2021-07-23 19:19:02
+  class_status: 1
+  person_closed_connection: 1
+  match: one
+
+two:
+  ended_at: 2021-07-23 19:19:02
+  class_status: 1
+  person_closed_connection: 1
+  match: two

@@ -3,6 +3,9 @@ class TestController < ApplicationController
   
     def index
 
+        puts SKILLS
+        puts SKILLS["1"]
+
         res = {"success" => "Article was successfully deleted"}
         render(:json => res)
     end
