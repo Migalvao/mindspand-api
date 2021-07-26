@@ -1,6 +1,6 @@
-# mindspand-api
+# SkillX
 
-API for the Mindspand web application, an application used to connect people to learn skills from each other, using Ruby On Rails. Endpoint documentation available [here](https://documenter.getpostman.com/view/10665400/TzmBDE1W). UML diagram of the the data models available [here](https://drive.google.com/file/d/1ZuopBsgD1IhwJFE2EYyJPaqq7YtLXxPj/view?usp=sharing).
+SkillX is a web application used to connect people to learn skills from each other, using Ruby On Rails. Endpoint documentation available [here](https://documenter.getpostman.com/view/10665400/TzmBDE1W). UML diagram of the the data models available [here](https://drive.google.com/file/d/1ZuopBsgD1IhwJFE2EYyJPaqq7YtLXxPj/view?usp=sharing).
 
 Requirements:
 
