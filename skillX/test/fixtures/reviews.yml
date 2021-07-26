@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: reviews
+#
+#  id              :bigint           not null, primary key
+#  rating          :integer
+#  comment         :text
+#  student_teacher :boolean
+#  connection_id   :bigint           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
+one:
+  rating: 1
+  comment: MyText
+  student_teacher: false
+  connection: one
+
+two:
+  rating: 1
+  comment: MyText
+  student_teacher: false
+  connection: two
