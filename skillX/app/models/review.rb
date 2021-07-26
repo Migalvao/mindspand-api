@@ -5,7 +5,7 @@
 #  id              :bigint           not null, primary key
 #  rating          :integer
 #  comment         :text
-#  student_teacher :boolean          (TRUE IS STUDENT AND FALSE IS TEACHER)
+#  student_teacher :boolean
 #  connection_id   :bigint           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
