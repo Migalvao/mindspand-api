@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   #API
   get '/username/:username', to: 'api/accounts#check_username', as: 'check_username'  #Check username
 
+  
   #FRONTEND
 
   #Signup

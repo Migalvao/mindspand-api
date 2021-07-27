@@ -2,7 +2,15 @@ class AccountsController < ApplicationController
     protect_from_forgery with: :null_session
   
     def get_signup
-      render "accounts/signup", status: 500
+      
+
+      render(inertia: 'Show',
+      props: {
+        event: {"test": "test"}
+      })
+
+
+      # render "accounts/signup", status: 500
     end
 
     def post_signup
