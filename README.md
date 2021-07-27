@@ -10,18 +10,30 @@ Requirements:
 
 ## To run
 
-To start the server, open a terminal window in the /api directory and run:
+To start the server, open a terminal window in the second /skillX directory and run:
 
 ```bash
 rails server
 ```
 
+To enable fast reload, open another terminal window in the same directory and run:
+
+```bash
+ruby bin/webpack-dev-server
+```
+
 ## To install
 
-After cloning this repository, open a terminal window in the project's /api directory and install dependencies with:
+After cloning this repository, open a terminal window in the project's skillX/skillX directory (inside the second skillX directory) and install ruby dependencies with:
 
 ```bash
 bundle install
+```
+
+Then, to install the JavaScript dependencies, run:
+
+```bash
+yarn install
 ```
 
 Then, to configure the database, open the file /app/config/database.yml and enter the following information for the development, test and production databases (depending on which mode you'll want to run the project):
