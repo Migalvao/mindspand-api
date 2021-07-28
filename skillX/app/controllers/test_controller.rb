@@ -1,6 +1,15 @@
 class TestController < ApplicationController
-    protect_from_forgery with: :null_session
+    include AuthenticationConcern
   
+    def home
+        if @current_user
+            render(inertia: 'Home', props: {"current_user": @current_user.as_json})
+        else
+            redirect_to "/login"
+        end
+    end
+
+
     def index
 
         puts SKILLS
