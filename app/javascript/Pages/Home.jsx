@@ -1,7 +1,8 @@
 import React from "react";
 import Layout from "./Layout";
 import { Head, Link } from "@inertiajs/inertia-react";
-import "../stylesheets/paragraph.css";
+// import "../stylesheets/paragraph.css";
+// import "../stylesheets/paragraph.css";
 
 export default function Welcome(props) {
   const token = document.querySelector(
@@ -14,6 +15,7 @@ export default function Welcome(props) {
       <h1>Welcome {props.current_user.name}!</h1>
       <p>Hello, welcome to your first Inertia app!</p>
       <p id="p1">This is cool!</p>
+      <p className="paragraph">This is cool!</p>
 
       <Link
         href="/logout"

@@ -5,6 +5,7 @@
 import React from "react";
 import { render } from "react-dom";
 import { createInertiaApp } from "@inertiajs/inertia-react";
+// import "../stylesheets/paragraph.css";
 
 createInertiaApp({
   resolve: (name) => require(`.././Pages/${name}`),
