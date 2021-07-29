@@ -10,7 +10,7 @@ Requirements:
 
 ## To run
 
-To start the server, open a terminal window in the second /skillX directory and run:
+To start the server, open a terminal window in the project's main directory and run:
 
 ```bash
 rails server
@@ -22,9 +22,19 @@ To enable fast reload, open another terminal window in the same directory and ru
 ruby bin/webpack-dev-server
 ```
 
+## To deploy
+
+To deploy the current version to heroku, open a terminal window in the project's main directory and run:
+
+```bash
+git push heroku master
+```
+
+And then you can check the live version [here](https://whitesmith-skillx.herokuapp.com/).
+
 ## To install
 
-After cloning this repository, open a terminal window in the project's skillX/skillX directory (inside the second skillX directory) and install ruby dependencies with:
+After cloning this repository, open a terminal window in the project's main directory and install ruby dependencies with:
 
 ```bash
 bundle install
