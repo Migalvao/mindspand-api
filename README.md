@@ -64,3 +64,9 @@ Finally, to create the necessary database tables, go back to the terminal window
 ```bash
 rails db:schema:load
 ```
+
+To load the default categories and skills and default user (username: 'username' and password: 'password'), run:
+
+```bash
+rails db:seed
+```

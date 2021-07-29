@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root "accounts#get_login"
 
   #API
-  get '/username/:username', to: 'api/accounts#check_username', as: 'check_username'  #Check username
+  get '/api/username/:username', to: 'api/utils#check_username', as: 'check_username'  #Check username
+  get '/api/skills/', to: 'api/utils#get_all_skills', as: 'get_all_skills'  #Fetch skills and categories
 
   
   #FRONTEND
