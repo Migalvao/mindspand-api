@@ -43,7 +43,7 @@ class SkillClass < ApplicationRecord
     hybrid: 2
   }
 
-  validates :title, :no_classes, :class_duration, :method, :dificulty, :regime, presence: true
+  validates :title, :no_classes, :class_duration, :method, :difficulty, :regime, presence: true
   validates :location, presence: true, unless: :method_is_remote?
 
 

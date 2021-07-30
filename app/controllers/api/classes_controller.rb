@@ -1,0 +1,45 @@
+class Api::ClassesController < ApplicationController
+    include AuthenticationConcern
+  
+    def post_class
+
+        if @current_user
+            filtered_params = class_params
+            filtered_params[:teacher] = @current_user
+
+            new_class = SkillClass.new(filtered_params)
+        
+            if new_class.save
+                # success
+                res = new_class.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
+                render(json: res)
+            else
+                res = {"error" => new_class.errors}
+                render(json: res, status: 400)
+            end
+        else
+            error = {"error": "User must be authenticated"}
+            render(json: error, status: 401)
+        end
+
+    end
+
+    def get_classes
+        if @current_user
+            # TODO filters
+            classes = SkillClass.all
+            classes = classes.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
+            render(json: classes)
+        else
+            error = {"error": "User must be authenticated"}
+            render(json: error, status: 401)
+        end
+    end
+  
+    private
+    def class_params
+        #filters parameters
+      params.permit(:title, :description, :no_classes, :class_duration, :method, :difficulty, :regime, :location, :skill_id)
+    end
+
+end
