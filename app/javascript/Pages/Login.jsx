@@ -30,7 +30,7 @@ export default function Login(props) {
   };
 
   return (
-    <Layout>
+    <main>
       <Head title="Welcome" />
       <ErrorMessage />
       <h1>Login</h1>
@@ -51,6 +51,6 @@ export default function Login(props) {
 
         <input type="submit" value="Submit" />
       </form>
-    </Layout>
+    </main>
   );
 }

@@ -36,6 +36,25 @@ class Api::ClassesController < ApplicationController
         end
     end
   
+    def get_user_classes
+        if @current_user
+
+            if @current_user.id == params[:id].to_i
+                #own classes, show all classes
+                classes = SkillClass.where(teacher: params[:id])
+            else
+                #someone else's classes, only show those not archived
+                classes = SkillClass.where(teacher: params[:id], archived: false)
+            end
+            
+            classes = classes.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
+            render(json: classes)
+        else
+            error = {"error": "User must be authenticated"}
+            render(json: error, status: 401)
+        end
+    end
+
     private
     def class_params
         #filters parameters

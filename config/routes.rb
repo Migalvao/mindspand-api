@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   #Classes
   get '/api/classes', to: 'api/classes#get_classes', as: 'get_classes'
   post '/api/users/:id/classes', to: 'api/classes#post_class', as: 'post_class'
+  get '/api/users/:id/classes', to: 'api/classes#get_user_classes', as: 'get_user_classes'
 
 
   
@@ -28,5 +29,8 @@ Rails.application.routes.draw do
   #home
   get '/', to: 'test#home', as: 'home'
   get '/home', to: 'test#home'
+
+  #profile
+  get '/users/:id', to: 'accounts#get_profile', as: 'get_profile'  #Profile
 
 end

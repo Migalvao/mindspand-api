@@ -7,9 +7,10 @@ export default function Welcome(props) {
   const token = document.querySelector(
     "[name=csrf-token]"
   ).content;
+  const headers = { "X-CSRF-Token": token };
 
   return (
-    <Layout>
+    <Layout current_user={props.current_user}>
       <Head title="Welcome" />
       <h1>Welcome {props.current_user.name}!</h1>
       <p>Hello, welcome to your first Inertia app!</p>
@@ -19,7 +20,7 @@ export default function Welcome(props) {
       <Link
         href="/logout"
         method="delete"
-        headers={{ "X-CSRF-Token": token }}
+        headers={headers}
         as="button"
       >
         Logout

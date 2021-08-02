@@ -74,6 +74,34 @@ class AccountsController < ApplicationController
     redirect_to '/login'
   end
 
+
+  def get_profile
+    if @current_user
+      user = User.find_by(id: params[:id].to_i)
+
+      if not user
+        render(inertia: 'NotFound')
+        return
+      end
+
+      if @current_user.id == user.id
+        #own profile, can edit
+        user_json = user.as_json(only: [:id, :name, :username, :description])
+        res = {"can_edit": true, "user": user}
+
+      else
+        #not own profile, can't edit
+        user_json = user.as_json(only: [:id, :name, :username, :description])
+        res = {"can_edit": false, "user": user}
+      end
+
+      render(inertia: 'Profile', props: res)
+    else
+      render(inertia: 'Login')
+    end
+  end
+
+
   private
   def signup_params
       #filters parameters
