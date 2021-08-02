@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   ## API
   get '/api/username/:username', to: 'api/utils#check_username', as: 'check_username'  #Check username
   get '/api/skills/', to: 'api/utils#get_all_skills', as: 'get_all_skills'  #Fetch skills and categories
+  get '/api/users/', to: 'api/utils#get_all_users', as: 'get_all_users'  #Fetch all users
 
   #Classes
   get '/api/classes', to: 'api/classes#get_classes', as: 'get_classes'

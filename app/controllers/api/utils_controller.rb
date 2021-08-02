@@ -22,5 +22,13 @@ class Api::UtilsController < ApplicationController
 
   end
 
+  def get_all_users
+
+    users = User.all
+    users_json = users.as_json(only: [:id, :name, :username, :description])
+
+    render(json: users_json)
+
+  end
 
 end

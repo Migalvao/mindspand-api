@@ -27,7 +27,7 @@ class Api::ClassesController < ApplicationController
     def get_classes
         if @current_user
             # TODO filters
-            classes = SkillClass.all
+            classes = SkillClass.where(archived: false).where(class_params())
             classes = classes.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
             render(json: classes)
         else

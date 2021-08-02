@@ -31,34 +31,13 @@ export default function Login(props) {
 
   return (
     <main>
-      <Head title="Welcome" />
       <ErrorMessage />
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username/Email:</label>
-        <br />
-        <input
-          type="text"
-          id="username"
-          required
-          name="username"
-        />
-        <br />
-        <label htmlFor="password">Password:</label>
-        <br />
-        <input
-          type="password"
-          required
-          id="password"
-          name="password"
-        />
-        <br />
+      <h1>Signup</h1>
 
-        <input type="submit" value="Submit" />
-      </form>
       <br />
-      Don't have an account yet? Signup{" "}
-      <Link href="/signup">here</Link>!
+      <Link href="/home" as="button">
+        Home
+      </Link>
     </main>
   );
 }

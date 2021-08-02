@@ -4,14 +4,8 @@ class AccountsController < ApplicationController
 
   def get_signup
     
+    render(inertia: 'Signup')
 
-    render(inertia: 'Show',
-    props: {
-      event: {"test": "test"}
-    })
-
-
-    # render "accounts/signup", status: 500
   end
 
   def post_signup
@@ -37,19 +31,6 @@ class AccountsController < ApplicationController
   end
 
   def post_login
-    # if not params["password"]
-    #   error = {"error" => "Password missing"}
-    #   render(inertia: 'Login', props: error, status: 400)
-    # end
-
-    # if params["username"]
-    #   user = User.find_by(username: params["username"])
-    # elsif params["email"]
-    #   user = User.find_by(email: params["email"])
-    # else
-    #   error = {"error" => "Username/email missing"}
-    #   render(inertia: 'Login', props: error, status: 400)
-    # end
 
     user = User.find_by(username: params["username"])
 
