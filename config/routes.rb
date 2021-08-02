@@ -32,5 +32,7 @@ Rails.application.routes.draw do
 
   #profile
   get '/users/:id', to: 'accounts#get_profile', as: 'get_profile'  #Profile
+  put '/users/:id', to: 'accounts#update_profile', as: 'update_profile'  #Edit Profile
+  get '/users/:id/edit', to: 'accounts#get_edit_profile', as: 'get_edit_profile'  #Get Edit Profile
 
 end
