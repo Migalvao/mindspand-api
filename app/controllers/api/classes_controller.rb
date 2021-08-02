@@ -55,6 +55,27 @@ class Api::ClassesController < ApplicationController
         end
     end
 
+    def get_single_class
+        if @current_user
+
+            c = SkillClass.find_by(id: params[:id])
+
+            if c
+
+                class_json = c.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
+                render(json: class_json)
+            else
+                
+                error = {"error": "Class not found"}
+                render(json: error, status: 404)
+            end
+
+        else
+            error = {"error": "User must be authenticated"}
+            render(json: error, status: 401)
+        end
+    end
+
     private
     def class_params
         #filters parameters

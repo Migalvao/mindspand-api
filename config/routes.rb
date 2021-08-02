@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   #Classes
   get '/api/classes', to: 'api/classes#get_classes', as: 'get_classes'
+  get '/api/classes/:id', to: 'api/classes#get_single_class', as: 'get_single_class'
   post '/api/users/:id/classes', to: 'api/classes#post_class', as: 'post_class'
   get '/api/users/:id/classes', to: 'api/classes#get_user_classes', as: 'get_user_classes'
 
