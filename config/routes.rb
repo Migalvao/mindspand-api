@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post '/api/users/:id/classes', to: 'api/classes#post_class', as: 'post_class'
   get '/api/users/:id/classes', to: 'api/classes#get_user_classes', as: 'get_user_classes'
 
+  #Connections
+  post '/api/classes/:id/request', to: 'api/connections#request_match', as: 'request_match'
 
   
   ## FRONTEND
