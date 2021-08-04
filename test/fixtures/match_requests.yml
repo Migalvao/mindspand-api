@@ -6,7 +6,7 @@
 #  response_datetime :datetime
 #  status            :integer          default("pending")
 #  student_id        :bigint           not null
-#  class_id          :bigint           not null
+#  skill_class_id    :bigint           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #

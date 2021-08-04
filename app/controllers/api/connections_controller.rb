@@ -10,14 +10,16 @@ class Api::ConnectionsController < ApplicationController
 
             if SkillClass.find_by(id: params[:id])
                 #check if class exists
-                request.class_id = params[:id]
+                request.skill_class_id = params[:id]
 
-                if MatchRequest.find_by(student_id: @current_user.id, class_id: params[:id])
-                    #check if request already exists
+                if MatchRequest.find_by(student_id: @current_user.id, skill_class_id: params[:id], status: "pending")
+                    #check if pending request already exists
                     error = {"error": "Match request already exists"}
                     render(json: error, status: 400)
                     return
                 end
+
+                #TODO check if connection already exists
 
                 if request.save
                     #success
@@ -47,6 +49,97 @@ class Api::ConnectionsController < ApplicationController
                 render(json: error, status: 400)
             end
 
+
+        else
+            error = {"error": "User must be authenticated"}
+            render(json: error, status: 401)
+        end
+
+    end
+
+    def update_match
+
+        if @current_user
+
+            request = MatchRequest.find_by(id: params[:id])
+
+            if request
+                #check if request exists
+
+                if request.status_is_pending?
+                    
+                    begin
+                        request.status = params[:status]
+                    rescue
+                        error = {"error": "Updated status is invalid"}
+                        render(json: error, status: 400)
+                        return
+                    end
+
+                    if request.status_is_pending?
+                        error = {"error": "Can't update request to pending"}
+                        render(json: error, status: 400)
+                        return
+
+                    elsif request.status_is_cancelled? and request.student_id != @current_user.id
+                        error = {"error": "Only the student can cancel the match request"}
+                        render(json: error, status: 400)
+                        return
+
+                    elsif (request.status_is_refused? or request.status_is_accepted?) and request.skill_class.teacher_id != @current_user.id
+                        error = {"error": "Only the teacher can answer the match request"}
+                        render(json: error, status: 400)
+                        return
+
+                    end
+
+                    #valid update
+                    request.response_datetime = Time.new
+
+                    if request.save
+                        if request.status_is_cancelled?
+                            #if request was cancelled, we need to delete the notification
+                            notification = Notification.find_by(match_id: request.id)
+                            notification.destroy
+
+                        else
+                            #if request was answered, we need to create a new notification for the answer
+                            
+                            data = {match_id: request.id, person_id: request.student_id, 
+                                    notification_type: request.status_is_accepted? ? "match_accepted" : "match_denied",
+                                    text: request.status_is_accepted? ? "Match request to class #{request.skill_class.title} accepted!" 
+                                        : "Match request to class #{request.skill_class.title} denied."
+                            }
+
+                            notification = Notification.new(data)
+
+                            #TODO create connection
+
+                            if not notification.save
+                                error = {"error": notification.errors.full_messages}
+                                render(json: error, status: 500)
+                                return
+                            end
+
+                        end
+
+                        res = {"request": request.as_json(only: [:id, :status])}
+                        render(json: res)
+                    else
+                        error = {"error": request.errors.full_messages}
+                        render(json: error, status: 400)
+                    end
+
+                else
+                    error = {"error": "Match request has already been updated"}
+                    render(json: error, status: 400)
+                end
+
+
+            else
+                error = {"error": "Match request with that id does not exist"}
+                render(json: error, status: 400)
+            end
 
         else
             error = {"error": "User must be authenticated"}

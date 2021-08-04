@@ -24,4 +24,5 @@ class Notification < ApplicationRecord
     }
     
     validates :notification_type, :text, presence: true
+
 end
