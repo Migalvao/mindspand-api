@@ -23,5 +23,5 @@ class Notification < ApplicationRecord
         connection_closed: 3
     }
     
-    validates :type, :text, :datetime, presence: true
+    validates :notification_type, :text, presence: true
 end

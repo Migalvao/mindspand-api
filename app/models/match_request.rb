@@ -23,7 +23,7 @@ class MatchRequest < ApplicationRecord
   belongs_to :student, class_name: 'User', foreign_key: 'student_id'
   belongs_to :skill_class, class_name: 'SkillClass', foreign_key: 'class_id'
 
-  has_many :notifications, foreign_key: 'match_id'
+  has_many :notifications, foreign_key: 'match_id', dependent: :destroy
   has_one :connection, foreign_key: 'match_id'
 
   # status [pending, accepted, refused, cancelled]

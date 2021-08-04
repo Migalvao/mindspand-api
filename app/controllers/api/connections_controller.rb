@@ -21,6 +21,18 @@ class Api::ConnectionsController < ApplicationController
 
                 if request.save
                     #success
+
+                    #create respective notification for the teacher
+                    data = {match_id: request.id, person_id: request.skill_class.teacher.id, notification_type: "received_request", 
+                        text: "New match request from #{@current_user.username} to class #{request.skill_class.title}"}
+                    notification = Notification.new(data)
+
+                    if not notification.save
+                        error = {"error": notification.errors.full_messages}
+                        render(json: error, status: 500)
+                        return
+                    end
+
                     res = {"request": request.as_json(only: [:id, :status])}
                     render(json: res)
 
