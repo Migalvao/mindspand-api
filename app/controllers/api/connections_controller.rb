@@ -12,14 +12,21 @@ class Api::ConnectionsController < ApplicationController
                 #check if class exists
                 request.skill_class_id = params[:id]
 
-                if MatchRequest.find_by(student_id: @current_user.id, skill_class_id: params[:id], status: "pending")
+                most_recent_request = MatchRequest.where(student_id: @current_user.id, skill_class_id: params[:id]).order(:created_at).reverse_order.first
+
+                if most_recent_request and most_recent_request.status_is_pending?
                     #check if pending request already exists
                     error = {"error": "Match request already exists"}
                     render(json: error, status: 400)
                     return
+
+                elsif most_recent_request and Connection.find_by(match_id: most_recent_request.id, class_status: "in_progress")
+                    #check if connection already exists
+                    error = {"error": "Connection to this class already exists"}
+                    render(json: error, status: 400)
+                    return
                 end
 
-                #TODO check if connection already exists
 
                 if request.save
                     #success
@@ -113,12 +120,21 @@ class Api::ConnectionsController < ApplicationController
 
                             notification = Notification.new(data)
 
-                            #TODO create connection
-
                             if not notification.save
                                 error = {"error": notification.errors.full_messages}
                                 render(json: error, status: 500)
                                 return
+                            end
+
+                            if request.status_is_accepted?
+                                #request was accepted so connection must be created
+                                connection = Connection.new(match_id: request.id)
+
+                                if not connection.save
+                                    error = {"error": connection.errors.full_messages}
+                                    render(json: error, status: 500)
+                                    return
+                                end
                             end
 
                         end
