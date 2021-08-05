@@ -6,7 +6,7 @@
 #  name            :string
 #  username        :string
 #  email           :string
-#  description     :text
+#  description     :text             default("")
 #  password_digest :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

@@ -8,7 +8,7 @@
 #  no_classes     :integer
 #  class_duration :integer
 #  method         :integer
-#  dificulty      :integer
+#  difficulty     :integer
 #  regime         :integer
 #  location       :string
 #  archived       :boolean          default(FALSE)
