@@ -3,6 +3,7 @@ class Api::ConnectionsController < ApplicationController
     before_action :check_authenticated_user
     before_action :check_class_exists, only: :request_match
     before_action :check_request_exists, only: :update_match
+    after_action :update_unread_notifications, only: :get_notifications
 
     def request_match
 
@@ -121,6 +122,16 @@ class Api::ConnectionsController < ApplicationController
 
     end
 
+    def get_notifications
+        @unread_notifications = Notification.where(person_id: @current_user.id, read: false).order(created_at: :desc)
+        u_n_json = @unread_notifications.as_json(only: [:id, :text, :notification_type, :created_at, :match_id])
+        read_notifications = Notification.where(person_id: @current_user.id, read: true).order(created_at: :desc).as_json(only: [:id, :text, :notification_type, :created_at, :match_id])
+
+        notifications = {"read": read_notifications, "unread": u_n_json}
+
+        render(json: notifications)
+    end
+
     private 
     def check_authenticated_user
         unless @current_user
@@ -151,6 +162,13 @@ class Api::ConnectionsController < ApplicationController
     def render_json_400(message)
         error = {"error": message}
         render(json: error, status: 400)
+    end
+
+    private
+    def update_unread_notifications
+        # only informative notifications should be marked read
+        @unread_notifications.where(notification_type: ["match_accepted", "match_denied"]).update_all(read: true)
+
     end
 
 end
