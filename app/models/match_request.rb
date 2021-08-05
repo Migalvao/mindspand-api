@@ -6,7 +6,7 @@
 #  response_datetime :datetime
 #  status            :integer          default("pending")
 #  student_id        :bigint           not null
-#  class_id          :bigint           not null
+#  skill_class_id    :bigint           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
@@ -21,7 +21,7 @@ end
 
 class MatchRequest < ApplicationRecord
   belongs_to :student, class_name: 'User', foreign_key: 'student_id'
-  belongs_to :skill_class, class_name: 'SkillClass', foreign_key: 'class_id'
+  belongs_to :skill_class, class_name: 'SkillClass', foreign_key: 'skill_class_id'
 
   has_many :notifications, foreign_key: 'match_id', dependent: :destroy
   has_one :connection, foreign_key: 'match_id'
@@ -36,9 +36,22 @@ class MatchRequest < ApplicationRecord
 
   validates_with OwnRequestValidator
   validates :response_datetime, presence: true, unless: :status_is_pending?
+  validates :status, presence: true
 
   def status_is_pending?
     return status == :pending.to_s
+  end
+
+  def status_is_cancelled?
+    return status == :cancelled.to_s
+  end
+
+  def status_is_accepted?
+    return status == :accepted.to_s
+  end
+
+  def status_is_refused?
+    return status == :refused.to_s
   end
 
 end
