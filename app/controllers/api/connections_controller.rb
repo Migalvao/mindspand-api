@@ -124,8 +124,8 @@ class Api::ConnectionsController < ApplicationController
 
     def get_notifications
         @unread_notifications = Notification.where(person_id: @current_user.id, read: false).order(created_at: :desc)
-        u_n_json = @unread_notifications.as_json(only: [:id, :text, :notification_type, :created_at, :match_id])
-        read_notifications = Notification.where(person_id: @current_user.id, read: true).order(created_at: :desc).as_json(only: [:id, :text, :notification_type, :created_at, :match_id])
+        u_n_json = @unread_notifications.as_json(only: [:id, :text, :notification_type, :created_at, :match_id], include: {match: { only: [:id, :student_id]}})
+        read_notifications = Notification.where(person_id: @current_user.id, read: true).order(created_at: :desc).as_json(only: [:id, :text, :notification_type, :created_at], include: {match: { only: [:id, :student_id]}})
 
         notifications = {"read": read_notifications, "unread": u_n_json}
 
