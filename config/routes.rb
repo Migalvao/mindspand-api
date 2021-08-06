@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   put '/api/match_request/:id/', to: 'api/connections#update_match', as: 'update_match'
   get '/api/notifications', to: 'api/connections#get_notifications', as: 'get_notifications'
 
+  #Ratings/reviews
+  post '/api/connections/:id/rate', to: 'api/ratings#rate_class', as: 'rate_class'
+
   
   ## FRONTEND
 
