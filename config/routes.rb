@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   #Connections
   post '/api/classes/:id/request', to: 'api/connections#request_match', as: 'request_match'
   put '/api/match_request/:id/', to: 'api/connections#update_match', as: 'update_match'
-  get '/api/notifications', to: 'api/connections#get_notifications', as: 'get_notifications'
+  get '/api/notifications', to: 'api/connections#get_notifications', as: 'api_get_notifications'
 
   #Ratings/reviews
   post '/api/connections/:id/rate', to: 'api/ratings#rate_class', as: 'rate_class'
@@ -43,5 +43,11 @@ Rails.application.routes.draw do
   get '/users/:id', to: 'accounts#get_profile', as: 'get_profile'  #Profile
   put '/users/:id', to: 'accounts#update_profile', as: 'update_profile'  #Edit Profile
   get '/users/:id/edit', to: 'accounts#get_edit_profile', as: 'get_edit_profile'  #Get Edit Profile
+
+  #connections
+  get '/connections', to: 'connections#get_connections', as: 'get_connections'
+
+  #notifications
+  get '/notifications', to: 'connections#get_notifications', as: 'get_notifications'
 
 end

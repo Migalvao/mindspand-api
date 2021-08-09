@@ -119,4 +119,6 @@ Space Exploration
 
 =end
 
+# SkillClass.create({title: "Example Class", description: "Amazing class", location: "Coimbra", no_classes:5, class_duration: 2, method: "synchronous", difficulty: "beginner", regime: "physical", teacher_id: 2, skill_id: 1})
+
 
