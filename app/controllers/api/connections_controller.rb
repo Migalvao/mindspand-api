@@ -3,6 +3,7 @@ class Api::ConnectionsController < ApplicationController
     before_action :check_authenticated_user
     before_action :check_class_exists, only: :request_match
     before_action :check_request_exists, only: :update_match
+    before_action :check_connection, only: :update_connection
     after_action :update_unread_notifications, only: :get_notifications
 
     def request_match
@@ -122,6 +123,72 @@ class Api::ConnectionsController < ApplicationController
 
     end
 
+    def update_connection
+
+        if @connection.in_progress?
+
+            begin
+                @connection.class_status = params[:status]
+
+            rescue
+                render_json_400("Updated status is invalid")
+                return
+            end
+
+            if @connection.in_progress?
+                render_json_400("Updated status is invalid")
+                return
+            end
+
+            # Valid request
+
+            if @is_student
+                @connection.person_closed_connection = "student_closed"
+            else
+                @connection.person_closed_connection = "teacher_closed"
+            end
+
+            @connection.ended_at = Time.new
+
+            if @connection.save
+                # connection updated successfully, now we need to notify the other user
+
+                skill_class = @connection.match.skill_class
+
+                if @connection.given?
+                    text = "Connection to class to class #{skill_class.title} was closed. Class was given"
+                else
+                    text = "Connection to class to class #{skill_class.title} was closed. Class was canceled"
+                end
+
+
+                if @is_student
+                    # create notification for the teacher
+                    notification = Notification.new({text: text, notification_type: "connection_closed", match_id: @connection.match_id, person_id: @connection.match.student_id})
+                else
+                    #create notification for the student
+                    notification = Notification.new({text: text, notification_type: "connection_closed", match_id: @connection.match_id, person_id: skill_class.teacher_id})
+                end
+
+                unless notification.save
+                    error = {"error": notification.errors.full_messages}
+                    render(json: error, status: 500)
+                    return
+                end
+
+                res = @connection.as_json(only: [:id, :created_at, :ended_at, :class_status])
+                render(json: res)
+
+            else
+                render_json_400(@connection.errors.full_messages)
+            end
+
+        else
+            render_json_400("Connection has already been closed")
+        end
+
+    end
+
     def get_notifications
         @unread_notifications = Notification.where(person_id: @current_user.id, read: false).order(created_at: :desc)
         u_n_json = @unread_notifications.as_json(only: [:id, :text, :notification_type, :created_at], include: {match: { only: [:id, :student_id, :status], include: {connection: {only: [:id, :class_status]}}}})
@@ -155,6 +222,31 @@ class Api::ConnectionsController < ApplicationController
         unless @request
             error = {"error": "Match request with that id does not exist"}
             render(json: error, status: 400)
+        end
+    end
+
+    private
+    def check_connection
+        @connection = Connection.find_by(id: params[:id])
+
+        unless @connection
+            render_json_400("Connection with that id does not exist")
+
+        else
+            if @connection.match.student_id == @current_user.id
+                # Student is closing the connection
+                @is_student = true
+
+            elsif @connection.match.skill_class.teacher_id == @current_user.id
+                # Teacher is closing the connection
+                @is_student = false
+
+            else
+                # Unauthorized
+                error = {"error": "Can't close other users' connections"}
+                render(json: error, status: 401)
+            end
+
         end
     end
 

@@ -15,8 +15,9 @@ Rails.application.routes.draw do
 
   #Connections
   post '/api/classes/:id/request', to: 'api/connections#request_match', as: 'request_match'
-  put '/api/match_request/:id/', to: 'api/connections#update_match', as: 'update_match'
+  put '/api/match_request/:id/', to: 'api/connections#update_match', as: 'update_match' # Answer or cancel match request
   get '/api/notifications', to: 'api/connections#get_notifications', as: 'api_get_notifications'
+  put '/api/connections/:id/', to: 'api/connections#update_connection', as: 'update_connection' # End connection
 
   #Ratings/reviews
   post '/api/connections/:id/rate', to: 'api/ratings#rate_class', as: 'rate_class'

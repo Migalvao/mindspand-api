@@ -28,5 +28,6 @@ class Connection < ApplicationRecord
     student_closed: 1,
     teacher_closed: 2,
   }
-
+  
+  validates :class_status, presence: true
 end
