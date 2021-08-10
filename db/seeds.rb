@@ -118,5 +118,3 @@ Scientific Thinking
 Space Exploration
 
 =end
-
-

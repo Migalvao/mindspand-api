@@ -1,63 +1,103 @@
-import React, { Component } from "react";
-import { MenuItems } from "./MenuItems";
-import { Button } from "../Button";
-import "./Navbar.css";
+import React, { useState } from "react";
 import { Link } from "@inertiajs/inertia-react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import "./Navbar.css";
+import { Button } from "../Button";
 
-const imagesPath = {
-  burger: require("../../../images/burger.svg"),
-  close: require("../../../images/close.svg"),
-};
+function Navbar(props) {
+  const token = document.querySelector("[name=csrf-token]").content;
+  const headers = { "X-CSRF-Token": token };
 
-class Navbar extends Component {
-  state = { clicked: false };
+  const [click, setClick] = useState(false);
+  const [button, setButton] = useState(true);
 
-  toggleImage = () => {
-    this.setState((state) => ({ clicked: !state.clicked }));
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
+
+  const showButton = () => {
+    if (window.innerWidth <= 960) {
+      setButton(false);
+    } else {
+      setButton(true);
+    }
   };
 
-  getImageName = () => (this.state.clicked ? "close" : "burger");
+  const show = props.current_user;
 
-  render() {
-    const imageName = this.getImageName();
-    const show = this.props.current_user;
-    return (
-      <nav className="NavbarItems">
-        <img
-          src={require("../../../images/logo_white.svg")}
-          alt="logo"
-          className="navbar-logo"
-        />
-        <div className="menu-icon">
-          {show ? (
-            <img src={imagesPath[imageName]} onClick={this.toggleImage} />
-          ) : null}
-        </div>
+  window.addEventListener("resize", showButton);
+
+  return (
+    <div className="navbar">
+      <div className="navbar-container container">
+        <Link href="/home" className="navbar-logo">
+          <img
+            src={require("../../../images/logo_white.svg")}
+            alt="logo"
+            className="navbar-logo"
+          />
+        </Link>
+        {show ? (
+          <div className="menu-icon" onClick={handleClick}>
+            {click ? <FaTimes /> : <FaBars />}
+          </div>
+        ) : null}
+        {show ? (
+          <ul className={click ? "nav-menu active" : "nav-menu"}>
+            <li className="nav-item">
+              <Link href="/home" className="nav-links">
+                Homepage
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/classes" className="nav-links">
+                Classes
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/" className="nav-links">
+                Messages
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/" className="nav-links">
+                Profile
+              </Link>
+            </li>
+            <li className="logout">
+              <Link
+                href="/logout"
+                method="delete"
+                headers={headers}
+                as="button"
+                className="btn-logout"
+              >
+                Logout
+              </Link>
+            </li>
+          </ul>
+        ) : null}
+      </div>
+
+      {!show ? (
         <div>
-          {" "}
-          {show ? (
-            <ul className={this.state.clicked ? "nav-menu active" : "nav-menu"}>
-              {MenuItems.map((item, index) => {
-                return (
-                  <li key={index}>
-                    <Link
-                      className={item.cName}
-                      href={item.url}
-                      activeclasscame="main-nav-active"
-                    >
-                      {item.title}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          ) : null}
+          {button ? (
+            <Link href="login" className="btn-link">
+              <Button buttonStyle="btn--outline">Sign in</Button>
+            </Link>
+          ) : (
+            <Link href="/login" className="btn-link">
+              <Button
+                buttonStyle="btn--outline"
+                buttonSize="btn--mobile"
+                onClick={closeMobileMenu}
+              >
+                Sign in
+              </Button>
+            </Link>
+          )}
         </div>
-
-        <div>{!show ? <Button>Sign in</Button> : null}</div>
-      </nav>
-    );
-  }
+      ) : null}
+    </div>
+  );
 }
-
 export default Navbar;

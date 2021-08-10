@@ -1,16 +1,10 @@
 import React, { useEffect } from "react";
-import { Link } from "@inertiajs/inertia-react";
+import Navbar from "./components/Navbar/Navbar";
 
-export default function Layout(props, { children }) {
+export default function Layout(props) {
   return (
     <main>
-      {/*<header>
-        <Link href="/">Home</Link>
-        <Link href={"/users/" + props.current_user.id}>
-          Profile
-        </Link>
-        <Link href="/contact">Contact</Link>
-      </header>*/}
+      <Navbar current_user={props.current_user} />
       <article>{props.children}</article>
     </main>
   );
