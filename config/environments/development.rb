@@ -73,4 +73,11 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+  
+  # ImageKit config
+  config.imagekit={
+    private_key: ENV['IMAGEKIT_PRIV_KEY'],
+    public_key: "public_5lvjI22WW3Q3qhKGqXXqyYk7m6E=",
+    url_endpoint: "https://ik.imagekit.io/skillx"
+  }
 end
