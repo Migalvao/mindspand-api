@@ -36,8 +36,7 @@ class Api::ConnectionsController < ApplicationController
 
             else
                 error = {"error": notification.errors.full_messages}
-                render(json: error, status: 500)
-                return
+                return render(json: error, status: 500)
             end
 
         else
@@ -54,21 +53,17 @@ class Api::ConnectionsController < ApplicationController
             begin
                 @request.status = params[:status]
             rescue
-                render_json_400("Updated status is invalid")
-                return
+                return render_json_400("Updated status is invalid")
             end
 
             if @request.status_is_pending?
-                render_json_400("Can't update request to pending")
-                return
+                return render_json_400("Can't update request to pending")
 
             elsif @request.status_is_cancelled? and @request.student_id != @current_user.id
-                render_json_400("Only the student can cancel the match request")
-                return
+                return render_json_400("Only the student can cancel the match request")
 
             elsif (@request.status_is_refused? or @request.status_is_accepted?) and @request.skill_class.teacher_id != @current_user.id
-                render_json_400("Only the teacher can answer the match request")
-                return
+                return render_json_400("Only the teacher can answer the match request")
 
             end
 
@@ -94,8 +89,7 @@ class Api::ConnectionsController < ApplicationController
 
                     unless notification.save
                         error = {"error": notification.errors.full_messages}
-                        render(json: error, status: 500)
-                        return
+                        return render(json: error, status: 500)
                     end
 
                     if @request.status_is_accepted?
@@ -104,8 +98,7 @@ class Api::ConnectionsController < ApplicationController
 
                         unless connection.save
                             error = {"error": connection.errors.full_messages}
-                            render(json: error, status: 500)
-                            return
+                            return render(json: error, status: 500)
                         end
                     end
 
@@ -131,13 +124,11 @@ class Api::ConnectionsController < ApplicationController
                 @connection.class_status = params[:status]
 
             rescue
-                render_json_400("Updated status is invalid")
-                return
+                return render_json_400("Updated status is invalid")
             end
 
             if @connection.in_progress?
-                render_json_400("Updated status is invalid")
-                return
+                return render_json_400("Updated status is invalid")
             end
 
             # Valid request
@@ -172,8 +163,7 @@ class Api::ConnectionsController < ApplicationController
 
                 unless notification.save
                     error = {"error": notification.errors.full_messages}
-                    render(json: error, status: 500)
-                    return
+                    return render(json: error, status: 500)
                 end
 
                 res = @connection.as_json(only: [:id, :created_at, :ended_at, :class_status])
@@ -229,25 +219,22 @@ class Api::ConnectionsController < ApplicationController
     def check_connection
         @connection = Connection.find_by(id: params[:id])
 
-        unless @connection
-            render_json_400("Connection with that id does not exist")
+        return render_json_400("Connection with that id does not exist") unless @connection
+
+        if @connection.match.student_id == @current_user.id
+            # Student is closing the connection
+            @is_student = true
+
+        elsif @connection.match.skill_class.teacher_id == @current_user.id
+            # Teacher is closing the connection
+            @is_student = false
 
         else
-            if @connection.match.student_id == @current_user.id
-                # Student is closing the connection
-                @is_student = true
-
-            elsif @connection.match.skill_class.teacher_id == @current_user.id
-                # Teacher is closing the connection
-                @is_student = false
-
-            else
-                # Unauthorized
-                error = {"error": "Can't close other users' connections"}
-                render(json: error, status: 401)
-            end
-
+            # Unauthorized
+            error = {"error": "Can't close other users' connections"}
+            render(json: error, status: 401)
         end
+
     end
 
     private
