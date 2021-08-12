@@ -13,7 +13,7 @@
 class Connection < ApplicationRecord
   belongs_to :match, class_name: 'MatchRequest', foreign_key: 'match_id'
 
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   # class status [in progress, given, cancelled]
   enum class_status: {

@@ -92,6 +92,18 @@ class Api::ConnectionsController < ApiController
                         return render(json: error, status: 500)
                     end
 
+                    # we also need to mark the own user's notification as read since they responded
+                    own_notification = Notification.find_by(match_id: @request.id, person_id: @current_user.id, notification_type: "received_request")
+                    
+                    if own_notification
+                        unless own_notification.update(read: true)
+                            return render_json_500(own_notification.errors.full_messages)
+                        end
+                    else
+                        # Shouldn't happen, notification not found
+                        puts "Error: there was no notification"
+                    end
+
                     if @request.status_is_accepted?
                         #request was accepted so connection must be created
                         connection = Connection.new(match_id: @request.id)
@@ -155,10 +167,10 @@ class Api::ConnectionsController < ApiController
 
                 if @is_student
                     # create notification for the teacher
-                    notification = Notification.new({text: text, notification_type: "connection_closed", match_id: @connection.match_id, person_id: @connection.match.student_id})
+                    notification = Notification.new({text: text, notification_type: "connection_closed", match_id: @connection.match_id, person_id: skill_class.teacher_id})
                 else
                     #create notification for the student
-                    notification = Notification.new({text: text, notification_type: "connection_closed", match_id: @connection.match_id, person_id: skill_class.teacher_id})
+                    notification = Notification.new({text: text, notification_type: "connection_closed", match_id: @connection.match_id, person_id: @connection.match.student_id})
                 end
 
                 unless notification.save
@@ -227,12 +239,6 @@ class Api::ConnectionsController < ApiController
             render(json: error, status: 401)
         end
 
-    end
-
-    private
-    def render_json_400(message)
-        error = {"error": message}
-        render(json: error, status: 400)
     end
 
     private

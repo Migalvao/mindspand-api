@@ -8,6 +8,16 @@ class Api::RatingsController < ApiController
         review = Review.new(connection_id: @connection.id, student_teacher: @is_student, rating: params[:rating], comment: params[:comment])
 
         if review.save
+
+            # We need to mark the own user's notification as read, should there be one
+            own_notification = Notification.find_by(match_id: @connection.match_id, person_id: @current_user.id, notification_type: "connection_closed")
+                    
+            if own_notification
+                unless own_notification.update(read: true)
+                    return render_json_500(own_notification.errors.full_messages)
+                end
+            end
+
             res = {"review": review.as_json(only: [:id, :rating, :comment])}
             render(json: res)
 
@@ -22,50 +32,39 @@ class Api::RatingsController < ApiController
     def check_connection
         @connection = Connection.find_by(id: params[:id])
 
-        unless @connection
-            render_json_400("Connection with that id does not exist")
+        return render_json_400("Connection with that id does not exist") unless @connection
 
+        if @connection.in_progress?
+            render_json_400("Class can't be rated because it's still in progess")
+
+        elsif @connection.cancelled?
+            render_json_400("Class can't be rated because it's been cancelled")
+        
         else
 
-            if @connection.in_progress?
-                render_json_400("Class can't be rated because it's still in progess")
-
-            elsif @connection.cancelled?
-                render_json_400("Class can't be rated because it's been cancelled")
-            
-            else
-
-                if @connection.match.student_id == @current_user.id
-                    # User is the student, student_teacher = true
-                    if Review.where(connection_id: @connection.id, student_teacher: true).exists?
-                        render_json_400("You have already rated this class")
-                    end
-
-                    @is_student = true
-                
-                elsif @connection.match.skill_class.teacher_id == @current_user.id
-                    # User is the teacher, student_teacher = false
-                    if Review.where(connection_id: @connection.id, student_teacher: false).exists?
-                        render_json_400("You have already rated this class")
-                    end
-                    
-                    @is_student = false
-
-                else
-                    # User is neither student nor teacher
-                    render_json_400("You are not allowed to rate this class")
+            if @connection.match.student_id == @current_user.id
+                # User is the student, student_teacher = true
+                if Review.where(connection_id: @connection.id, student_teacher: true).exists?
+                    render_json_400("You have already rated this class")
                 end
 
+                @is_student = true
+            
+            elsif @connection.match.skill_class.teacher_id == @current_user.id
+                # User is the teacher, student_teacher = false
+                if Review.where(connection_id: @connection.id, student_teacher: false).exists?
+                    render_json_400("You have already rated this class")
+                end
+                
+                @is_student = false
+
+            else
+                # User is neither student nor teacher
+                render_json_400("You are not allowed to rate this class")
             end
 
         end
 
-    end
-
-    private
-    def render_json_400(message)
-        error = {"error": message}
-        render(json: error, status: 400)
     end
 
 end
