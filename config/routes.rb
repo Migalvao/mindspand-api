@@ -50,5 +50,9 @@ Rails.application.routes.draw do
 
   #notifications
   get '/notifications', to: 'connections#get_notifications', as: 'get_notifications'
+  
+  #avatar
+  put '/users/:id/avatar', to: 'accounts#update_avatar', as: 'update_avatar'  # Update avatar
+  get '/users/:id/avatar', to: 'accounts#get_upload_avatar', as: 'get_upload_avatar'  #Get upload avatar
 
 end

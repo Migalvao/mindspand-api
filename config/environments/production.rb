@@ -117,4 +117,11 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  # ImageKit config
+  config.imagekit={
+    private_key: ENV['IMAGEKIT_PRIV_KEY'],
+    public_key: "public_5lvjI22WW3Q3qhKGqXXqyYk7m6E=",
+    url_endpoint: "https://ik.imagekit.io/skillx"
+  }
 end

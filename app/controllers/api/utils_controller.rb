@@ -16,7 +16,7 @@ class Api::UtilsController < ApiController
   def get_all_skills
 
     categories = Category.all
-    skills = categories.as_json(only: [:id, :name], include: {skills: { only: [:id, :name]}})
+    skills = categories.as_json(only: [:id, :name, :color], include: {skills: { only: [:id, :name]}})
 
     render(json: skills)
 

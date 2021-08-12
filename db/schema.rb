@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_04_151541) do
+ActiveRecord::Schema.define(version: 2021_08_11_143051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2021_08_04_151541) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "color", default: ""
   end
 
   create_table "connections", force: :cascade do |t|
@@ -98,6 +99,7 @@ ActiveRecord::Schema.define(version: 2021_08_04_151541) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "avatar"
   end
 
   add_foreign_key "connections", "match_requests", column: "match_id"
