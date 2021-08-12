@@ -7,6 +7,8 @@ import "../stylesheets/body.css";
 import "../stylesheets/Home.css";
 import { useState, useEffect } from "react";
 import SocialCard from "./components/SocialCard";
+import "../stylesheets/body.css";
+import "../stylesheets/Home.css";
 
 function Homepage(props) {
   const token = document.querySelector("[name=csrf-token]").content;
@@ -37,9 +39,15 @@ function Homepage(props) {
 
       <div className="newClasses">
         <h1>New classes added every week</h1>
-        <div className="newClasses-cards">
+        <div className="newClasses-wrapper">
           {items.map((item, index) => {
-            return <SocialCard newClassData={item} key={index} />;
+            return (
+              <SocialCard
+                newClassData={item}
+                key={index}
+                className="newc-card"
+              />
+            );
           })}
         </div>
       </div>

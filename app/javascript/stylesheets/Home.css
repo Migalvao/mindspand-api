@@ -19,6 +19,19 @@
   font-size: 32px;
 }
 
+.newClasses-wrapper {
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+}
+
+.newClasses-wrapper::-webkit-scrollbar {
+  width: 0;
+}
+.newc-card {
+  width: 100%;
+}
+
 @media screen and (max-width: 960px) {
   .hero-img {
     height: 550px;

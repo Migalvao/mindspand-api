@@ -3,6 +3,7 @@ class TestController < ApplicationController
   
     def home
         if @current_user
+            puts ENV['DB_PASSWORD'];
             render(inertia: 'Home', props: {"current_user": @current_user.as_json})
         else
             render(inertia: 'Home')

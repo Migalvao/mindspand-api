@@ -11,7 +11,7 @@ class Api::ClassesController < ApplicationController
         
             if new_class.save
                 # success
-                res = new_class.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
+                res = new_class.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :difficulty, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
                 render(json: res)
             else
                 res = {"error" => new_class.errors}
@@ -27,7 +27,7 @@ class Api::ClassesController < ApplicationController
     def get_classes
        
         classes = SkillClass.where(archived: false).where(class_params())
-        classes = classes.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
+        classes = classes.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :difficulty, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name, :avatar]}})
         render(json: classes)
      
     end
@@ -43,7 +43,7 @@ class Api::ClassesController < ApplicationController
                 classes = SkillClass.where(teacher: params[:id], archived: false)
             end
             
-            classes = classes.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
+            classes = classes.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :difficulty, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
             render(json: classes)
         else
             error = {"error": "User must be authenticated"}
@@ -58,7 +58,7 @@ class Api::ClassesController < ApplicationController
 
             if c
 
-                class_json = c.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
+                class_json = c.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :difficulty, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
                 render(json: class_json)
             else
                 

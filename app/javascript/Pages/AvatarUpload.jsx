@@ -8,13 +8,9 @@ export default function Profile(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    Inertia.put(
-      "/users/" + props.user.id + "/avatar",
-      state,
-      {
-        headers: headers,
-      }
-    );
+    Inertia.put("/users/" + props.user.id + "/avatar", state, {
+      headers: headers,
+    });
   };
 
   const state = { avatar: null };
@@ -23,17 +19,17 @@ export default function Profile(props) {
     state.avatar = event.target.files[0];
   };
 
-  const token = document.querySelector(
-    "[name=csrf-token]"
-  ).content;
+  const token = document.querySelector("[name=csrf-token]").content;
   const headers = { "X-CSRF-Token": token };
+
+  const link = props.curent_avatar + "?tr=w-250,h-300";
 
   return (
     <Layout current_user={props.user}>
       {/* <Head title="Welcome" /> */}
       <h1>Upload Avatar</h1>
       <p>Current avatar:</p>
-      <img src={props.curent_avatar} />
+      <img src={link} />
       <br />
       <form onSubmit={handleSubmit}>
         <label htmlFor="image">
