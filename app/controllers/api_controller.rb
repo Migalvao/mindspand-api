@@ -1,4 +1,4 @@
-class ApiController < ActionController::Base
+class ApiController < ActionController::API
 
     private 
     def check_authenticated_user
