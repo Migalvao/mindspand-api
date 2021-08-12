@@ -1,3 +1,40 @@
 .hero-img {
-  width: 100%;
+  background-image: linear-gradient(
+      rgba(37, 38, 54, 0.2),
+      rgba(37, 38, 54, 0.2)
+    ),
+    url("./../images/banner.svg");
+  height: 720px;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.newClasses {
+  margin-left: 9em;
+  padding-top: 7em;
+}
+.newClasses h1 {
+  font-weight: 600;
+  font-size: 32px;
+}
+
+@media screen and (max-width: 960px) {
+  .hero-img {
+    height: 550px;
+  }
+
+  .newClasses {
+    margin-left: 1em;
+    padding-top: 5em;
+  }
+
+  .newClasses h1 {
+    font-size: 21px;
+  }
+
+  .newClasses-card {
+    margin-left: 1em;
+    padding-top: 3em;
+  }
 }

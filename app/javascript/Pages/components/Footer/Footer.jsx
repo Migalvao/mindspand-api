@@ -22,7 +22,7 @@ function Footer() {
 
       <p className="social-text">Connect with us!</p>
       <section className="social-media">
-        <div className="social-media-wrap">
+        <div className="social-media-wrappers">
           <div className="social-icons">
             <Link
               className="social-icon-link facebook"
