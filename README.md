@@ -40,6 +40,22 @@ After cloning this repository, open a terminal window in the project's main dire
 bundle install
 ```
 
+If there's an error installing the mimemagic gem, make sure you have shared-mime-info first, by running
+
+```bash
+brew install shared-mime-info
+```
+
+on MacOS,
+
+```bash
+sudo apt-get install -y shared-mime-info
+```
+
+on Linux
+
+or by following [this](https://stackoverflow.com/questions/66808927/error-installing-ruby-on-rails-on-windows-10) guide on Windows.
+
 Then, to install the JavaScript dependencies, run:
 
 ```bash
@@ -69,4 +85,10 @@ To load the default categories and skills and default user (username: 'whitesmit
 
 ```bash
 rails db:seed
+```
+
+To setup the ImageKit remote storage, you'll also need to insert your public key and url_endpoint in the configs at the bottom of the config/environments/development.rb and config/environments/production.rb files, as well as inserting your private key in the .env file as
+
+```bash
+IMAGEKIT_PRIV_KEY='your private key'
 ```

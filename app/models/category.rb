@@ -6,9 +6,11 @@
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  color      :string           default("")
 #
 class Category < ApplicationRecord
     has_many :skills
 
     validates :name, presence: true, uniqueness: true
+    validates :color, presence: true
 end

@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   post '/api/users/:id/classes', to: 'api/classes#post_class', as: 'post_class'
   get '/api/users/:id/classes', to: 'api/classes#get_user_classes', as: 'get_user_classes'
 
+  #Connections
+  post '/api/classes/:id/request', to: 'api/connections#request_match', as: 'request_match'
+  put '/api/match_request/:id/', to: 'api/connections#update_match', as: 'update_match'
+  get '/api/notifications', to: 'api/connections#get_notifications', as: 'get_notifications'
 
   
   ## FRONTEND
@@ -39,5 +43,8 @@ Rails.application.routes.draw do
   get '/users/:id', to: 'accounts#get_profile', as: 'get_profile'  #Profile
   put '/users/:id', to: 'accounts#update_profile', as: 'update_profile'  #Edit Profile
   get '/users/:id/edit', to: 'accounts#get_edit_profile', as: 'get_edit_profile'  #Get Edit Profile
+
+  put '/users/:id/avatar', to: 'accounts#update_avatar', as: 'update_avatar'  # Update avatar
+  get '/users/:id/avatar', to: 'accounts#get_upload_avatar', as: 'get_upload_avatar'  #Get upload avatar
 
 end
