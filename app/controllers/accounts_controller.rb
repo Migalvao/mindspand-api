@@ -2,6 +2,8 @@ class AccountsController < ApplicationController
   # protect_from_forgery with: :null_session
   include AuthenticationConcern
 
+  before_action :check_authenticated_user, only: [:get_upload_avatar, :update_avatar]
+
   def get_signup
     
     render(inertia: 'Signup')
@@ -116,6 +118,20 @@ class AccountsController < ApplicationController
     end
   end
 
+  def get_upload_avatar
+    user_json = @current_user.as_json(only: [:id, :name, :username, :description])
+    render(inertia: 'AvatarUpload', props: {"user": user_json, "curent_avatar": @current_user.avatar_url})
+  end
+
+  def update_avatar
+    begin
+      @current_user.update(avatar: params[:avatar])
+    rescue
+    end
+    
+    redirect_to "/users/#{@current_user.id}/avatar"
+  end
+
   def update_profile
 
     if @current_user
@@ -157,7 +173,15 @@ class AccountsController < ApplicationController
 
   private
   def signup_params
-      #filters parameters
+    #filters parameters
     params.permit(:name, :username, :email, :password, :description)
+  end
+
+  private
+  def check_authenticated_user
+    unless @current_user
+      redirect_to '/login'
+      return
+    end
   end
 end

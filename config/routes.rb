@@ -41,4 +41,7 @@ Rails.application.routes.draw do
   put '/users/:id', to: 'accounts#update_profile', as: 'update_profile'  #Edit Profile
   get '/users/:id/edit', to: 'accounts#get_edit_profile', as: 'get_edit_profile'  #Get Edit Profile
 
+  put '/users/:id/avatar', to: 'accounts#update_avatar', as: 'update_avatar'  # Update avatar
+  get '/users/:id/avatar', to: 'accounts#get_upload_avatar', as: 'get_upload_avatar'  #Get upload avatar
+
 end
