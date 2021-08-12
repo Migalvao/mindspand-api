@@ -1,4 +1,4 @@
-class Api::UtilsController < ApplicationController
+class Api::UtilsController < ApiController
   #include AuthenticationConcern
   
   def check_username

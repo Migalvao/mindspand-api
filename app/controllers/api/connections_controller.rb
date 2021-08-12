@@ -1,4 +1,4 @@
-class Api::ConnectionsController < ApplicationController
+class Api::ConnectionsController < ApiController
     include AuthenticationConcern
     before_action :check_authenticated_user
     before_action :check_class_exists, only: :request_match
@@ -147,9 +147,9 @@ class Api::ConnectionsController < ApplicationController
                 skill_class = @connection.match.skill_class
 
                 if @connection.given?
-                    text = "Connection to class to class #{skill_class.title} was closed. Class was given"
+                    text = "Connection to class #{skill_class.title} was closed. Class was given"
                 else
-                    text = "Connection to class to class #{skill_class.title} was closed. Class was canceled"
+                    text = "Connection to class #{skill_class.title} was closed. Class was canceled"
                 end
 
 
@@ -187,14 +187,6 @@ class Api::ConnectionsController < ApplicationController
         notifications = {"read": read_notifications, "unread": u_n_json}
 
         render(json: notifications)
-    end
-
-    private 
-    def check_authenticated_user
-        unless @current_user
-            error = {"error": "User must be authenticated"}
-            render(json: error, status: 401)
-        end
     end
 
     private

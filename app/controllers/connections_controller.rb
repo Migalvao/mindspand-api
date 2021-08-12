@@ -32,13 +32,6 @@ class ConnectionsController < ApplicationController
         render(inertia: 'Notifications', props: {"current_user": user_json, "notifications": notifications})
     end
 
-    private 
-    def check_authenticated_user
-        unless @current_user
-            redirect_to '/login'
-        end
-    end
-
     private
     def update_unread_notifications
         # only informative notifications should be marked read

@@ -1,4 +1,4 @@
-class Api::RatingsController < ApplicationController
+class Api::RatingsController < ApiController
     include AuthenticationConcern
     before_action :check_authenticated_user
     before_action :check_connection, only: :rate_class
@@ -16,13 +16,6 @@ class Api::RatingsController < ApplicationController
 
         end
 
-    end
-
-    private 
-    def check_authenticated_user
-        unless @current_user
-            render_json_400("User must be authenticated")
-        end
     end
 
     private
