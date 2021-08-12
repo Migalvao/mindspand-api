@@ -1,4 +1,4 @@
-class Api::ClassesController < ApplicationController
+class Api::ClassesController < ApiController
     include AuthenticationConcern
   
     def post_class
