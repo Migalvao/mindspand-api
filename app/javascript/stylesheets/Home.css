@@ -28,8 +28,12 @@
 .newClasses-wrapper::-webkit-scrollbar {
   width: 0;
 }
-.newc-card {
+
+.filter-wrapper {
   width: 100%;
+  display: flex;
+  overflow-x: auto;
+  margin: 0.75rem 0;
 }
 
 @media screen and (max-width: 960px) {
@@ -44,10 +48,5 @@
 
   .newClasses h1 {
     font-size: 21px;
-  }
-
-  .newClasses-card {
-    margin-left: 1em;
-    padding-top: 3em;
   }
 }

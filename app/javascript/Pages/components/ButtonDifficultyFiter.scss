@@ -1,0 +1,15 @@
+.btn-difficulty {
+  padding: 4px 10px;
+  margin-right: 8px;
+  color: #252636;
+  font-size: 12px;
+  background: none;
+  cursor: pointer;
+  border-radius: 1.25em;
+  border: 1px solid #252636;
+
+  &:focus {
+    background-color: #252636;
+    color: #f5f4f9;
+  }
+}

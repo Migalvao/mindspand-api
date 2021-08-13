@@ -8,80 +8,76 @@ import { useState, useEffect } from "react";
 import SocialCard from "./components/SocialCard";
 import "../stylesheets/body.css";
 import "../stylesheets/Home.css";
+import ButtonDifficultyFilter from "./components/ButtonDifficultyFilter";
 
 function Homepage(props) {
   const token = document.querySelector("[name=csrf-token]").content;
   const headers = { "X-CSRF-Token": token };
 
-  const [items, setUsers] = useState([]);
+  const [items, setItems] = useState([]);
+
+  const fetchClassesDifficulty = async (difficulty) => {
+    let newClassData;
+    try {
+      const response = await fetch(`/api/classes?difficulty=${difficulty}`);
+      newClassData = await response.json();
+    } catch (error) {
+      console.log(error);
+      newClassData = [];
+    }
+
+    setItems(newClassData);
+  };
 
   useEffect(() => {
-    (async () => {
-      let newClassData;
-      try {
-        const response = await fetch("/api/classes");
-        newClassData = await response.json();
-      } catch (error) {
-        console.log(error);
-        newClassData = [];
-      }
-
-      setUsers(newClassData);
-    })();
+    fetchClassesDifficulty("beginner");
   }, []);
+
   return (
     <main>
+      <Head title="Welcome" />
       <Navbar current_user={props.current_user} />
       <div className="hero-img"></div>
 
-      <Head title="Welcome" />
-
       <div className="newClasses">
         <h1>New classes added every week</h1>
+
+        <div className="filter-wrapper">
+          <ButtonDifficultyFilter
+            props={{
+              onClick: fetchClassesDifficulty,
+              difficulty: "beginner",
+            }}
+          >
+            Beginner
+          </ButtonDifficultyFilter>
+          <ButtonDifficultyFilter
+            props={{
+              onClick: fetchClassesDifficulty,
+              difficulty: "intermediate",
+            }}
+          >
+            Intermediate
+          </ButtonDifficultyFilter>
+          <ButtonDifficultyFilter
+            props={{
+              onClick: fetchClassesDifficulty,
+              difficulty: "advanced",
+            }}
+          >
+            Advanced
+          </ButtonDifficultyFilter>
+        </div>
+
         <div className="newClasses-wrapper">
           {items.map((item, index) => {
-            return (
-              <SocialCard
-                newClassData={item}
-                key={index}
-                className="newc-card"
-              />
-            );
+            return <SocialCard newClassData={item} key={index} />;
           })}
         </div>
       </div>
       <Footer />
     </main>
   );
-}
-
-{
-  /*class Homepage extends Component {
-  render() {
-    const token = document.querySelector("[name=csrf-token]").content;
-    const headers = { "X-CSRF-Token": token };
-    
-    return (
-      <main>
-        <Navbar current_user={this.props.current_user} />
-        <img
-          src={require("../images/banner.svg")}
-          alt="banner"
-          className="hero-img"
-        />
-        <Head title="Welcome" />
-        <p>Hello, welcome to your first Inertia app!</p>
-        <p id="p1">This is cool!</p>
-        <p className="paragraph">This is cool!</p>
-        <Link href="/logout" method="delete" headers={headers} as="button">
-          Logout
-        </Link>
-
-        <Footer />
-      </main>
-    );
-  }
-}*/
 }
 
 export default Homepage;

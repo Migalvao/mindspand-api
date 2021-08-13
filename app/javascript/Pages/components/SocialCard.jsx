@@ -1,5 +1,4 @@
 import React from "react";
-import Chip from "@material-ui/core/Chip";
 
 const SocialCard = ({ newClassData }) => {
   const link = newClassData.teacher.avatar.url + "?tr=w-250,h-300";
