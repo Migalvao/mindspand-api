@@ -65,14 +65,15 @@
 
   .card__chip-new {
     color: #252636;
-
     position: absolute;
     background-color: #f5f4f9;
-    padding: 4px 11px;
+    padding: 2px 11px;
     border-radius: 20px;
     font-size: 12px;
     margin-top: 10px;
     margin-left: 5px;
+    font-weight: normal;
+    font-size: 12px;
   }
 
   .card__dif-level {
@@ -80,7 +81,7 @@
     text-align: left;
     font-size: 10px;
     letter-spacing: 0.1em;
-    margin-top: 20px;
+    margin-top: 14px;
     right: 5px;
     text-transform: uppercase;
   }
