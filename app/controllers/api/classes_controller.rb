@@ -1,5 +1,6 @@
 class Api::ClassesController < ApiController
     include AuthenticationConcern
+    before_action :check_class, only: [:update_class]
   
     def post_class
 
@@ -86,6 +87,38 @@ class Api::ClassesController < ApiController
             error = {"error": "User must be authenticated"}
             render(json: error, status: 401)
         end
+    end
+
+    def update_class
+
+        begin
+            if @skill_class.update(edit_class_params())
+                c = @skill_class.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :method, :regime, :location], 
+                                        include: {skill: { only: [:id, :name]}, 
+                                                teacher: {only: [:id, :username, :name]}})
+                render(json: c)
+            else
+
+                render_json_400(@skill_class.errors.full_messages)
+            end
+        rescue
+            render_json_400("Method or regime is not valid")
+        end
+    end
+
+    private
+    def check_class
+        @skill_class = SkillClass.find_by(id: params[:class_id])
+
+        return render_json_400("Class with that id was not found") unless @skill_class
+        
+        return render_json_400("Class doesn't belong to you") if @skill_class.teacher_id != @current_user.id
+    end
+
+    private
+    def edit_class_params
+        #filters parameters
+      params.permit(:title, :description, :no_classes, :class_duration, :method, :difficulty, :regime, :location, :archived)
     end
 
     private
