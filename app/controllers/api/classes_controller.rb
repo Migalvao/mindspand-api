@@ -1,6 +1,6 @@
 class Api::ClassesController < ApiController
     include AuthenticationConcern
-    before_action :check_class, only: [:update_class]
+    before_action :check_class, only: [:update_class, :delete_class]
   
     def post_class
 
@@ -103,6 +103,22 @@ class Api::ClassesController < ApiController
             end
         rescue
             render_json_400("Method or regime is not valid")
+        end
+    end
+
+    def delete_class
+        open_connections = Connection.where(class_status: "in_progress", match_id: MatchRequest.where(skill_class_id: @skill_class.id))
+        
+        if open_connections.empty?
+            # we can delete the class
+            @skill_class.update(deleted: true)
+
+            res = {"success": "Class was deleted successfully"}
+            render(json: res)
+
+        else
+            # There are open connections so class can't be closed
+            render_json_400("Class can't be deleted because there are open connections to it")
         end
     end
 
