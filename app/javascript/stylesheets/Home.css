@@ -41,6 +41,11 @@
   padding-top: 7em;
 }
 
+.categories-wrapper {
+  display: grid;
+  grid-gap: 1rem;
+}
+
 @media screen and (max-width: 960px) {
   .hero-img {
     height: 550px;
@@ -58,5 +63,9 @@
   .categories {
     margin-left: 1em;
     padding-top: 5em;
+  }
+
+  .categories-wrapper {
+    grid-template-columns: repeat(2, 10.25rem);
   }
 }
