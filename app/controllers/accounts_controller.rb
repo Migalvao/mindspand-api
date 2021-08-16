@@ -68,20 +68,27 @@ class AccountsController < ApplicationController
     if @current_user
       user = User.find_by(id: params[:id].to_i)
 
-      if not user
+      unless user
         render(inertia: 'NotFound')
         return
       end
 
+      user_json = user.as_json(only: [:id, :name, :username, :description, :avatar])
+
+      student_reviews = Review.where(connection_id: Connection.where(match_id: MatchRequest.where(student_id: user.id)))
+      teacher_reviews = Review.where(connection_id: Connection.where(match_id: MatchRequest.where(skill_class_id: SkillClass.where(teacher_id: user.id))))
+
+      total_reviews = student_reviews.or(teacher_reviews)
+
+      avg_rating = total_reviews.average(:rating).to_f.round(1) # only one decimal case
+
       if @current_user.id == user.id
         #own profile, can edit
-        user_json = user.as_json(only: [:id, :name, :username, :description])
-        res = {"can_edit": true, "user": user}
+        res = {"can_edit": true, "user": user_json, "rating": avg_rating}
 
       else
         #not own profile, can't edit
-        user_json = user.as_json(only: [:id, :name, :username, :description])
-        res = {"can_edit": false, "user": user}
+        res = {"can_edit": false, "user": user_json, "rating": avg_rating}
       end
 
       render(inertia: 'Profile', props: res)
