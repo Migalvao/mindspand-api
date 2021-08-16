@@ -1,13 +1,7 @@
 import React from "react";
 import "./Footer.css";
 import { Link } from "@inertiajs/inertia-react";
-import {
-  FaFacebook,
-  FaInstagram,
-  FaYoutube,
-  FaTwitter,
-  FaLinkedin,
-} from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 function Footer() {
   return (

@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import Layout from "./Layout";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { Head, Link } from "@inertiajs/inertia-react";
-import { Inertia } from "@inertiajs/inertia";
-import "../stylesheets/body.css";
 import "../stylesheets/Home.css";
 
 class Homepage extends Component {
@@ -24,7 +21,6 @@ class Homepage extends Component {
         />
         <Head title="Welcome" />
         <p>Hello, welcome to your first Inertia app!</p>
-        <p id="p1">This is cool!</p>
         <p className="paragraph">This is cool!</p>
 
         <Link href="/logout" method="delete" headers={headers} as="button">

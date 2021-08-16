@@ -1,7 +1,6 @@
 import React from "react";
 import { Inertia } from "@inertiajs/inertia";
-import Layout from "./Layout";
-import { Head, Link } from "@inertiajs/inertia-react";
+import { Link } from "@inertiajs/inertia-react";
 
 export default function Login(props) {
   const ErrorMessage = () => {
@@ -12,9 +11,7 @@ export default function Login(props) {
   };
 
   const handleSubmit = (e) => {
-    const token = document.querySelector(
-      "[name=csrf-token]"
-    ).content;
+    const token = document.querySelector("[name=csrf-token]").content;
 
     const data = {
       username: username.value,
