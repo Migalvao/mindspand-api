@@ -18,7 +18,8 @@ class Homepage extends Component {
 
         <img
           src={require("../images/banner.svg")}
-          alt="banner"
+          alt=""
+          role="presentation"
           className="hero-img"
         />
         <Head title="Welcome" />
