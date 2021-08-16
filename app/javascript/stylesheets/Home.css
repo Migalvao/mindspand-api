@@ -10,22 +10,22 @@
   background-size: cover;
   position: relative;
 }
-.newClasses {
+.new-classes {
   margin-left: 9em;
   padding-top: 7em;
 }
-.newClasses h1 {
+.new-classes h1 {
   font-weight: 600;
   font-size: 32px;
 }
 
-.newClasses-wrapper {
+.new-classes-wrapper {
   width: 100%;
   display: flex;
   overflow-x: auto;
 }
 
-.newClasses-wrapper::-webkit-scrollbar {
+.new-classes-wrapper::-webkit-scrollbar {
   width: 0;
 }
 
@@ -36,17 +36,27 @@
   margin: 0.75rem 0;
 }
 
+.categories {
+  margin-left: 9em;
+  padding-top: 7em;
+}
+
 @media screen and (max-width: 960px) {
   .hero-img {
     height: 550px;
   }
 
-  .newClasses {
+  .new-classes {
     margin-left: 1em;
     padding-top: 5em;
   }
 
-  .newClasses h1 {
+  .new-classes h1 {
     font-size: 21px;
+  }
+
+  .categories {
+    margin-left: 1em;
+    padding-top: 5em;
   }
 }
