@@ -34,7 +34,8 @@ class Login extends Component {
         <Navbar />
         <img
           src={require("../images/scene_1.svg")}
-          alt="logo"
+          alt=""
+          role="presentation"
           className="scene-1-login"
         />
         <div className="login_content">
