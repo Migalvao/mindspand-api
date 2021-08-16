@@ -43,25 +43,37 @@ class Login extends Component {
           <ErrorMessage />
           <div className="login-title">Log in to your account</div>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="username"></label>
-            <br />
-            <input
-              type="text"
-              id="username"
-              required
-              name="username"
+            <label
+              htmlFor="username"
               placeholder="Username/Email"
-            />
+              aria-label="Inserir username ou email"
+            >
+              <br />
+              <input
+                type="text"
+                id="username"
+                required
+                name="username"
+                placeholder="Username/Email"
+              />
+            </label>
+
             <br />
-            <label htmlFor="password"></label>
-            <br />
-            <input
-              type="password"
-              required
-              id="password"
-              name="password"
+            <label
+              htmlFor="password"
               placeholder="Password"
-            />
+              aria-label="Inserir password"
+            >
+              <br />
+              <input
+                type="password"
+                required
+                id="password"
+                name="password"
+                placeholder="Password"
+              />
+            </label>
+
             <br />
 
             <input type="submit" value="Log in" className="login-btn" />
