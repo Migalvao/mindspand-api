@@ -1,4 +1,4 @@
-class Api::ClassesController < ApplicationController
+class Api::ClassesController < ApiController
     include AuthenticationConcern
   
     def post_class
@@ -30,6 +30,18 @@ class Api::ClassesController < ApplicationController
         classes = classes.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :difficulty, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name, :avatar]}})
         render(json: classes)
      
+    end
+
+    def get_new_classes
+        # Classes created up to a week ago
+        if @current_user
+            classes = SkillClass.where(archived: false).where("created_at >= ?", 1.week.ago)
+            classes = classes.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
+            render(json: classes)
+        else
+            error = {"error": "User must be authenticated"}
+            render(json: error, status: 401)
+        end
     end
   
     def get_user_classes
