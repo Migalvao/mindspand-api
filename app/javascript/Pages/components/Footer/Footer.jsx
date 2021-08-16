@@ -5,7 +5,7 @@ import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 function Footer() {
   return (
-    <div className="footer-container">
+    <div className="footer">
       <Link href="/home" className="footer-logo">
         <img
           src={require("../../../images/logo_white.svg")}

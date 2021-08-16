@@ -14,9 +14,6 @@
   display: flex;
   justify-content: space-between;
   height: 80px;
-}
-
-.container {
   z-index: 1;
   width: 100%;
   max-width: 1300px;
@@ -29,7 +26,7 @@
   color: #fff;
   justify-self: start;
   cursor: pointer;
-  display: flex;
+  margin-top: 2%;
 }
 
 .navbar-icon {
@@ -144,6 +141,7 @@
     top: 0;
     left: 0;
     transform: translate(25%, 80%);
+    margin-top: 0;
   }
 
   .menu-icon {
