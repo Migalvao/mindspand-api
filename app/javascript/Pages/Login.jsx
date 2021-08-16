@@ -41,7 +41,7 @@ class Login extends Component {
         <div className="login_content">
           <Head title="Welcome" />
           <ErrorMessage />
-          <h1>Log in to your account</h1>
+          <div className="login-title">Log in to your account</div>
           <form onSubmit={handleSubmit}>
             <label htmlFor="username"></label>
             <br />

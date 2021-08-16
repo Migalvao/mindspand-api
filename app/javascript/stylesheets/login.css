@@ -22,7 +22,7 @@ body {
   z-index: -1;
 }
 
-h1 {
+.login-title {
   font-weight: 600;
   font-size: 21px;
   display: flex;
