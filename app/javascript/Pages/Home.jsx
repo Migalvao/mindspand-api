@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import { Head, Link } from "@inertiajs/inertia-react";
+import { Head } from "@inertiajs/inertia-react";
 import { useState, useEffect } from "react";
 import SocialCard from "./components/SocialCard";
-import "../stylesheets/Home.css";
+import "../stylesheets/home.scss";
 import ButtonDifficultyFilter from "./components/ButtonDifficultyFilter";
 import CardCategory from "./components/CardCategory";
 
@@ -53,7 +53,7 @@ function Homepage(props) {
       <div className="hero-img"></div>
 
       <div className="new-classes">
-        <h1>New classes added every week</h1>
+        <div className="new-classes-title">New classes added every week</div>
 
         <div className="filter-wrapper">
           <ButtonDifficultyFilter
@@ -90,7 +90,7 @@ function Homepage(props) {
       </div>
 
       <div className="categories">
-        <h1>Our class categories</h1>
+        <div className="categories-title">Our class categories</div>
 
         <div className="categories-wrapper">
           {cats.map((cat, index) => {
