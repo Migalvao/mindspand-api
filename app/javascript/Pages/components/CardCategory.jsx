@@ -1,7 +1,7 @@
 import React from "react";
+import "./CardCategory.scss";
 
 const CardCategory = ({ categoryData }) => {
-  console.log(categoryData);
   return (
     <div
       className="card-category"

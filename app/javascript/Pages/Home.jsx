@@ -7,6 +7,7 @@ import SocialCard from "./components/SocialCard";
 import "../stylesheets/home.scss";
 import ButtonDifficultyFilter from "./components/ButtonDifficultyFilter";
 import CardCategory from "./components/CardCategory";
+import CardPopular from "./components/CardPopular";
 
 function Homepage(props) {
   const token = document.querySelector("[name=csrf-token]").content;
@@ -14,6 +15,7 @@ function Homepage(props) {
 
   const [items, setItems] = useState([]);
   const [cats, setCat] = useState([]);
+  const [pclasses, setPClasses] = useState([]);
 
   const fetchClassesDifficulty = async (difficulty) => {
     let newClassData;
@@ -28,11 +30,6 @@ function Homepage(props) {
     setItems(newClassData);
   };
 
-  useEffect(() => {
-    fetchClassesDifficulty("beginner");
-    fetchCategories();
-  }, []);
-
   const fetchCategories = async () => {
     let categoryData;
     try {
@@ -46,6 +43,24 @@ function Homepage(props) {
     setCat(categoryData);
   };
 
+  const fetchPopularClasses = async () => {
+    let popularClassData;
+    try {
+      const response = await fetch("/api/classes");
+      popularClassData = await response.json();
+    } catch (error) {
+      console.log(error);
+      popularClassData = [];
+    }
+
+    setPClasses(popularClassData);
+  };
+
+  useEffect(() => {
+    fetchClassesDifficulty("beginner");
+    fetchCategories();
+    fetchPopularClasses();
+  }, []);
   return (
     <main>
       <Head title="Welcome" />
@@ -53,7 +68,7 @@ function Homepage(props) {
       <div className="hero-img"></div>
 
       <div className="new-classes">
-        <div className="new-classes-title">New classes added every week</div>
+        <h1 className="home-title">New classes added every week</h1>
 
         <div className="filter-wrapper">
           <ButtonDifficultyFilter
@@ -90,11 +105,21 @@ function Homepage(props) {
       </div>
 
       <div className="categories">
-        <div className="categories-title">Our class categories</div>
+        <h1 className="home-title">Our class categories</h1>
 
         <div className="categories-wrapper">
           {cats.map((cat, index) => {
             return <CardCategory categoryData={cat} key={index} />;
+          })}
+        </div>
+      </div>
+
+      <div className="popular">
+        <h1 className="home-title">Most Popular</h1>
+
+        <div className="popular-wrapper">
+          {pclasses.map((pclass, indexx) => {
+            return <CardPopular popularClassData={pclass} key={indexx} />;
           })}
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import "./SocialCard.scss";
 
 const SocialCard = ({ newClassData }) => {
   const link = newClassData.teacher.avatar.url + "?tr=w-250,h-300";
