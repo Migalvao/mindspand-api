@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import Navbar from "./components/Navbar/Navbar";
 import { Head, Link } from "@inertiajs/inertia-react";
-import "../stylesheets/body.css";
 import "../stylesheets/login.css";
 
 class Login extends Component {
@@ -15,6 +14,7 @@ class Login extends Component {
     };
 
     const handleSubmit = (e) => {
+      e.preventDefault();
       const token = document.querySelector("[name=csrf-token]").content;
 
       const data = {
@@ -22,7 +22,6 @@ class Login extends Component {
         password: password.value,
       };
 
-      e.preventDefault();
       Inertia.post("/login", data, {
         headers: {
           "X-CSRF-Token": token,
@@ -35,33 +34,46 @@ class Login extends Component {
         <Navbar />
         <img
           src={require("../images/scene_1.svg")}
-          alt="logo"
+          alt=""
+          role="presentation"
           className="scene-1-login"
         />
         <div className="login_content">
           <Head title="Welcome" />
           <ErrorMessage />
-          <h1>Log in to your account</h1>
+          <div className="login-title">Log in to your account</div>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="username"></label>
-            <br />
-            <input
-              type="text"
-              id="username"
-              required
-              name="username"
+            <label
+              htmlFor="username"
               placeholder="Username/Email"
-            />
+              aria-label="Inserir username ou email"
+            >
+              <br />
+              <input
+                type="text"
+                id="username"
+                required
+                name="username"
+                placeholder="Username/Email"
+              />
+            </label>
+
             <br />
-            <label htmlFor="password"></label>
-            <br />
-            <input
-              type="password"
-              required
-              id="password"
-              name="password"
+            <label
+              htmlFor="password"
               placeholder="Password"
-            />
+              aria-label="Inserir password"
+            >
+              <br />
+              <input
+                type="password"
+                required
+                id="password"
+                name="password"
+                placeholder="Password"
+              />
+            </label>
+
             <br />
 
             <input type="submit" value="Log in" className="login-btn" />

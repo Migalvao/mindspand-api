@@ -1,17 +1,12 @@
 import React from "react";
 import Layout from "./Layout";
-import { Head, Link } from "@inertiajs/inertia-react";
-import "../stylesheets/body.css";
+import { Link } from "@inertiajs/inertia-react";
 
 export default function Profile(props) {
   const EditButton = () => {
     if (props.can_edit) {
       return (
-        <Link
-          href={props.user.id + "/edit"}
-          headers={headers}
-          as="button"
-        >
+        <Link href={props.user.id + "/edit"} headers={headers} as="button">
           Edit
         </Link>
       );
@@ -19,9 +14,7 @@ export default function Profile(props) {
     return null;
   };
 
-  const token = document.querySelector(
-    "[name=csrf-token]"
-  ).content;
+  const token = document.querySelector("[name=csrf-token]").content;
   const headers = { "X-CSRF-Token": token };
 
   return (

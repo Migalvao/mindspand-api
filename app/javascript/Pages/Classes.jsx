@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Layout from "./Layout";
-import "../stylesheets/body.css";
 
 class Classes extends Component {
   render() {
