@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "@inertiajs/inertia-react";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { MdNotifications } from "react-icons/md";
 import "./navbar.scss";
 import { Button } from "../Button";
 
@@ -27,8 +28,13 @@ function Navbar(props) {
           />
         </Link>
         {show ? (
-          <div className="navbar-menu-icon" onClick={handleClick}>
-            {click ? <FaTimes /> : <FaBars />}
+          <div className="navbar-menu-icons">
+            <div className="navbar-menu-icon-notification">
+              <MdNotifications />
+            </div>
+            <div className="navbar-menu-icon-burger" onClick={handleClick}>
+              {click ? <FaTimes /> : <FaBars />}
+            </div>
           </div>
         ) : null}
         {show ? (

@@ -27,12 +27,26 @@
       margin-top: 2%;
     }
 
-    .navbar-menu-icon {
+    .navbar-menu-icons {
       color: #ffffff;
-      display: none;
 
-      .fa-bars {
-        color: #fff;
+      .navbar-menu-icon-notification {
+        display: flex;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        font-size: 1.8rem;
+        padding: 2rem;
+        right: 0;
+
+        &:hover {
+          font-size: 2rem;
+          transition: all 0.2s ease-out;
+        }
+      }
+      .navbar-menu-icon-burger {
+        display: none;
       }
     }
 
@@ -89,18 +103,20 @@
         margin-top: 0;
       }
 
-      .navbar-menu-icon {
-        display: block;
+      .navbar-menu-icons {
+        display: flex;
         position: absolute;
-        top: 0;
-        right: 0;
-        transform: translate(-100%, 60%);
+        top: 50%;
+        left: 90%;
+        transform: translate(-100%, -50%);
         font-size: 1.8rem;
-        cursor: pointer;
 
-        .fa-times {
-          color: #fff;
-          font-size: 2rem;
+        .navbar-menu-icon-notification {
+          right: 60%;
+        }
+        .navbar-menu-icon-burger {
+          display: flex;
+          cursor: pointer;
         }
       }
 
