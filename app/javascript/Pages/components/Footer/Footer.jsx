@@ -1,5 +1,5 @@
 import React from "react";
-import "./Footer.css";
+import "./footer.scss";
 import { Link } from "@inertiajs/inertia-react";
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
 
@@ -16,7 +16,7 @@ function Footer() {
 
       <p className="social-text">Connect with us!</p>
       <section className="social-media">
-        <div className="social-media-wrappers">
+        <div className="social-media-wrapper">
           <div className="social-icons">
             <Link
               className="social-icon-link facebook"
