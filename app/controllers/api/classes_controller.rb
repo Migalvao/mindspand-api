@@ -25,8 +25,12 @@ class Api::ClassesController < ApplicationController
     end
 
     def get_classes
-       
-        classes = SkillClass.where(archived: false).where(class_params())
+        if params[:category_id] and ! params[:skill_id]
+            classes = SkillClass.where(archived: false, skill_id: Skill.where(category_id: params[:category_id])).where(class_params())
+        else
+            classes = SkillClass.where(archived: false).where(class_params())
+        end
+
         classes = classes.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :difficulty, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name, :avatar]}})
         render(json: classes)
      
