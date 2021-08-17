@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import Navbar from "./components/Navbar/Navbar";
 import { Head, Link } from "@inertiajs/inertia-react";
-import "../stylesheets/login.css";
+import "../stylesheets/login.scss";
 
 class Login extends Component {
   render() {
@@ -38,7 +38,7 @@ class Login extends Component {
           role="presentation"
           className="scene-1-login"
         />
-        <div className="login_content">
+        <div className="login-content">
           <Head title="Welcome" />
           <ErrorMessage />
           <div className="login-title">Log in to your account</div>
