@@ -6,9 +6,6 @@ import "../stylesheets/Home.css";
 
 class Homepage extends Component {
   render() {
-    const token = document.querySelector("[name=csrf-token]").content;
-    const headers = { "X-CSRF-Token": token };
-
     return (
       <main>
         <Navbar current_user={this.props.current_user} />
@@ -23,7 +20,12 @@ class Homepage extends Component {
         <p>Hello, welcome to your first Inertia app!</p>
         <p className="paragraph">This is cool!</p>
 
-        <Link href="/logout" method="delete" headers={headers} as="button">
+        <Link
+          href="/logout"
+          method="delete"
+          headers={window.defaultHeaders}
+          as="button"
+        >
           Logout
         </Link>
         <Footer />

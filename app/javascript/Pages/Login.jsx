@@ -15,7 +15,6 @@ class Login extends Component {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      const token = document.querySelector("[name=csrf-token]").content;
 
       const data = {
         username: username.value,
@@ -23,9 +22,7 @@ class Login extends Component {
       };
 
       Inertia.post("/login", data, {
-        headers: {
-          "X-CSRF-Token": token,
-        },
+        headers: window.defaultHeaders,
       });
     };
 
