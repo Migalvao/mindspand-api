@@ -28,7 +28,7 @@
     position: relative;
   }
 
-  h3 {
+  .cardSocial-skill-name {
     left: 50%;
     top: 50%;
     width: 90%;
@@ -41,7 +41,7 @@
     transition: all ease-in 100ms;
   }
 
-  h4 {
+  .cardSocial-class-title {
     position: absolute;
     left: 50%;
     top: 61%;
@@ -54,7 +54,7 @@
     transition: all ease-in 100ms;
   }
 
-  h5 {
+  .cardSocial-teacher-name {
     font-weight: normal;
     font-size: 12px;
     left: 50%;
