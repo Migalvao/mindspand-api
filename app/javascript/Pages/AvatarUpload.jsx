@@ -9,7 +9,7 @@ export default function Profile(props) {
     e.preventDefault();
 
     Inertia.put("/users/" + props.user.id + "/avatar", state, {
-      headers: headers,
+      headers: window.defaultHeaders,
     });
   };
 
@@ -18,9 +18,6 @@ export default function Profile(props) {
   const onImageChange = (event) => {
     state.avatar = event.target.files[0];
   };
-
-  const token = document.querySelector("[name=csrf-token]").content;
-  const headers = { "X-CSRF-Token": token };
 
   const link = props.curent_avatar + "?tr=w-250,h-300";
 
@@ -45,7 +42,7 @@ export default function Profile(props) {
         <input type="submit" value="Submit" />
       </form>
 
-      <Link href="/home" headers={headers} as="button">
+      <Link href="/home" headers={window.defaultHeaders} as="button">
         Home
       </Link>
     </Layout>

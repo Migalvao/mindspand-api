@@ -22,7 +22,7 @@ export default function Profile(props) {
     e.preventDefault();
 
     Inertia.put("/users/" + props.user.id, values, {
-      headers: headers,
+      headers: window.defaultHeaders,
     });
   };
 
@@ -34,9 +34,6 @@ export default function Profile(props) {
       [key]: value,
     }));
   };
-
-  const token = document.querySelector("[name=csrf-token]").content;
-  const headers = { "X-CSRF-Token": token };
 
   return (
     <Layout current_user={props.user}>
@@ -84,7 +81,11 @@ export default function Profile(props) {
       <p>Description: {props.user.description}</p> */}
       {/* <p>Can edit?: {props.can_edit.toString()}</p> */}
 
-      <Link href={"/users/" + props.user.id} headers={headers} as="button">
+      <Link
+        href={"/users/" + props.user.id}
+        headers={window.defaultHeaders}
+        as="button"
+      >
         Cancel
       </Link>
     </Layout>

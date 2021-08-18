@@ -15,7 +15,6 @@ class Login extends Component {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      const token = document.querySelector("[name=csrf-token]").content;
 
       const data = {
         username: username.value,
@@ -23,9 +22,7 @@ class Login extends Component {
       };
 
       Inertia.post("/login", data, {
-        headers: {
-          "X-CSRF-Token": token,
-        },
+        headers: window.defaultHeaders,
       });
     };
 
@@ -41,13 +38,9 @@ class Login extends Component {
         <div className="login-content">
           <Head title="Welcome" />
           <ErrorMessage />
-          <div className="login-title">Log in to your account</div>
+          <h1 className="login-title">Log in to your account</h1>
           <form onSubmit={handleSubmit}>
-            <label
-              htmlFor="username"
-              placeholder="Username/Email"
-              aria-label="Inserir username ou email"
-            >
+            <label htmlFor="username" aria-label="Inserir username ou email">
               <br />
               <input
                 type="text"
@@ -59,11 +52,7 @@ class Login extends Component {
             </label>
 
             <br />
-            <label
-              htmlFor="password"
-              placeholder="Password"
-              aria-label="Inserir password"
-            >
+            <label htmlFor="password" aria-label="Inserir password">
               <br />
               <input
                 type="password"

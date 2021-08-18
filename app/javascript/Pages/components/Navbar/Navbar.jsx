@@ -6,9 +6,6 @@ import "./navbar.scss";
 import { Button } from "../Button";
 
 function Navbar(props) {
-  const token = document.querySelector("[name=csrf-token]").content;
-  const headers = { "X-CSRF-Token": token };
-
   const [click, setClick] = useState(false);
   const [button] = useState(true);
 
@@ -63,7 +60,7 @@ function Navbar(props) {
               <Link
                 href="/logout"
                 method="delete"
-                headers={headers}
+                headers={window.defaultHeaders}
                 as="button"
                 className="btn-logout"
               >

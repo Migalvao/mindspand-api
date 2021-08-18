@@ -127,6 +127,7 @@ Skill.create({name: "Space Exploration", category: c})
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 SkillClass.create({title: "Painting class", description: "Very cool painting class", no_classes: 3, class_duration: 90, method: "synchronous", difficulty: "beginner", regime: "physical", location: "Coimbra", teacher_id: 1, skill_id: 1})
 SkillClass.create({title: "Graphic Design", description: "You'll learn a lot about design", no_classes: 3, class_duration: 90, method: "synchronous", difficulty: "intermediate", regime: "remote", location: "Coimbra", teacher_id: 1, skill_id: 1})
 SkillClass.create({title: "Get a 6 pack", description: "How to get ripped", no_classes: 3, class_duration: 90, method: "synchronous", difficulty: "advanced", regime: "physical", location: "Coimbra", teacher_id: 1, skill_id: 1})
@@ -135,3 +136,6 @@ SkillClass.create({title: "Get a 6 pack", description: "How to get ripped", no_c
 
 
 >>>>>>> a0450a0dbad9457330b2d1a4c2a1030992d2ca90
+=======
+
+>>>>>>> 4dc8ad51558bf98d9e75ed1efb170eecef0ff778

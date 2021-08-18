@@ -6,16 +6,17 @@ export default function Profile(props) {
   const EditButton = () => {
     if (props.can_edit) {
       return (
-        <Link href={props.user.id + "/edit"} headers={headers} as="button">
+        <Link
+          href={props.user.id + "/edit"}
+          headers={window.defaultHeaders}
+          as="button"
+        >
           Edit
         </Link>
       );
     }
     return null;
   };
-
-  const token = document.querySelector("[name=csrf-token]").content;
-  const headers = { "X-CSRF-Token": token };
 
   return (
     <Layout current_user={props.user}>
@@ -29,7 +30,7 @@ export default function Profile(props) {
       <EditButton />
       <br></br>
 
-      <Link href="/home" headers={headers} as="button">
+      <Link href="/home" headers={window.defaultHeaders} as="button">
         Home
       </Link>
     </Layout>

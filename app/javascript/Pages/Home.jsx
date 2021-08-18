@@ -10,9 +10,6 @@ import CardCategory from "./components/CardCategory";
 import CardPopular from "./components/CardPopular";
 
 function Homepage(props) {
-  const token = document.querySelector("[name=csrf-token]").content;
-  const headers = { "X-CSRF-Token": token };
-
   const [items, setItems] = useState([]);
   const [cats, setCat] = useState([]);
   const [pclasses, setPClasses] = useState([]);
