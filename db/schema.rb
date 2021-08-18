@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_02_113401) do
+ActiveRecord::Schema.define(version: 2021_08_11_143051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2021_08_02_113401) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "color", default: ""
   end
 
   create_table "connections", force: :cascade do |t|
@@ -35,10 +36,10 @@ ActiveRecord::Schema.define(version: 2021_08_02_113401) do
     t.datetime "response_datetime"
     t.integer "status", default: 0
     t.bigint "student_id", null: false
-    t.bigint "class_id", null: false
+    t.bigint "skill_class_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["class_id"], name: "index_match_requests_on_class_id"
+    t.index ["skill_class_id"], name: "index_match_requests_on_skill_class_id"
     t.index ["student_id"], name: "index_match_requests_on_student_id"
   end
 
@@ -98,10 +99,11 @@ ActiveRecord::Schema.define(version: 2021_08_02_113401) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "avatar"
   end
 
   add_foreign_key "connections", "match_requests", column: "match_id"
-  add_foreign_key "match_requests", "skill_classes", column: "class_id"
+  add_foreign_key "match_requests", "skill_classes"
   add_foreign_key "match_requests", "users", column: "student_id"
   add_foreign_key "notifications", "match_requests", column: "match_id"
   add_foreign_key "notifications", "users", column: "person_id"

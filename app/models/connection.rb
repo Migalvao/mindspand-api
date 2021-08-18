@@ -4,8 +4,8 @@
 #
 #  id                       :bigint           not null, primary key
 #  ended_at                 :datetime
-#  class_status             :integer          default("class_open")
-#  person_closed_connection :integer          default(0)
+#  class_status             :integer          default("in_progress")
+#  person_closed_connection :integer          default("class_open")
 #  match_id                 :bigint           not null
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -23,10 +23,11 @@ class Connection < ApplicationRecord
   }
 
   # person_closed_connection [class_open, student closed, teacher closed]
-  enum class_status: {
+  enum person_closed_connection: {
     class_open: 0,
     student_closed: 1,
     teacher_closed: 2,
   }
-
+  
+  validates :class_status, presence: true
 end

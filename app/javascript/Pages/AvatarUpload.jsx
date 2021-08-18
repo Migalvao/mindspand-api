@@ -8,6 +8,7 @@ export default function Profile(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+
     Inertia.put("/users/" + props.user.id + "/avatar", state, {
       headers: window.defaultHeaders,
     });
@@ -18,6 +19,7 @@ export default function Profile(props) {
   const onImageChange = (event) => {
     state.avatar = event.target.files[0];
   };
+
 
   const link = props.curent_avatar + "?tr=w-250,h-300";
 
