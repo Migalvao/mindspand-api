@@ -47,6 +47,7 @@ class Api::ConnectionsController < ApiController
     end
 
     def update_match
+        logger = Rails.logger
 
         if @request.status_is_pending?
             
@@ -101,7 +102,7 @@ class Api::ConnectionsController < ApiController
                         end
                     else
                         # Shouldn't happen, notification not found
-                        puts "Error: there was no notification"
+                        logger.warn "Error: there was no notification"
                     end
 
                     if @request.status_is_accepted?

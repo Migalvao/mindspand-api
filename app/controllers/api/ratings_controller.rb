@@ -12,10 +12,8 @@ class Api::RatingsController < ApiController
             # We need to mark the own user's notification as read, should there be one
             own_notification = Notification.find_by(match_id: @connection.match_id, person_id: @current_user.id, notification_type: "connection_closed")
                     
-            if own_notification
-                unless own_notification.update(read: true)
-                    return render_json_500(own_notification.errors.full_messages)
-                end
+            if own_notification and ! own_notification.update(read: true)
+                return render_json_500(own_notification.errors.full_messages)
             end
 
             res = {"review": review.as_json(only: [:id, :rating, :comment])}
