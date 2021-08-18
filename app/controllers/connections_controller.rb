@@ -8,7 +8,7 @@ class ConnectionsController < ApplicationController
         # connections where user a student
         student_connections = Connection.where(match_id: MatchRequest.where(student_id: @current_user.id), class_status: "in_progress").order(created_at: :desc)
         # connections where user is a teacher
-        teacher_connections = Connection.where(match_id: MatchRequest.where(skill_class_id: SkillClass.where(teacher_id: @current_user.id, deleted: false)), class_status: "in_progress").order(created_at: :desc)
+        teacher_connections = Connection.where(match_id: MatchRequest.where(skill_class_id: SkillClass.visible_to_all.where(teacher_id: @current_user.id)), class_status: "in_progress").order(created_at: :desc)
 
         # json payload should contain information about the other person, so should contain info about the user
         # when user is a student and vice-versa

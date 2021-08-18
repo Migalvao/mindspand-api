@@ -22,6 +22,9 @@ class SkillClass < ApplicationRecord
   belongs_to :teacher, class_name: 'User', foreign_key: 'teacher_id'
   belongs_to :skill
   has_many :match_requests, foreign_key: 'class_id'
+
+  scope :visible_to_all, -> { where(deleted: false, archived: false) }
+  scope :visible_to_own_user, -> { where(deleted: false) }
   
   # method [synchronous, asynchronous, both]
   enum method: {

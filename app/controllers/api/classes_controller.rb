@@ -27,7 +27,7 @@ class Api::ClassesController < ApiController
 
     def get_classes
         if @current_user
-            classes = SkillClass.where(archived: false, deleted: false).where(class_params())
+            classes = SkillClass.visible_to_all.where(class_params())
             classes = classes.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
             render(json: classes)
         else
@@ -39,7 +39,7 @@ class Api::ClassesController < ApiController
     def get_new_classes
         # Classes created up to a week ago
         if @current_user
-            classes = SkillClass.where(archived: false, deleted: false).where("created_at >= ?", 1.week.ago).where(class_params())
+            classes = SkillClass.visible_to_all.where("created_at >= ?", 1.week.ago).where(class_params())
             classes = classes.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
             render(json: classes)
         else
@@ -53,10 +53,10 @@ class Api::ClassesController < ApiController
 
             if @current_user.id == params[:id].to_i
                 #own classes, show all classes
-                classes = SkillClass.where(teacher: params[:id], deleted: false)
+                classes = SkillClass.visible_to_own_user.where(teacher: params[:id])
             else
                 #someone else's classes, only show those not archived
-                classes = SkillClass.where(teacher: params[:id], archived: false, deleted: false)
+                classes = SkillClass.visible_to_all.where(teacher: params[:id])
             end
             
             classes = classes.as_json(only: [:id, :title, :description, :no_classes, :class_duration, :method, :regime, :location], include: {skill: { only: [:id, :name]}, teacher: {only: [:id, :username, :name]}})
@@ -70,7 +70,7 @@ class Api::ClassesController < ApiController
     def get_single_class
         if @current_user
 
-            c = SkillClass.find_by(id: params[:id], deleted: false)
+            c = SkillClass.visible_to_all.find_by(id: params[:id])
 
             if c
 
@@ -123,7 +123,7 @@ class Api::ClassesController < ApiController
 
     private
     def check_class
-        @skill_class = SkillClass.find_by(id: params[:class_id], deleted: false)
+        @skill_class = SkillClass.visible_to_all.find_by(id: params[:class_id])
 
         return render_json_400("Class with that id was not found") unless @skill_class
         
