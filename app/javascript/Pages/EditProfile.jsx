@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Layout from "./Layout";
 import { Link } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
-import "../stylesheets/body.css";
 
 export default function Profile(props) {
   const ErrorMessage = () => {
@@ -23,7 +22,7 @@ export default function Profile(props) {
     e.preventDefault();
 
     Inertia.put("/users/" + props.user.id, values, {
-      headers: headers,
+      headers: window.defaultHeaders,
     });
   };
 
@@ -35,11 +34,6 @@ export default function Profile(props) {
       [key]: value,
     }));
   };
-
-  const token = document.querySelector(
-    "[name=csrf-token]"
-  ).content;
-  const headers = { "X-CSRF-Token": token };
 
   return (
     <Layout current_user={props.user}>
@@ -89,7 +83,7 @@ export default function Profile(props) {
 
       <Link
         href={"/users/" + props.user.id}
-        headers={headers}
+        headers={window.defaultHeaders}
         as="button"
       >
         Cancel

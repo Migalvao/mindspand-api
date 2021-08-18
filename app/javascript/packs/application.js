@@ -5,8 +5,12 @@
 import React from "react";
 import { render } from "react-dom";
 import { createInertiaApp } from "@inertiajs/inertia-react";
+import "../stylesheets/body.css";
 // import "../../assets/stylesheets/paragraph.css";
 // import "../stylesheets/paragraph.css";
+
+window.csrfToken = document.querySelector("[name=csrf-token]").content
+window.defaultHeaders = { "X-CSRF-Token": window.csrfToken }
 
 createInertiaApp({
   resolve: (name) => require(`.././Pages/${name}`),

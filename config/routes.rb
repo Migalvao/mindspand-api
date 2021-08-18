@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root "accounts#get_login"
+  root "test#home"
 
   ## API
   get '/api/username/:username', to: 'api/utils#check_username', as: 'check_username'  #Check username
@@ -40,6 +40,9 @@ Rails.application.routes.draw do
   #home
   get '/', to: 'test#home', as: 'home'
   get '/home', to: 'test#home'
+
+  #classes
+  get '/classes', to: 'test#classes'
 
   #profile
   get '/users/:id', to: 'accounts#get_profile', as: 'get_profile'  #Profile
