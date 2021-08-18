@@ -47,7 +47,6 @@ class Api::ConnectionsController < ApiController
     end
 
     def update_match
-        logger = Rails.logger
 
         if @request.status_is_pending?
             
