@@ -1,4 +1,4 @@
-.card {
+.cardSocial {
   min-width: 11.75em;
   height: 16.88em;
   display: flex;
@@ -10,7 +10,7 @@
   position: relative;
   color: #fff;
 
-  .card__img {
+  .cardSocial-img {
     position: absolute;
     left: 0;
     top: 0;
@@ -20,7 +20,7 @@
     z-index: -1;
   }
 
-  .card__filter {
+  .cardSocial-filter {
     background-color: rgba(37, 38, 54, 0.4);
     min-width: 11.75em;
     height: 16.88em;
@@ -63,7 +63,7 @@
     position: absolute;
   }
 
-  .card__chip-new {
+  .cardSocial-chip-new {
     color: #252636;
     position: absolute;
     background-color: #f5f4f9;
@@ -75,7 +75,7 @@
     font-weight: normal;
   }
 
-  .card__dif-level {
+  .cardSocial-dif-level {
     position: absolute;
     text-align: left;
     font-size: 10px;
