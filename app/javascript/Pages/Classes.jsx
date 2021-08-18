@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import ButtonFilter from "./ButtonFilter";
 import { FaTimes } from "react-icons/fa";
+import PropTypes from "prop-types";
 
 const Classes = (props) => {
   const [categories, setCategories] = useState([]);
@@ -196,6 +197,10 @@ const Classes = (props) => {
       ) : null}
     </Layout>
   );
+};
+
+Classes.propTypes = {
+  current_user: PropTypes.object.isRequired,
 };
 
 export default Classes;
