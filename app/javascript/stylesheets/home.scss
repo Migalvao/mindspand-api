@@ -4,7 +4,7 @@
       rgba(37, 38, 54, 0.2)
     ),
     url("./../images/banner.svg");
-  height: 720px;
+  height: 45rem;
   background-position: left;
   background-repeat: no-repeat;
   background-size: cover;
@@ -14,12 +14,12 @@
 .home-title {
   color: #252636;
   font-weight: 600;
-  font-size: 32px;
+  font-size: 2rem;
 }
 
 .new-classes {
-  margin-left: 9em;
-  padding-top: 7em;
+  margin-left: 9rem;
+  padding-top: 7rem;
 
   .filter-wrapper {
     width: 100%;
@@ -40,8 +40,8 @@
 }
 
 .categories {
-  margin-left: 9em;
-  padding-top: 7em;
+  margin-left: 9rem;
+  padding-top: 7rem;
 
   .categories-wrapper {
     display: grid;
@@ -50,26 +50,26 @@
 }
 
 .popular {
-  margin-left: 9em;
-  padding-top: 7em;
+  margin-left: 9rem;
+  padding-top: 7rem;
 }
 
 @media screen and (max-width: 960px) {
   .home-title {
-    font-size: 21px;
+    font-size: 1.313rem;
   }
   .hero-img {
-    height: 550px;
+    height: 34.375rem;
   }
 
   .new-classes {
-    margin-left: 1em;
-    padding-top: 5em;
+    margin-left: 1rem;
+    padding-top: 5rem;
   }
 
   .categories {
-    margin-left: 1em;
-    padding-top: 5em;
+    margin-left: 1rem;
+    padding-top: 5rem;
 
     .categories-wrapper {
       grid-template-columns: repeat(2, 10.25rem);
@@ -77,7 +77,7 @@
   }
 
   .popular {
-    margin-left: 1em;
-    padding-top: 5em;
+    margin-left: 1rem;
+    padding-top: 5rem;
   }
 }

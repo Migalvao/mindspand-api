@@ -8,7 +8,7 @@
 }
 
 .login-content {
-  padding: 24px;
+  padding: 1.5rem;
   position: absolute;
   display: block;
   left: 50%;
@@ -19,7 +19,7 @@
 
   .login-title {
     font-weight: 600;
-    font-size: 21px;
+    font-size: 1.313rem;
     display: flex;
     text-align: center;
     color: #252636;
@@ -30,22 +30,22 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-    padding-top: 50px;
+    padding-top: 3.125rem;
     height: auto;
     overflow: hidden;
 
     input {
       float: left;
       clear: both;
-      margin: 5px 0;
-      padding: 10px 170px 10px 20px;
+      margin: 0.313rem 0;
+      padding: 0.625rem 10.625rem 0.625rem 1.25rem;
       outline: none;
       border: 1px solid #252636;
-      border-radius: 5px;
+      border-radius: 0.313rem;
     }
 
     ::placeholder {
-      font-size: 12px;
+      font-size: 0.75rem;
       color: #aaaaaa;
     }
 
@@ -53,7 +53,7 @@
       background-color: #6600cc;
       color: #ffffff;
       margin-top: 15%;
-      padding: 10px 137px;
+      padding: 0.625rem 8.563rem;
       font-weight: 600;
       font-size: 1rem;
       border: 0;
@@ -63,10 +63,10 @@
 
   .to-signup {
     color: #252636;
-    margin-top: 380px;
+    margin-top: 23.75rem;
     font-family: Avenir Next;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 0.75rem;
     cursor: pointer;
 
     .to-signup a {
