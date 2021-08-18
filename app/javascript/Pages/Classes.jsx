@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Layout from "./Layout";
-
 class Classes extends Component {
   render() {
     return (
