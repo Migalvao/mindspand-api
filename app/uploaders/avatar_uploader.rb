@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AvatarUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -10,15 +12,15 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    path = __FILE__ + "/../../public/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    path = "C:/Galvao/skillX/app/uploaders/avatar_uploader.rb/../../public/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  def default_url(*args)
+  def default_url(*_args)
     # For Rails 3.1+ asset pipeline compatibility:
     # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  
-    "https://ik.imagekit.io/skillx/default_HQ9dhWQdf.jpg?updatedAt=1628589479298"
+
+    'https://ik.imagekit.io/skillx/default_HQ9dhWQdf.jpg?updatedAt=1628589479298'
   end
 
   # Process files as they are uploaded:

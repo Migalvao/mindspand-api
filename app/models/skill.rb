@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: skills
@@ -9,8 +11,8 @@
 #  updated_at  :datetime         not null
 #
 class Skill < ApplicationRecord
-    belongs_to :category
-    has_many :skill_classes
-    
-    validates :name, presence: true, uniqueness: true
+  belongs_to :category
+  has_many :skill_classes
+
+  validates :name, presence: true, uniqueness: true
 end

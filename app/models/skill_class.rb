@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: skill_classes
@@ -21,7 +23,7 @@ class SkillClass < ApplicationRecord
   belongs_to :teacher, class_name: 'User', foreign_key: 'teacher_id'
   belongs_to :skill
   has_many :match_requests, foreign_key: 'class_id'
-  
+
   # method [synchronous, asynchronous, both]
   enum method: {
     synchronous: 0,
@@ -46,8 +48,7 @@ class SkillClass < ApplicationRecord
   validates :title, :no_classes, :class_duration, :method, :difficulty, :regime, presence: true
   validates :location, presence: true, unless: :method_is_remote?
 
-
   def method_is_remote?
-    return regime == :remote.to_s
+    regime == :remote.to_s
   end
 end

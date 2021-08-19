@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: match_requests
@@ -14,7 +16,7 @@ class OwnRequestValidator < ActiveModel::Validator
   # To prevent a user from requesting a match of their own
   def validate(record)
     if record.student == record.skill_class.teacher
-      record.errors.add :base, "The student and teacher must not be the same user"
+      record.errors.add :base, 'The student and teacher must not be the same user'
     end
   end
 end
@@ -39,19 +41,18 @@ class MatchRequest < ApplicationRecord
   validates :status, presence: true
 
   def status_is_pending?
-    return status == :pending.to_s
+    status == :pending.to_s
   end
 
   def status_is_cancelled?
-    return status == :cancelled.to_s
+    status == :cancelled.to_s
   end
 
   def status_is_accepted?
-    return status == :accepted.to_s
+    status == :accepted.to_s
   end
 
   def status_is_refused?
-    return status == :refused.to_s
+    status == :refused.to_s
   end
-
 end

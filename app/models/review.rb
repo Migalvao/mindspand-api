@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: reviews
@@ -15,6 +17,7 @@ class Review < ApplicationRecord
   MAXIMUM_REVIEW_VALUE = 5
   belongs_to :connection
 
-  validates :student_teacher, inclusion: { in: [ true, false ] } # TRUE IS STUDENT AND FALSE IS TEACHER
-  validates :rating, presence: true, numericality: { greater_than_or_equal_to: MINIMUM_REVIEW_VALUE, less_than_or_equal_to: MAXIMUM_REVIEW_VALUE }
+  validates :student_teacher, inclusion: { in: [true, false] } # TRUE IS STUDENT AND FALSE IS TEACHER
+  validates :rating, presence: true,
+                     numericality: { greater_than_or_equal_to: MINIMUM_REVIEW_VALUE, less_than_or_equal_to: MAXIMUM_REVIEW_VALUE }
 end
