@@ -61,4 +61,5 @@ module Api
         render_json_400('You are not allowed to rate this class')
       end
     end
+  end
 end
