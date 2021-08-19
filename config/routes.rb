@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get '/api/classes/:id', to: 'api/classes#get_single_class', as: 'get_single_class'
   post '/api/users/:id/classes', to: 'api/classes#post_class', as: 'post_class'
   get '/api/users/:id/classes', to: 'api/classes#get_user_classes', as: 'get_user_classes'
+  put '/api/users/:id/classes/:class_id', to: 'api/classes#update_class', as: 'update_class'
+  delete '/api/users/:id/classes/:class_id', to: 'api/classes#delete_class', as: 'delete_class'
 
   #Connections
   post '/api/classes/:id/request', to: 'api/connections#request_match', as: 'request_match'
