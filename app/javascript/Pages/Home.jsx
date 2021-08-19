@@ -8,6 +8,7 @@ import "../stylesheets/home.scss";
 import ButtonDifficultyFilter from "./components/ButtonDifficultyFilter";
 import CardCategory from "./components/CardCategory";
 import CardPopular from "./components/CardPopular";
+import axios from "axios";
 
 function Homepage(props) {
   const [items, setItems] = useState([]);
@@ -15,42 +16,45 @@ function Homepage(props) {
   const [pclasses, setPClasses] = useState([]);
 
   const fetchClassesDifficulty = async (difficulty) => {
-    let newClassData;
-    try {
-      const response = await fetch(`/api/classes?difficulty=${difficulty}`);
-      newClassData = await response.json();
-    } catch (error) {
-      console.log(error);
-      newClassData = [];
-    }
-
-    setItems(newClassData);
+    let newClassData = [];
+    axios
+      .get(`/api/classes?difficulty=${difficulty}`)
+      .then((response) => {
+        newClassData = response.data;
+        setItems(newClassData);
+      })
+      .catch((error) => {
+        console.log(error);
+        newClassData = [];
+      });
   };
 
   const fetchCategories = async () => {
-    let categoryData;
-    try {
-      const response = await fetch("/api/skills");
-      categoryData = await response.json();
-    } catch (error) {
-      console.log(error);
-      categoryData = [];
-    }
-
-    setCat(categoryData);
+    let categoryData = [];
+    axios
+      .get("/api/skills")
+      .then((response) => {
+        categoryData = response.data;
+        setCat(categoryData);
+      })
+      .catch((error) => {
+        console.log(error);
+        categoryData = [];
+      });
   };
 
   const fetchPopularClasses = async () => {
-    let popularClassData;
-    try {
-      const response = await fetch("/api/classes");
-      popularClassData = await response.json();
-    } catch (error) {
-      console.log(error);
-      popularClassData = [];
-    }
-
-    setPClasses(popularClassData);
+    let popularClassData = [];
+    axios
+      .get("/api/classes")
+      .then((response) => {
+        popularClassData = response.data;
+        setPClasses(popularClassData);
+      })
+      .catch((error) => {
+        console.log(error);
+        popularClassData = [];
+      });
   };
 
   useEffect(() => {
@@ -58,6 +62,7 @@ function Homepage(props) {
     fetchCategories();
     fetchPopularClasses();
   }, []);
+
   return (
     <main>
       <Head title="Welcome" />
