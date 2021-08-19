@@ -39,7 +39,7 @@ class Login extends Component {
           <Head title="Welcome" />
           <ErrorMessage />
           <h1 className="login-title">Log in to your account</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="login-form">
             <label htmlFor="username" aria-label="Inserir username ou email">
               <br />
               <input
@@ -48,6 +48,7 @@ class Login extends Component {
                 required
                 name="username"
                 placeholder="Username/Email"
+                className="login-input"
               />
             </label>
 
@@ -60,6 +61,7 @@ class Login extends Component {
                 id="password"
                 name="password"
                 placeholder="Password"
+                className="login-input"
               />
             </label>
 
