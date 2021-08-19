@@ -20,22 +20,25 @@
 .new-classes {
   margin-left: 9rem;
   padding-top: 7rem;
+}
+.filter-wrapper {
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+  margin: 0.75rem 0;
 
-  .filter-wrapper {
-    width: 100%;
-    display: flex;
-    overflow-x: auto;
-    margin: 0.75rem 0;
+  &::-webkit-scrollbar {
+    width: 0;
   }
+}
 
-  .new-classes-wrapper {
-    width: 100%;
-    display: flex;
-    overflow-x: auto;
+.new-classes-wrapper {
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
 
-    &::-webkit-scrollbar {
-      width: 0;
-    }
+  &::-webkit-scrollbar {
+    width: 0;
   }
 }
 
@@ -78,7 +81,15 @@
   }
 
   .popular {
-    margin-left: 1rem;
+    margin-left: 0;
     padding-top: 5rem;
+
+    .home-title {
+      margin-left: 1rem;
+    }
+
+    .popular-wrapper {
+      margin-left: 1rem;
+    }
   }
 }

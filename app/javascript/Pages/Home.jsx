@@ -15,6 +15,7 @@ function Homepage(props) {
   const [items, setItems] = useState([]);
   const [cats, setCat] = useState([]);
   const [pclasses, setPClasses] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const fetchClassesDifficulty = async (difficulty) => {
     let newClassData = [];
@@ -58,10 +59,50 @@ function Homepage(props) {
       });
   };
 
+  const addCategoryButtons = async () => {
+    let categories = [];
+    axios
+      .get(`/api/skills`)
+      .then((response) => {
+        categories = response.data;
+
+        const categoryComponents = [];
+
+        categories.map((c, i) => {
+          categoryComponents.push(
+            <ButtonFilter
+              props={{
+                onClick: updateCategory,
+                params: c,
+              }}
+            >
+              {c.name}
+            </ButtonFilter>
+          );
+        });
+
+        setCategories(categoryComponents);
+      })
+      .catch((error) => {
+        console.log(error);
+        categories = [];
+      });
+  };
+
+  const updateCategory = (category) => {
+    setCategoryFilter(category.id);
+    if (category) skillsPopup(category.skills);
+    else {
+      setSkills([]);
+    }
+    setSkillFilter("");
+  };
+
   useEffect(() => {
     fetchClassesDifficulty("beginner");
     fetchCategories();
     fetchPopularClasses();
+    addCategoryButtons();
   }, []);
 
   return (
@@ -119,6 +160,18 @@ function Homepage(props) {
 
       <div className="popular">
         <h1 className="home-title">Most Popular</h1>
+
+        <div className="filter-wrapper">
+          <ButtonFilter
+            props={{
+              onClick: updateCategory,
+              params: "",
+            }}
+          >
+            All categories
+          </ButtonFilter>
+          {categories}
+        </div>
 
         <div className="popular-wrapper">
           {pclasses.map((pclass, indexx) => {
