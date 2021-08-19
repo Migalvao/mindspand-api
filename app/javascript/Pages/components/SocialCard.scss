@@ -1,4 +1,4 @@
-.cardSocial {
+.card-social {
   min-width: 11.75rem;
   height: 16.88rem;
   display: flex;
@@ -10,7 +10,7 @@
   position: relative;
   color: #fff;
 
-  .cardSocial-img {
+  .card-social-img {
     position: absolute;
     left: 0;
     top: 0;
@@ -20,7 +20,7 @@
     z-index: -1;
   }
 
-  .cardSocial-filter {
+  .card-social-filter {
     background-color: rgba(37, 38, 54, 0.4);
     min-width: 11.75rem;
     height: 16.88rem;
@@ -28,7 +28,7 @@
     position: relative;
   }
 
-  .cardSocial-skill-name {
+  .card-social-skill-name {
     left: 50%;
     top: 50%;
     width: 90%;
@@ -41,7 +41,7 @@
     transition: all ease-in 100ms;
   }
 
-  .cardSocial-class-title {
+  .card-social-class-title {
     position: absolute;
     left: 50%;
     top: 61%;
@@ -54,7 +54,7 @@
     transition: all ease-in 100ms;
   }
 
-  .cardSocial-teacher-name {
+  .card-social-teacher-name {
     font-weight: normal;
     font-size: 0.75rem;
     left: 50%;
@@ -63,7 +63,7 @@
     position: absolute;
   }
 
-  .cardSocial-chip-new {
+  .card-social-chip-new {
     color: #252636;
     position: absolute;
     background-color: #f5f4f9;
@@ -75,7 +75,7 @@
     font-weight: normal;
   }
 
-  .cardSocial-dif-level {
+  .card-social-dif-level {
     position: absolute;
     text-align: left;
     font-size: 0.625rem;
