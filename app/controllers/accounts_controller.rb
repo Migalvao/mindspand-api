@@ -2,7 +2,7 @@ class AccountsController < ApplicationController
   # protect_from_forgery with: :null_session
   include AuthenticationConcern
 
-  before_action :check_authenticated_user, only: [:get_upload_avatar, :update_avatar]
+  before_action :check_authenticated_user, only: [:get_upload_avatar, :update_avatar, :get_profile]
 
   def get_signup
     
@@ -65,36 +65,18 @@ class AccountsController < ApplicationController
 
 
   def get_profile
-    if @current_user
-      user = User.find_by(id: params[:id].to_i)
+    user = User.find_by(id: params[:id].to_i)
 
-      unless user
-        render(inertia: 'NotFound')
-        return
-      end
-
-      user_json = user.as_json(only: [:id, :name, :username, :description, :avatar])
-
-      student_reviews = Review.where(connection_id: Connection.where(match_id: MatchRequest.where(student_id: user.id)))
-      teacher_reviews = Review.where(connection_id: Connection.where(match_id: MatchRequest.where(skill_class_id: SkillClass.where(teacher_id: user.id))))
-
-      total_reviews = student_reviews.or(teacher_reviews)
-
-      avg_rating = total_reviews.average(:rating).to_f.round(1) # only one decimal case
-
-      if @current_user.id == user.id
-        #own profile, can edit
-        res = {"can_edit": true, "user": user_json, "rating": avg_rating}
-
-      else
-        #not own profile, can't edit
-        res = {"can_edit": false, "user": user_json, "rating": avg_rating}
-      end
-
-      render(inertia: 'Profile', props: res)
-    else
-      render(inertia: 'Login')
+    unless user
+      render(inertia: 'NotFound')
+      return
     end
+
+    user_json = ProfileInfo.new(user).get
+
+    res = {"can_edit": @current_user.id == user.id, "user": user_json}
+
+    render(inertia: 'Profile', props: res)
   end
 
   def get_edit_profile
