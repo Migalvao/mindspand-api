@@ -203,7 +203,7 @@ class Api::ConnectionsController < ApiController
 
     private
     def check_class_exists
-        unless SkillClass.find_by(id: params[:id])
+        unless SkillClass.visible_to_all.find_by(id: params[:id])
             error = {"error": "Class with that id does not exist"}
             render(json: error, status: 400)
         end
