@@ -9,6 +9,7 @@ import ButtonDifficultyFilter from "./components/ButtonDifficultyFilter";
 import CardCategory from "./components/CardCategory";
 import CardPopular from "./components/CardPopular";
 import axios from "axios";
+import ButtonFilter from "./components/ButtonFilter";
 
 function Homepage(props) {
   const [items, setItems] = useState([]);

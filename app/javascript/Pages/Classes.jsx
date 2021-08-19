@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
-import ButtonFilter from "./ButtonFilter";
+import ButtonFilter from "./components/ButtonFilter";
 import { FaTimes } from "react-icons/fa";
 import PropTypes from "prop-types";
 
