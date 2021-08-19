@@ -2,3 +2,14 @@ AllCops:
   Exclude:
     - bin/**/*
     - config/**/*
+    - coverage/**/*
+    - db/schema.rb
+    - db/migrate/**
+    - log/**/*
+    - node_modules/**/*
+    - public/**/*
+    - tmp/**/*
+    - vendor/**/*
+
+Style/Documentation:
+  Enabled: false

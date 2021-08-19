@@ -1,34 +1,33 @@
-class Api::UtilsController < ApiController
-  #include AuthenticationConcern
-  
-  def check_username
-    username = params["username"]
+# frozen_string_literal: true
 
-    if User.where(username: username).exists?
-      res = {"unavailable" => "Username is unavailable"}
-    else 
-      res = {"available" => "Username is available"}
+module Api
+  class UtilsController < ApiController
+    # include AuthenticationConcern
+
+    def check_username
+      username = params['username']
+
+      res = if User.where(username: username).exists?
+              { 'unavailable' => 'Username is unavailable' }
+            else
+              { 'available' => 'Username is available' }
+            end
+
+      render(json: res)
     end
 
-    render(json: res)
+    def get_all_skills
+      categories = Category.all
+      skills = categories.as_json(only: %i[id name color], include: { skills: { only: %i[id name] } })
+
+      render(json: skills)
+    end
+
+    def get_all_users
+      users = User.all
+      users_json = users.as_json(only: %i[id name username description])
+
+      render(json: users_json)
+    end
   end
-
-  def get_all_skills
-
-    categories = Category.all
-    skills = categories.as_json(only: [:id, :name, :color], include: {skills: { only: [:id, :name]}})
-
-    render(json: skills)
-
-  end
-
-  def get_all_users
-
-    users = User.all
-    users_json = users.as_json(only: [:id, :name, :username, :description])
-
-    render(json: users_json)
-
-  end
-
 end

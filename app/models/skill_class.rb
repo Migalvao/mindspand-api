@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: skill_classes
@@ -26,6 +28,7 @@ class SkillClass < ApplicationRecord
   scope :visible_to_all, -> { where(deleted: false, archived: false) }
   scope :visible_to_own_user, -> { where(deleted: false) }
   
+
   # method [synchronous, asynchronous, both]
   enum method: {
     synchronous: 0,
@@ -50,8 +53,7 @@ class SkillClass < ApplicationRecord
   validates :title, :no_classes, :class_duration, :method, :difficulty, :regime, presence: true
   validates :location, presence: true, unless: :method_is_remote?
 
-
   def method_is_remote?
-    return regime == :remote.to_s
+    regime == :remote.to_s
   end
 end
