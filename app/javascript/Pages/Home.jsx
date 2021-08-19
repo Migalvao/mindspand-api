@@ -16,6 +16,7 @@ function Homepage(props) {
   const [cats, setCat] = useState([]);
   const [pclasses, setPClasses] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [categoryFilter, setCategoryFilter] = useState("");
 
   const fetchClassesDifficulty = async (difficulty) => {
     let newClassData = [];
@@ -89,13 +90,39 @@ function Homepage(props) {
       });
   };
 
-  const updateCategory = (category) => {
-    setCategoryFilter(category.id);
-    if (category) skillsPopup(category.skills);
-    else {
-      setSkills([]);
+  const fetchClasses = async () => {
+    const params = new URLSearchParams();
+
+    if (categoryFilter) {
+      params.append("category_id", categoryFilter);
     }
-    setSkillFilter("");
+
+    let url = "/api/classes";
+
+    if (params.toString()) {
+      url += "?" + params.toString();
+    } else {
+      console.log("no parameters");
+    }
+    console.log(url);
+    let classes = [];
+    axios
+      .get(url)
+      .then((response) => {
+        classes = response.data;
+
+        setPClasses(classes);
+      })
+      .catch((error) => {
+        classes = [];
+      });
+  };
+
+  const updateCategory = (category) => {
+    if (category) setCategoryFilter(category.id);
+    else {
+      setCategoryFilter("");
+    }
   };
 
   useEffect(() => {
@@ -104,6 +131,10 @@ function Homepage(props) {
     fetchPopularClasses();
     addCategoryButtons();
   }, []);
+
+  useEffect(() => {
+    fetchClasses();
+  }, [categoryFilter]);
 
   return (
     <main>
@@ -174,8 +205,8 @@ function Homepage(props) {
         </div>
 
         <div className="popular-wrapper">
-          {pclasses.map((pclass, indexx) => {
-            return <CardPopular popularClassData={pclass} key={indexx} />;
+          {pclasses.map((pclass, index) => {
+            return <CardPopular popularClassData={pclass} key={index} />;
           })}
         </div>
       </div>
