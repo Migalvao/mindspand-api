@@ -1,64 +1,80 @@
-import React from "react";
+import React, { Component } from "react";
 import { Inertia } from "@inertiajs/inertia";
-import Layout from "./Layout";
+import Navbar from "./components/Navbar/Navbar";
 import { Head, Link } from "@inertiajs/inertia-react";
+import "../stylesheets/login.css";
 
-export default function Login(props) {
-  const ErrorMessage = () => {
-    if (props.error) {
-      return <p>{props.error}</p>;
-    }
-    return null;
-  };
-
-  const handleSubmit = (e) => {
-    const token = document.querySelector(
-      "[name=csrf-token]"
-    ).content;
-
-    const data = {
-      username: username.value,
-      password: password.value,
+class Login extends Component {
+  render() {
+    const ErrorMessage = () => {
+      if (this.props.error) {
+        return <p>{this.props.error}</p>;
+      }
+      return null;
     };
 
-    e.preventDefault();
-    Inertia.post("/login", data, {
-      headers: {
-        "X-CSRF-Token": token,
-      },
-    });
-  };
+    const handleSubmit = (e) => {
+      e.preventDefault();
 
-  return (
-    <main>
-      <Head title="Welcome" />
-      <ErrorMessage />
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username/Email:</label>
-        <br />
-        <input
-          type="text"
-          id="username"
-          required
-          name="username"
-        />
-        <br />
-        <label htmlFor="password">Password:</label>
-        <br />
-        <input
-          type="password"
-          required
-          id="password"
-          name="password"
-        />
-        <br />
+      const data = {
+        username: username.value,
+        password: password.value,
+      };
 
-        <input type="submit" value="Submit" />
-      </form>
-      <br />
-      Don't have an account yet? Signup{" "}
-      <Link href="/signup">here</Link>!
-    </main>
-  );
+      Inertia.post("/login", data, {
+        headers: window.defaultHeaders,
+      });
+    };
+
+    return (
+      <main>
+        <Navbar />
+        <img
+          src={require("../images/scene_1.svg")}
+          alt=""
+          role="presentation"
+          className="scene-1-login"
+        />
+        <div className="login_content">
+          <Head title="Welcome" />
+          <ErrorMessage />
+          <h1 className="login-title">Log in to your account</h1>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="username" aria-label="Inserir username ou email">
+              <br />
+              <input
+                type="text"
+                id="username"
+                required
+                name="username"
+                placeholder="Username/Email"
+              />
+            </label>
+
+            <br />
+            <label htmlFor="password" aria-label="Inserir password">
+              <br />
+              <input
+                type="password"
+                required
+                id="password"
+                name="password"
+                placeholder="Password"
+              />
+            </label>
+
+            <br />
+
+            <input type="submit" value="Log in" className="login-btn" />
+          </form>
+          <br />
+          <div className="to-signup">
+            Don't have an account yet? <Link href="/signup">Sign up</Link>
+          </div>
+        </div>
+      </main>
+    );
+  }
 }
+
+export default Login;

@@ -9,4 +9,16 @@ class ApiController < ActionController::API
       render(json: error, status: 401)
     end
   end
+
+  private
+  def render_json_400(message)
+      error = {"error": message}
+      render(json: error, status: 400)
+  end
+
+  private
+  def render_json_500(message)
+      error = {"error": message}
+      render(json: error, status: 500)
+  end
 end

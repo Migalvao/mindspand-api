@@ -95,16 +95,6 @@ module Api
               return render(json: error, status: 500)
             end
 
-            if @request.status_is_accepted?
-              # request was accepted so connection must be created
-              connection = Connection.new(match_id: @request.id)
-
-              unless connection.save
-                error = { "error": connection.errors.full_messages }
-                return render(json: error, status: 500)
-              end
-            end
-
           end
 
           res = { "request": @request.as_json(only: %i[id status]) }
@@ -149,6 +139,7 @@ module Api
                  else
                    "Connection to class #{skill_class.title} was closed. Class was canceled"
                  end
+
 
           if @is_student
             # create notification for the teacher
@@ -197,10 +188,10 @@ module Api
     private
 
     def check_class_exists
-      unless SkillClass.find_by(id: params[:id])
-        error = { "error": 'Class with that id does not exist' }
-        render(json: error, status: 400)
-      end
+        unless SkillClass.visible_to_all.find_by(id: params[:id])
+          error = { "error": 'Class with that id does not exist' }
+          render(json: error, status: 400)
+        end
     end
 
     def check_request_exists
@@ -232,11 +223,7 @@ module Api
       end
     end
 
-    def render_json_400(message)
-      error = { "error": message }
-      render(json: error, status: 400)
-    end
-
+    private
     def update_unread_notifications
       # only informative notifications should be marked read
       @unread_notifications.where(notification_type: %w[match_accepted match_denied]).update_all(read: true)
