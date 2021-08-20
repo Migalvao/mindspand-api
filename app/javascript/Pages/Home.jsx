@@ -10,6 +10,7 @@ import CardCategory from "./components/CardCategory";
 import CardPopular from "./components/CardPopular";
 import axios from "axios";
 import ButtonFilter from "./components/ButtonFilter";
+import PropTypes from "prop-types";
 
 function Homepage(props) {
   const [items, setItems] = useState([]);
@@ -215,5 +216,9 @@ function Homepage(props) {
     </main>
   );
 }
+
+Homepage.propTypes = {
+  current_user: PropTypes.object.isRequired,
+};
 
 export default Homepage;
