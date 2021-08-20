@@ -14,10 +14,10 @@ class AccountsController < ApplicationController
     user = User.new(signup_params)
 
     if user.save
-      redirect_to index
+      redirect_to '/home'
     else
       res = { 'errors' => user.errors }
-      render(json: res)
+      render(json: res, status: 400)
     end
   end
 
@@ -155,12 +155,5 @@ class AccountsController < ApplicationController
   def signup_params
     # filters parameters
     params.permit(:name, :username, :email, :password, :description)
-  end
-
-  def check_authenticated_user
-    unless @current_user
-      redirect_to '/login'
-      nil
-    end
   end
 end
