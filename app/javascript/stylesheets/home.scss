@@ -9,6 +9,17 @@
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+
+  .hero-title {
+    color: #ffffff;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 4rem;
+    line-height: 5rem;
+    display: table-caption;
+    margin-left: 1rem;
+    margin-top: 19rem;
+  }
 }
 
 .home-title {
