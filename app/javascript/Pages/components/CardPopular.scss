@@ -1,3 +1,8 @@
+$primary-color: #6600cc;
+$dark-color: #252636;
+$white-color: #ffffff;
+$gray-color: #aaaaaa;
+
 .Media {
   display: flex;
   align-items: flex-start;
@@ -6,7 +11,7 @@
   overflow: hidden;
   cursor: pointer;
   margin-top: 1rem;
-  background-color: #252636;
+  background-color: $dark-color;
 }
 
 .Media-figure {
@@ -20,7 +25,7 @@
 .Media-body {
   flex: 1;
   height: 5rem;
-  color: #ffffff;
+  color: $white-color;
   vertical-align: middle;
 
   .Media-body-info {

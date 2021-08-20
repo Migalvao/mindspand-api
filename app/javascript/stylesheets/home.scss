@@ -1,3 +1,8 @@
+$primary-color: #6600cc;
+$dark-color: #252636;
+$white-color: #ffffff;
+$gray-color: #aaaaaa;
+
 .hero-img {
   background-image: linear-gradient(
       rgba(37, 38, 54, 0.2),
@@ -11,7 +16,7 @@
   position: relative;
 
   .hero-title {
-    color: #ffffff;
+    color: $white-color;
     font-style: normal;
     font-weight: 800;
     font-size: 4rem;
@@ -23,7 +28,7 @@
 }
 
 .home-title {
-  color: #252636;
+  color: $dark-color;
   font-weight: 600;
   font-size: 2rem;
 }

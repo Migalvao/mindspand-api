@@ -1,3 +1,9 @@
+$primary-color: #6600cc;
+$dark-color: #252636;
+$white-color: #ffffff;
+$gray-color: #aaaaaa;
+$shadow-color: #f5f4f9;
+
 .scene-1-login {
   position: absolute;
   display: flex;
@@ -22,7 +28,7 @@
     font-size: 1.313rem;
     display: flex;
     text-align: center;
-    color: #252636;
+    color: $dark-color;
     justify-content: center;
   }
 
@@ -40,7 +46,7 @@
       margin: 0.313rem 0;
       padding: 0.625rem 10.625rem 0.625rem 1.25rem;
       outline: none;
-      border: 1px solid #252636;
+      border: 1px solid $dark-color;
       border-radius: 0.313rem;
     }
 
@@ -50,8 +56,8 @@
     }
 
     .login-btn {
-      background-color: #6600cc;
-      color: #ffffff;
+      background-color: $primary-color;
+      color: $white-color;
       margin-top: 15%;
       padding: 0.625rem 8.563rem;
       font-weight: 600;
@@ -62,7 +68,7 @@
   }
 
   .to-signup {
-    color: #252636;
+    color: $dark-color;
     margin-top: 23.75rem;
     font-family: Avenir Next;
     font-weight: 600;

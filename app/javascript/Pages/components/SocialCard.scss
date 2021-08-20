@@ -1,3 +1,9 @@
+$primary-color: #6600cc;
+$dark-color: #252636;
+$white-color: #ffffff;
+$gray-color: #aaaaaa;
+$shadow-color: #f5f4f9;
+
 .card-social {
   min-width: 11.75rem;
   height: 16.88rem;
@@ -8,7 +14,7 @@
   cursor: pointer;
   transition: all ease 200ms;
   position: relative;
-  color: #fff;
+  color: $white-color;
 
   .card-social-img {
     position: absolute;
@@ -64,9 +70,9 @@
   }
 
   .card-social-chip-new {
-    color: #252636;
+    color: $dark-color;
     position: absolute;
-    background-color: #f5f4f9;
+    background-color: $shadow-color;
     padding: 0.125rem 0.688rem;
     border-radius: 1.25rem;
     font-size: 0.75rem;

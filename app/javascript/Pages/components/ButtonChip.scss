@@ -1,16 +1,16 @@
+$primary-color: #6600cc;
+$dark-color: #252636;
+$white-color: #ffffff;
+$gray-color: #aaaaaa;
+
 .btn-chip {
   padding: 0.25rem 0.6rem;
   margin-left: 0.5rem;
-  color: #252636;
+  color: $dark-color;
   font-size: 0.75rem;
   background: none;
   cursor: pointer;
   border-radius: 1.25rem;
-  border: 1px solid #252636;
+  border: 1px solid $dark-color;
   white-space: nowrap;
-
-  &:focus {
-    background-color: #252636;
-    color: #f5f4f9;
-  }
 }
