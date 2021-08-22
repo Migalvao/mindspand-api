@@ -142,7 +142,7 @@ function Homepage(props) {
       <Head title="Welcome" />
       <Navbar current_user={props.current_user} />
       <div className="hero-img">
-        <h1 className="hero-title">Explore your skills</h1>
+        <h1 className="hero-title">Explore your skills!!</h1>
       </div>
       <div className="new-classes">
         <h1 className="home-title">New classes added every week</h1>
