@@ -14,7 +14,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 
 function Homepage(props) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [items, setItems] = useState([]);
   const [cats, setCat] = useState([]);
   const [pclasses, setPClasses] = useState([]);
@@ -69,22 +69,6 @@ function Homepage(props) {
       .get(`/api/skills`)
       .then((response) => {
         categories = response.data;
-
-        // const categoryComponents = [];
-
-        // categories.map((c, i) => {
-        //   categoryComponents.push(
-        //     <ButtonFilter
-        //       props={{
-        //         onClick: updateCategory,
-        //         params: c,
-        //         id: categoryFilter,
-        //       }}
-        //     >
-        //       {c.name}
-        //     </ButtonFilter>
-        //   );
-        // });
 
         setCategories(categories);
       })
@@ -142,30 +126,10 @@ function Homepage(props) {
       <Head title="Welcome" />
       <Navbar current_user={props.current_user} />
       <div className="hero-img">
-        <h1 className="hero-title">
-          Explore your skills!!
-        </h1>
-        <h1>{t("welcome")}</h1>
+        <h1 className="hero-title">{t("hero-title")}</h1>
       </div>
       <div className="new-classes">
-        <h1 className="home-title">
-          New classes added every week
-        </h1>
-
-        <button
-          onClick={() => {
-            i18n.changeLanguage("pt");
-          }}
-        >
-          PT
-        </button>
-        <button
-          onClick={() => {
-            i18n.changeLanguage("en");
-          }}
-        >
-          EN
-        </button>
+        <h1 className="home-title">{t("first-title")}</h1>
 
         <div className="filter-wrapper">
           <ButtonDifficultyFilter
@@ -196,24 +160,17 @@ function Homepage(props) {
 
         <div className="new-classes-wrapper">
           {items.map((item, index) => {
-            return (
-              <SocialCard newClassData={item} key={index} />
-            );
+            return <SocialCard newClassData={item} key={index} />;
           })}
         </div>
       </div>
 
       <div className="categories">
-        <h1 className="home-title">Our class categories</h1>
+        <h1 className="home-title">{t("second-title")}</h1>
 
         <div className="categories-wrapper">
           {cats.map((cat, index) => {
-            return (
-              <CardCategory
-                categoryData={cat}
-                key={index}
-              />
-            );
+            return <CardCategory categoryData={cat} key={index} />;
           })}
         </div>
       </div>
@@ -250,12 +207,7 @@ function Homepage(props) {
 
         <div className="popular-wrapper">
           {pclasses.map((pclass, index) => {
-            return (
-              <CardPopular
-                popularClassData={pclass}
-                key={index}
-              />
-            );
+            return <CardPopular popularClassData={pclass} key={index} />;
           })}
         </div>
       </div>

@@ -1,7 +1,7 @@
 @import "../../../../../node_modules/mappy-breakpoints/mappy-breakpoints.scss";
 
 $breakpoints: (
-  "small": 320px,
+  "small": 375px,
   "large": 960px,
 );
 
@@ -49,7 +49,6 @@ $gray-color: #aaaaaa;
         top: 50%;
         transform: translate(0, -50%);
         font-size: 1.8rem;
-        padding: 2rem;
         right: 0;
 
         &:hover {
@@ -69,6 +68,20 @@ $gray-color: #aaaaaa;
       list-style: none;
       text-align: center;
       justify-content: end;
+
+      .nav-btn-lang-group {
+        display: table;
+        left: 0;
+
+        .nav-btn-lang {
+          background: none;
+          color: $white-color;
+          border: none;
+          padding: 0.2rem;
+          cursor: pointer;
+          outline: inherit;
+        }
+      }
 
       .nav-item {
         height: 5rem;
@@ -124,7 +137,7 @@ $gray-color: #aaaaaa;
         font-size: 1.8rem;
 
         .navbar-menu-icon-notification {
-          right: 60%;
+          right: 3rem;
         }
         .navbar-menu-icon-burger {
           display: flex;
@@ -142,6 +155,13 @@ $gray-color: #aaaaaa;
         left: -100%;
         opacity: 1;
         transition: all 0.5s ease;
+        .nav-btn-lang-group {
+          padding-top: 2rem;
+
+          .nav-btn-lang {
+            padding: 0 0.5rem;
+          }
+        }
 
         &.active {
           background: $primary-color;
@@ -156,7 +176,6 @@ $gray-color: #aaaaaa;
           &:hover {
             border: none;
           }
-
           .nav-links {
             text-align: left;
             padding: 2rem;

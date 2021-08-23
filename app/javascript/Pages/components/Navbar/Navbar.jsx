@@ -4,8 +4,11 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
 import "./navbar.scss";
 import { Button } from "../Button";
+import { useTranslation } from "react-i18next";
 
 function Navbar(props) {
+  const { i18n } = useTranslation();
+
   const [click, setClick] = useState(false);
   const [button] = useState(true);
 
@@ -36,6 +39,25 @@ function Navbar(props) {
         ) : null}
         {show ? (
           <ul className={click ? "nav-menu active" : "nav-menu"}>
+            <div className="nav-btn-lang-group">
+              <button
+                className="nav-btn-lang"
+                onClick={() => {
+                  i18n.changeLanguage("pt");
+                }}
+              >
+                PT
+              </button>
+              <button
+                className="nav-btn-lang"
+                onClick={() => {
+                  i18n.changeLanguage("en");
+                }}
+              >
+                EN
+              </button>
+            </div>
+
             <li className="nav-item">
               <Link href="/home" className="nav-links">
                 Homepage
