@@ -70,22 +70,23 @@ function Homepage(props) {
       .then((response) => {
         categories = response.data;
 
-        const categoryComponents = [];
+        // const categoryComponents = [];
 
-        categories.map((c, i) => {
-          categoryComponents.push(
-            <ButtonFilter
-              props={{
-                onClick: updateCategory,
-                params: c,
-              }}
-            >
-              {c.name}
-            </ButtonFilter>
-          );
-        });
+        // categories.map((c, i) => {
+        //   categoryComponents.push(
+        //     <ButtonFilter
+        //       props={{
+        //         onClick: updateCategory,
+        //         params: c,
+        //         id: categoryFilter,
+        //       }}
+        //     >
+        //       {c.name}
+        //     </ButtonFilter>
+        //   );
+        // });
 
-        setCategories(categoryComponents);
+        setCategories(categories);
       })
       .catch((error) => {
         console.log(error);
@@ -119,7 +120,7 @@ function Homepage(props) {
   };
 
   const updateCategory = (category) => {
-    if (category) setCategoryFilter(category.id);
+    if (category) setCategoryFilter(category);
     else {
       setCategoryFilter("");
     }
@@ -225,11 +226,26 @@ function Homepage(props) {
             props={{
               onClick: updateCategory,
               params: "",
+              id: categoryFilter,
+              key: "",
             }}
           >
             All categories
           </ButtonFilter>
-          {categories}
+          {categories.map((c, index) => {
+            return (
+              <ButtonFilter
+                props={{
+                  onClick: updateCategory,
+                  params: c.id,
+                  id: categoryFilter,
+                  key: index,
+                }}
+              >
+                {c.name}
+              </ButtonFilter>
+            );
+          })}
         </div>
 
         <div className="popular-wrapper">

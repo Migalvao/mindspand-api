@@ -2,15 +2,19 @@ $primary-color: #6600cc;
 $dark-color: #252636;
 $white-color: #ffffff;
 $gray-color: #aaaaaa;
-
 .btn-chip {
-  padding: 0.25rem 0.6rem;
-  margin-left: 0.5rem;
-  color: $dark-color;
-  font-size: 0.75rem;
-  background: none;
-  cursor: pointer;
-  border-radius: 1.25rem;
-  border: 1px solid $dark-color;
-  white-space: nowrap;
+    padding: 0.25rem 0.6rem;
+    margin-left: 0.5rem;
+    color: $dark-color;
+    font-size: 0.75rem;
+    background-color: $white-color;
+    cursor: pointer;
+    border-radius: 1.25rem;
+    border: 1px solid $dark-color;
+    white-space: nowrap;
+    &.chip--active {
+        background-color: $dark-color;
+        color: $white-color;
+    }
+    ;
 }
