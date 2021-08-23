@@ -11,8 +11,10 @@ import CardPopular from "./components/CardPopular";
 import axios from "axios";
 import ButtonFilter from "./components/ButtonFilter";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 function Homepage(props) {
+  const { t, i18n } = useTranslation();
   const [items, setItems] = useState([]);
   const [cats, setCat] = useState([]);
   const [pclasses, setPClasses] = useState([]);
@@ -102,10 +104,7 @@ function Homepage(props) {
 
     if (params.toString()) {
       url += "?" + params.toString();
-    } else {
-      console.log("no parameters");
     }
-    console.log(url);
     let classes = [];
     axios
       .get(url)
@@ -142,10 +141,30 @@ function Homepage(props) {
       <Head title="Welcome" />
       <Navbar current_user={props.current_user} />
       <div className="hero-img">
-        <h1 className="hero-title">Explore your skills!!</h1>
+        <h1 className="hero-title">
+          Explore your skills!!
+        </h1>
+        <h1>{t("welcome")}</h1>
       </div>
       <div className="new-classes">
-        <h1 className="home-title">New classes added every week</h1>
+        <h1 className="home-title">
+          New classes added every week
+        </h1>
+
+        <button
+          onClick={() => {
+            i18n.changeLanguage("pt");
+          }}
+        >
+          PT
+        </button>
+        <button
+          onClick={() => {
+            i18n.changeLanguage("en");
+          }}
+        >
+          EN
+        </button>
 
         <div className="filter-wrapper">
           <ButtonDifficultyFilter
@@ -176,7 +195,9 @@ function Homepage(props) {
 
         <div className="new-classes-wrapper">
           {items.map((item, index) => {
-            return <SocialCard newClassData={item} key={index} />;
+            return (
+              <SocialCard newClassData={item} key={index} />
+            );
           })}
         </div>
       </div>
@@ -186,7 +207,12 @@ function Homepage(props) {
 
         <div className="categories-wrapper">
           {cats.map((cat, index) => {
-            return <CardCategory categoryData={cat} key={index} />;
+            return (
+              <CardCategory
+                categoryData={cat}
+                key={index}
+              />
+            );
           })}
         </div>
       </div>
@@ -208,7 +234,12 @@ function Homepage(props) {
 
         <div className="popular-wrapper">
           {pclasses.map((pclass, index) => {
-            return <CardPopular popularClassData={pclass} key={index} />;
+            return (
+              <CardPopular
+                popularClassData={pclass}
+                key={index}
+              />
+            );
           })}
         </div>
       </div>
