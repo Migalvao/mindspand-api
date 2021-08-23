@@ -1,14 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe 'User ', :type => :request do
+RSpec.describe 'User ', type: :request do
     it 'signup' do
         post '/signup', params: { username: 'whitesmith', password: 'password', email: 'whitesmith@whitesmith.co', name: 'Whitesmith' }
 
         expect(response).to redirect_to('/home')
+        expect(response).to have_http_status(302)   # signup redirects to home 
     end
 end
 
-RSpec.describe 'User access', :type => :request do
+RSpec.describe 'User access', type: :request do
     context 'before login' do
         it 'is limited' do
             get "/api/users/1/classes"

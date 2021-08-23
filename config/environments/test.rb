@@ -60,9 +60,9 @@ Rails.application.configure do
   # config.action_view.annotate_rendered_view_with_filenames = true
 
   # ImageKit config
-  config.imagekit = {
-    private_key: ENV['IMAGEKIT_PRIV_KEY'],
-    public_key: 'public_5lvjI22WW3Q3qhKGqXXqyYk7m6E=',
-    url_endpoint: 'https://ik.imagekit.io/skillx'
-  }
+  # config.imagekit = {
+  #   private_key: ENV['IMAGEKIT_PRIV_KEY'],
+  #   public_key: 'public_5lvjI22WW3Q3qhKGqXXqyYk7m6E=',
+  #   url_endpoint: 'https://ik.imagekit.io/skillx'
+  # }
 end
