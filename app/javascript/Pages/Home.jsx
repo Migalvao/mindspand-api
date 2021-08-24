@@ -5,7 +5,6 @@ import { Head } from "@inertiajs/inertia-react";
 import { useState, useEffect } from "react";
 import SocialCard from "./components/SocialCard";
 import "../stylesheets/home.scss";
-import ButtonDifficultyFilter from "./components/ButtonDifficultyFilter";
 import CardCategory from "./components/CardCategory";
 import CardPopular from "./components/CardPopular";
 import axios from "axios";
@@ -20,11 +19,13 @@ function Homepage(props) {
   const [pclasses, setPClasses] = useState([]);
   const [categories, setCategories] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState("");
+  const [difFilter, setDifFilter] = useState("beginner");
+  const dif = ["beginner", "intermediate", "advanced"];
 
-  const fetchClassesDifficulty = async (difficulty) => {
+  const fetchClassesDifficulty = async () => {
     let newClassData = [];
     axios
-      .get(`/api/classes?difficulty=${difficulty}`)
+      .get(`/api/classes?difficulty=${difFilter}`)
       .then((response) => {
         newClassData = response.data;
         setItems(newClassData);
@@ -109,17 +110,26 @@ function Homepage(props) {
       setCategoryFilter("");
     }
   };
+  useEffect(() => {
+    fetchClasses();
+  }, [categoryFilter]);
+
+  const updateDif = (difficulty) => {
+    if (difficulty) setDifFilter(difficulty);
+    else {
+      setDifFilter("");
+    }
+  };
 
   useEffect(() => {
-    fetchClassesDifficulty("beginner");
+    fetchClassesDifficulty();
+  }, [difFilter]);
+
+  useEffect(() => {
     fetchCategories();
     fetchPopularClasses();
     addCategoryButtons();
   }, []);
-
-  useEffect(() => {
-    fetchClasses();
-  }, [categoryFilter]);
 
   return (
     <main>
@@ -132,10 +142,28 @@ function Homepage(props) {
         <h1 className="home-title">{t("first-title")}</h1>
 
         <div className="filter-wrapper">
-          <ButtonDifficultyFilter
+          {dif.map((d, index) => {
+            console.log(d);
+            return (
+              <ButtonFilter
+                key={index}
+                props={{
+                  onClick: updateDif,
+                  params: d,
+                  id: difFilter,
+                  key: index,
+                }}
+              >
+                {d.charAt(0).toUpperCase() + d.slice(1)}
+              </ButtonFilter>
+            );
+          })}
+          {/*} <ButtonDifficultyFilter
             props={{
               onClick: fetchClassesDifficulty,
               difficulty: "beginner",
+              id: difFilter,
+              key: "",
             }}
           >
             Beginner
@@ -144,6 +172,8 @@ function Homepage(props) {
             props={{
               onClick: fetchClassesDifficulty,
               difficulty: "intermediate",
+              id: difFilter,
+              key: "",
             }}
           >
             Intermediate
@@ -152,10 +182,12 @@ function Homepage(props) {
             props={{
               onClick: fetchClassesDifficulty,
               difficulty: "advanced",
+              id: difFilter,
+              key: "",
             }}
           >
             Advanced
-          </ButtonDifficultyFilter>
+          </ButtonDifficultyFilter>*/}
         </div>
 
         <div className="new-classes-wrapper">
@@ -176,7 +208,7 @@ function Homepage(props) {
       </div>
 
       <div className="popular">
-        <h1 className="home-title">Most Popular</h1>
+        <h1 className="home-title">{t("third-title")}</h1>
 
         <div className="filter-wrapper">
           <ButtonFilter
@@ -184,7 +216,6 @@ function Homepage(props) {
               onClick: updateCategory,
               params: "",
               id: categoryFilter,
-              key: "",
             }}
           >
             All categories
@@ -192,11 +223,11 @@ function Homepage(props) {
           {categories.map((c, index) => {
             return (
               <ButtonFilter
+                key={index}
                 props={{
                   onClick: updateCategory,
                   params: c.id,
                   id: categoryFilter,
-                  key: index,
                 }}
               >
                 {c.name}
