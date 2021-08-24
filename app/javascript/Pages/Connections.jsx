@@ -3,8 +3,9 @@ import Layout from "./Layout";
 import { Head, Link } from "@inertiajs/inertia-react";
 
 export default function Welcome(props) {
-  const token = document.querySelector("[name=csrf-token]").content;
-  const headers = { "X-CSRF-Token": token };
+  Inertia.post("/login", data, {
+    headers: window.defaultHeaders,
+  });
 
   const ConnectionsList = (props) => {
     const connectionsListChild = props.connections.map((c) => {

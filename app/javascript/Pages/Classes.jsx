@@ -25,29 +25,25 @@ const Classes = (props) => {
   };
 
   const fetchClasses = async () => {
-    const params = new URLSearchParams();
+    const params = {};
+
+    if (categoryFilter) {
+      params.category_id = categoryFilter;
+    }
 
     if (difficultyFilter) {
-      params.append("difficulty", difficultyFilter);
+      params.difficulty = difficultyFilter;
     }
-    if (categoryFilter) {
-      params.append("category_id", categoryFilter);
-    }
+
     if (skillFilter) {
-      params.append("skill_id", skillFilter);
+      params.skill_id = skillFilter;
     }
 
     let url = "/api/classes";
 
-    if (params.toString()) {
-      url += "?" + params.toString();
-    } else {
-      console.log("no parameters");
-    }
-
     let classes = [];
     axios
-      .get(url)
+      .get(url, { params: params })
       .then((response) => {
         classes = response.data;
         setClasses(classes);
@@ -57,7 +53,7 @@ const Classes = (props) => {
       });
   };
 
-  const addCategoryButtons = async () => {
+  const getCategoryButtons = async () => {
     let url = "/api/skills";
     let categories = [];
     axios
@@ -128,7 +124,7 @@ const Classes = (props) => {
   };
 
   useEffect(() => {
-    addCategoryButtons();
+    getCategoryButtons();
   }, []);
 
   useEffect(() => {

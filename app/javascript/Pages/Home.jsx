@@ -21,7 +21,7 @@ function Homepage(props) {
   const [difFilter, setDifFilter] = useState("beginner");
   const dif = ["beginner", "intermediate", "advanced"];
 
-  const fetchClassesDifficulty = async () => {
+  const fetchClassesDifficulty = () => {
     let newClassData = [];
     axios
       .get(`/api/classes?difficulty=${difFilter}`)
@@ -79,21 +79,16 @@ function Homepage(props) {
   };
 
   const fetchClasses = async () => {
-    const params = new URLSearchParams();
+    const params = {};
 
     if (categoryFilter) {
-      params.append("category_id", categoryFilter);
+      params.category_id = categoryFilter;
     }
 
     let url = "/api/classes";
-
-    if (params.toString()) {
-      url += "?" + params.toString();
-    }
-
     let classes = [];
     axios
-      .get(url)
+      .get(url, { params: params })
       .then((response) => {
         classes = response.data;
 
@@ -151,7 +146,6 @@ function Homepage(props) {
                   onClick: updateDif,
                   params: d,
                   id: difFilter,
-                  key: index,
                 }}
               >
                 {d.charAt(0).toUpperCase() + d.slice(1)}
@@ -184,7 +178,6 @@ function Homepage(props) {
           <ButtonFilter
             props={{
               onClick: updateCategory,
-              params: "",
               id: categoryFilter,
             }}
           >

@@ -1,6 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const ButtonFilter = ({ props, children }) => {
+  props.params ||= "";
+
   console.log("params: ", props.params, "id: ", props.id);
   return (
     <div>
@@ -15,6 +18,11 @@ const ButtonFilter = ({ props, children }) => {
       </button>
     </div>
   );
+};
+
+ButtonFilter.propTypes = {
+  props: PropTypes.object,
+  children: PropTypes.string,
 };
 
 export default ButtonFilter;
