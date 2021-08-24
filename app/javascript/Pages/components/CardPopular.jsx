@@ -1,5 +1,4 @@
 import React from "react";
-import "./CardPopular.scss";
 
 const CardPopular = ({ popularClassData }) => {
   const link = popularClassData.teacher.avatar.url + "?tr=w-250,h-300";

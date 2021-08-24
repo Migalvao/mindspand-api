@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "./Layout";
 import { Head, Link } from "@inertiajs/inertia-react";
-import "../stylesheets/body.css";
 
 export default function Welcome(props) {
   const token = document.querySelector("[name=csrf-token]").content;

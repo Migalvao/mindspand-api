@@ -1,5 +1,4 @@
 import React from "react";
-import "./footer.scss";
 import { Link } from "@inertiajs/inertia-react";
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
 

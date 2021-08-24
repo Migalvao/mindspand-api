@@ -1,5 +1,4 @@
 import React from "react";
-import "./CardCategory.scss";
 
 const CardCategory = ({ categoryData }) => {
   return (

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import Navbar from "./components/Navbar/Navbar";
 import { Head, Link } from "@inertiajs/inertia-react";
-import "../stylesheets/login.scss";
 
 class Login extends Component {
   render() {

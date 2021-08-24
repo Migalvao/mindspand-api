@@ -4,7 +4,6 @@ import Footer from "./components/Footer/Footer";
 import { Head } from "@inertiajs/inertia-react";
 import { useState, useEffect } from "react";
 import SocialCard from "./components/SocialCard";
-import "../stylesheets/home.scss";
 import CardCategory from "./components/CardCategory";
 import CardPopular from "./components/CardPopular";
 import axios from "axios";

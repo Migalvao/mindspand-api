@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "@inertiajs/inertia-react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
-import "./navbar.scss";
 import { Button } from "../Button";
 import { useTranslation } from "react-i18next";
 
