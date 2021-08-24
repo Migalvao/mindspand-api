@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Layout from "./Layout";
 import { Link } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
+import Layout from "./Layout";
 
 export default function Profile(props) {
   const ErrorMessage = () => {

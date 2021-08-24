@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import axios from "axios";
+import PropTypes from "prop-types";
+import { useState, useEffect } from "react;";
+import { FaTimes } from "react-icons/fa";
 import Layout from "./Layout";
 import ButtonFilter from "./components/ButtonFilter";
-import { FaTimes } from "react-icons/fa";
-import PropTypes from "prop-types";
-import axios from "axios";
 
 const Classes = (props) => {
   const [categories, setCategories] = useState([]);

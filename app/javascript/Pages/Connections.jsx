@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "./Layout";
 import { Head, Link } from "@inertiajs/inertia-react";
+import Layout from "./Layout";
 
 export default function Welcome(props) {
   Inertia.post("/login", data, {

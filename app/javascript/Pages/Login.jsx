@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
+import { Component } from "react";
 import { Inertia } from "@inertiajs/inertia";
-import Navbar from "./components/Navbar/Navbar";
 import { Head, Link } from "@inertiajs/inertia-react";
+import Navbar from "./components/Navbar/Navbar";
 
 class Login extends Component {
   render() {

@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "./Layout";
-import { Head, Link } from "@inertiajs/inertia-react";
+import { Link } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
+import Layout from "./Layout";
 
 export default function Profile(props) {
   const handleSubmit = (e) => {

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 import { Link } from "@inertiajs/inertia-react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
-import { Button } from "../Button";
 import { useTranslation } from "react-i18next";
+import { Button } from "../Button";
 
 function Navbar(props) {
   const { i18n } = useTranslation();
