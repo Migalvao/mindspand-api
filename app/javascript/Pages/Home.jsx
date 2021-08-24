@@ -1,15 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
+import axios from "axios";
+import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { Head } from "@inertiajs/inertia-react";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import { Head } from "@inertiajs/inertia-react";
-import { useState, useEffect } from "react";
 import SocialCard from "./components/SocialCard";
 import CardCategory from "./components/CardCategory";
 import CardPopular from "./components/CardPopular";
-import axios from "axios";
 import ButtonFilter from "./components/ButtonFilter";
-import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 
 function Homepage(props) {
   const { t } = useTranslation();
@@ -138,15 +138,12 @@ function Homepage(props) {
 
         <div className="filter-wrapper">
           {dif.map((d, index) => {
-            console.log(d);
             return (
               <ButtonFilter
                 key={index}
-                props={{
-                  onClick: updateDif,
-                  params: d,
-                  id: difFilter,
-                }}
+                onClick={updateDif}
+                params={d}
+                id={difFilter}
               >
                 {d.charAt(0).toUpperCase() + d.slice(1)}
               </ButtonFilter>
@@ -175,23 +172,16 @@ function Homepage(props) {
         <h1 className="home-title">{t("third-title")}</h1>
 
         <div className="filter-wrapper">
-          <ButtonFilter
-            props={{
-              onClick: updateCategory,
-              id: categoryFilter,
-            }}
-          >
+          <ButtonFilter onClick={updateCategory} id={categoryFilter}>
             All categories
           </ButtonFilter>
           {categories.map((c, index) => {
             return (
               <ButtonFilter
                 key={index}
-                props={{
-                  onClick: updateCategory,
-                  params: c.id,
-                  id: categoryFilter,
-                }}
+                onClick={updateCategory}
+                params={c.id}
+                id={categoryFilter}
               >
                 {c.name}
               </ButtonFilter>

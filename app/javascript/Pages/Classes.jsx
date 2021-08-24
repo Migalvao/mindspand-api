@@ -16,10 +16,12 @@ const Classes = (props) => {
   const dif = ["beginner", "intermediate", "advanced"];
 
   const updateCategory = (category) => {
-    setCategoryFilter(category.id);
-    if (category) skillsPopup(category.skills);
-    else {
+    if (category) {
+      skillsPopup(category.skills);
+      setCategoryFilter(category.id);
+    } else {
       setSkills([]);
+      setCategoryFilter("");
     }
     setSkillFilter("");
   };
@@ -134,13 +136,7 @@ const Classes = (props) => {
   return (
     <Layout current_user={props.current_user}>
       <div className="filter-wrapper">
-        <ButtonFilter
-          props={{
-            onClick: updateCategory,
-            params: "",
-            id: categoryFilter,
-          }}
-        >
+        <ButtonFilter onClick={updateCategory} id={categoryFilter}>
           All categories
         </ButtonFilter>
         {categories.map((c, index) => {
@@ -148,11 +144,9 @@ const Classes = (props) => {
           return (
             <ButtonFilter
               key={index}
-              props={{
-                onClick: updateCategory,
-                params: c,
-                id: categoryFilter,
-              }}
+              onClick={updateCategory}
+              params={c}
+              id={categoryFilter}
             >
               {c.name}
             </ButtonFilter>
@@ -163,7 +157,6 @@ const Classes = (props) => {
         <ButtonFilter
           props={{
             onClick: setDifficultyFilter,
-            params: "",
           }}
         >
           All
