@@ -90,6 +90,7 @@ function Homepage(props) {
     if (params.toString()) {
       url += "?" + params.toString();
     }
+
     let classes = [];
     axios
       .get(url)
@@ -157,36 +158,6 @@ function Homepage(props) {
               </ButtonFilter>
             );
           })}
-          {/*} <ButtonDifficultyFilter
-            props={{
-              onClick: fetchClassesDifficulty,
-              difficulty: "beginner",
-              id: difFilter,
-              key: "",
-            }}
-          >
-            Beginner
-          </ButtonDifficultyFilter>
-          <ButtonDifficultyFilter
-            props={{
-              onClick: fetchClassesDifficulty,
-              difficulty: "intermediate",
-              id: difFilter,
-              key: "",
-            }}
-          >
-            Intermediate
-          </ButtonDifficultyFilter>
-          <ButtonDifficultyFilter
-            props={{
-              onClick: fetchClassesDifficulty,
-              difficulty: "advanced",
-              id: difFilter,
-              key: "",
-            }}
-          >
-            Advanced
-          </ButtonDifficultyFilter>*/}
         </div>
 
         <div className="new-classes-wrapper">

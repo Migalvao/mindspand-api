@@ -1,14 +1,15 @@
 import React from "react";
-import "./ButtonChip.scss";
 
 const ButtonFilter = ({ props, children }) => {
-  console.log(props);
+  console.log("params: ", props.params, "id: ", props.id);
   return (
     <div>
       <button
         onClick={() => props.onClick(props.params)}
         key={props.key}
-        className={`btn-chip ${props.params == props.id ? "chip--active" : ""}`}
+        className={`btn-chip ${
+          (props.params.id || props.params) == props.id ? "chip--active" : ""
+        }`}
       >
         {children}
       </button>

@@ -3,6 +3,7 @@ import Layout from "./Layout";
 import ButtonFilter from "./components/ButtonFilter";
 import { FaTimes } from "react-icons/fa";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 const Classes = (props) => {
   const [categories, setCategories] = useState([]);
@@ -11,6 +12,8 @@ const Classes = (props) => {
   const [categoryFilter, setCategoryFilter] = useState("");
   const [skillFilter, setSkillFilter] = useState("");
   const [difficultyFilter, setDifficultyFilter] = useState("");
+  const [difFilter, setDifFilter] = useState("beginner");
+  const dif = ["beginner", "intermediate", "advanced"];
 
   const updateCategory = (category) => {
     setCategoryFilter(category.id);
@@ -37,55 +40,36 @@ const Classes = (props) => {
     let url = "/api/classes";
 
     if (params.toString()) {
-      console.log(params.toString());
       url += "?" + params.toString();
     } else {
       console.log("no parameters");
     }
 
-    console.log(url);
     let classes = [];
-    try {
-      const response = await fetch(url);
-      classes = await response.json();
-    } catch (error) {
-      console.log(error);
-      classes = [];
-    }
-
-    const components = classes.map((c) => {
-      return <p>{c.title}</p>;
-    });
-
-    setClasses(components);
+    axios
+      .get(url)
+      .then((response) => {
+        classes = response.data;
+        setClasses(classes);
+      })
+      .catch((error) => {
+        classes = [];
+      });
   };
 
   const addCategoryButtons = async () => {
+    let url = "/api/skills";
     let categories = [];
-    try {
-      const response = await fetch(`/api/skills`);
-      categories = await response.json();
-    } catch (error) {
-      console.log(error);
-      categories = [];
-    }
-
-    const categoryComponents = [];
-
-    categories.map((c, i) => {
-      categoryComponents.push(
-        <ButtonFilter
-          props={{
-            onClick: updateCategory,
-            params: c,
-          }}
-        >
-          {c.name}
-        </ButtonFilter>
-      );
-    });
-
-    setCategories(categoryComponents);
+    axios
+      .get(url)
+      .then((response) => {
+        categories = response.data;
+        setCategories(categories);
+      })
+      .catch((error) => {
+        console.log(error);
+        categories = [];
+      });
   };
 
   const addDifficultyButtons = () => {
@@ -158,11 +142,26 @@ const Classes = (props) => {
           props={{
             onClick: updateCategory,
             params: "",
+            id: categoryFilter,
           }}
         >
           All categories
         </ButtonFilter>
-        {categories}
+        {categories.map((c, index) => {
+          console.log(c.name);
+          return (
+            <ButtonFilter
+              key={index}
+              props={{
+                onClick: updateCategory,
+                params: c,
+                id: categoryFilter,
+              }}
+            >
+              {c.name}
+            </ButtonFilter>
+          );
+        })}
       </div>
       <div className="filter-wrapper">
         <ButtonFilter
@@ -175,7 +174,11 @@ const Classes = (props) => {
         </ButtonFilter>
         {addDifficultyButtons()}
       </div>
-      <div>{classes}</div>
+      <div>
+        {classes.map((c, index) => {
+          return c.title;
+        })}
+      </div>
       {skills.length ? (
         <div>
           <div
