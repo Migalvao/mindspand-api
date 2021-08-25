@@ -146,7 +146,7 @@ function Homepage(props) {
                 params={{ id: d }}
                 id={difFilter}
               >
-                {d.charAt(0).toUpperCase() + d.slice(1)}
+                <a>{d.charAt(0).toUpperCase() + d.slice(1)}</a>
               </ButtonFilter>
             );
           })}

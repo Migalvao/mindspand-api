@@ -4,9 +4,6 @@ import { Head, Link } from "@inertiajs/inertia-react";
 import Layout from "./Layout";
 
 export default function Welcome(props) {
-  const token = document.querySelector("[name=csrf-token]").content;
-  const headers = { "X-CSRF-Token": token };
-
   const Notifications_list = (props) => {
     console.log(props.notifications);
     const notificationsList = props.notifications.map((n, index) => (
@@ -29,7 +26,7 @@ export default function Welcome(props) {
       <p>Read notifications</p>
       <Notifications_list notifications={props.notifications.read} />
 
-      <Link href="/home" headers={headers} as="button">
+      <Link href="/home" headers={Window.defaultHeaders} as="button">
         Home
       </Link>
     </Layout>
