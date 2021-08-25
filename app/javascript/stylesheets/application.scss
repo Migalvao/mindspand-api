@@ -1,0 +1,16 @@
+@import "../../../node_modules/mappy-breakpoints/mappy-breakpoints.scss";
+
+@import "./body.css";
+@import "./base.scss";
+
+@import "./components/footer/footer.scss";
+@import "./components/navbar/navbar.scss";
+
+@import "./components/button.scss";
+@import "./components/buttonChip.scss";
+@import "./components/cardCategory.scss";
+@import "./components/cardPopular.scss";
+@import "./components/socialCard.scss";
+
+@import "./pages/login.scss";
+@import "./pages/home.scss";

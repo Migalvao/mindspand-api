@@ -1,0 +1,43 @@
+.media {
+  display: flex;
+  align-items: flex-start;
+  width: 21.5rem;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  cursor: pointer;
+  margin-top: 1rem;
+  background-color: $dark-color;
+}
+
+.media-figure {
+  left: 0;
+  top: 0;
+  width: 5.5rem;
+  height: 5rem;
+  border-radius: 0.313rem;
+  object-fit: cover;
+}
+
+.media-body {
+  flex: 1;
+  height: 5rem;
+  color: $white-color;
+  vertical-align: middle;
+}
+.media-body-info {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 0.625rem;
+}
+.media-teacher {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.media-skill {
+  font-weight: normal;
+  font-size: 0.75rem;
+  line-height: 1.1rem;
+}

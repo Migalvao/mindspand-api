@@ -1,0 +1,75 @@
+.scene-1-login {
+  position: absolute;
+  display: flex;
+  top: 8rem;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: -1;
+}
+
+.login-content {
+  padding: 1.5rem;
+  position: absolute;
+  display: block;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  top: 20rem;
+  width: 100%;
+  text-align: center;
+}
+.login-title {
+  font-weight: 600;
+  font-size: 1.313rem;
+  display: flex;
+  text-align: center;
+  color: $dark-color;
+  justify-content: center;
+}
+
+.login-form {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding-top: 3.125rem;
+  height: auto;
+  overflow: hidden;
+
+  .login-input {
+    float: left;
+    clear: both;
+    margin: 0.313rem 0;
+    padding: 0.625rem 10.625rem 0.625rem 1.25rem;
+    outline: none;
+    border: 1px solid $dark-color;
+    border-radius: 0.313rem;
+  }
+
+  ::placeholder {
+    font-size: 0.75rem;
+    color: #aaaaaa;
+  }
+
+  .login-btn {
+    background-color: $primary-color;
+    color: $white-color;
+    margin-top: 15%;
+    padding: 0.625rem 8.563rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border: 0;
+    cursor: pointer;
+  }
+}
+
+.to-signup {
+  color: $dark-color;
+  margin-top: 23rem;
+  font-weight: 400;
+  font-size: 0.75rem;
+  cursor: pointer;
+  a {
+    color: $dark-color;
+    text-decoration: none;
+    font-weight: 600;
+  }
+}
