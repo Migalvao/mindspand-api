@@ -25,7 +25,7 @@ const Classes = (props) => {
     setSkillFilter("");
   };
 
-  const fetchClasses = async () => {
+  const fetchClasses = () => {
     const params = {};
 
     if (categoryFilter) {
@@ -55,7 +55,7 @@ const Classes = (props) => {
       });
   };
 
-  const getCategoryButtons = async () => {
+  const getCategoryButtons = () => {
     let url = "/api/skills";
     let categories = [];
     axios
@@ -179,13 +179,7 @@ const Classes = (props) => {
           >
             <FaTimes />
           </div>
-          <ul
-          // className={
-          //   skills.length ? "nav-menu active" : "nav-menu"
-          // }
-          >
-            {skills}
-          </ul>
+          <ul>{skills}</ul>
         </div>
       ) : null}
     </Layout>

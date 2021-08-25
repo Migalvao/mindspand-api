@@ -35,7 +35,7 @@ function Homepage(props) {
       });
   };
 
-  const fetchCategories = async () => {
+  const fetchCategories = () => {
     let categoryData = [];
     axios
       .get("/api/skills")
@@ -49,7 +49,7 @@ function Homepage(props) {
       });
   };
 
-  const fetchPopularClasses = async () => {
+  const fetchPopularClasses = () => {
     let popularClassData = [];
     axios
       .get("/api/classes")
@@ -63,7 +63,7 @@ function Homepage(props) {
       });
   };
 
-  const addCategoryButtons = async () => {
+  const addCategoryButtons = () => {
     let categories = [];
     axios
       .get(`/api/skills`)
@@ -78,7 +78,7 @@ function Homepage(props) {
       });
   };
 
-  const fetchClasses = async () => {
+  const fetchClasses = () => {
     const params = {};
 
     if (categoryFilter) {
@@ -143,7 +143,7 @@ function Homepage(props) {
               <ButtonFilter
                 key={index}
                 onClick={updateDif}
-                params={d}
+                params={{ id: d }}
                 id={difFilter}
               >
                 {d.charAt(0).toUpperCase() + d.slice(1)}
@@ -181,7 +181,7 @@ function Homepage(props) {
               <ButtonFilter
                 key={index}
                 onClick={updateCategory}
-                params={c.id}
+                params={c}
                 id={categoryFilter}
               >
                 {c.name}

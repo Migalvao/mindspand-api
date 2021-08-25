@@ -8,12 +8,10 @@ class ButtonFilter extends Component {
     return (
       <div>
         <button
-          onClick={() => this.props.onClick(this.props.params)}
+          onClick={() => this.props.onClick(this.props.params.id)}
           key={this.key}
           className={`btn-chip ${
-            (this.props.params.id || this.props.params) == this.props.id
-              ? "chip--active"
-              : ""
+            this.props.params.id == this.props.id ? "chip--active" : ""
           }`}
         >
           {this.props.children}
@@ -24,17 +22,13 @@ class ButtonFilter extends Component {
 }
 
 ButtonFilter.defaultProps = {
-  params: "",
+  params: { id: "" },
 };
 
 ButtonFilter.propTypes = {
-  params: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.number,
-  ]),
+  params: PropTypes.object,
   children: PropTypes.string,
-  id: PropTypes.string,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onClick: PropTypes.func,
 };
 
