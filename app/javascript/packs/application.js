@@ -5,7 +5,6 @@
 import React from "react";
 import { render } from "react-dom";
 import { createInertiaApp } from "@inertiajs/inertia-react";
-import "../stylesheets/body.css";
 import "../stylesheets/application.scss";
 // import "../../assets/stylesheets/paragraph.css";
 // import "../stylesheets/paragraph.css";
