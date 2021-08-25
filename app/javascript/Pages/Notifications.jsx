@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Head, Link } from "@inertiajs/inertia-react";
 import Layout from "./Layout";
 
@@ -8,8 +9,8 @@ export default function Welcome(props) {
 
   const Notifications_list = (props) => {
     console.log(props.notifications);
-    const notificationsList = props.notifications.map((n) => (
-      <li>
+    const notificationsList = props.notifications.map((n, index) => (
+      <li key={index}>
         id: {n.id}
         text: {n.text}
         notification_type: {n.notification_type}
@@ -34,3 +35,8 @@ export default function Welcome(props) {
     </Layout>
   );
 }
+
+Welcome.propTypes = {
+  notifications: PropTypes.object,
+  current_user: PropTypes.object.isRequired,
+};

@@ -13,8 +13,6 @@ const Classes = (props) => {
   const [categoryFilter, setCategoryFilter] = useState("");
   const [skillFilter, setSkillFilter] = useState("");
   const [difficultyFilter, setDifficultyFilter] = useState("");
-  const [difFilter, setDifFilter] = useState("beginner");
-  const dif = ["beginner", "intermediate", "advanced"];
 
   const updateCategory = (category) => {
     if (category) {
@@ -52,6 +50,7 @@ const Classes = (props) => {
         setClasses(classes);
       })
       .catch((error) => {
+        console.log(error);
         classes = [];
       });
   };
@@ -103,8 +102,9 @@ const Classes = (props) => {
   };
 
   const skillsPopup = (skills) => {
-    const components = skills.map((s) => (
+    const components = skills.map((s, index) => (
       <p
+        key={index}
         onClick={() => {
           setSkillFilter(s.id);
           setSkills([]);
@@ -165,7 +165,7 @@ const Classes = (props) => {
         {addDifficultyButtons()}
       </div>
       <div>
-        {classes.map((c, index) => {
+        {classes.map((c) => {
           return c.title;
         })}
       </div>

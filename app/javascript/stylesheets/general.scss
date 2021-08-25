@@ -410,7 +410,7 @@ $shadow-color: #f5f4f9;
   display: block;
   left: 50%;
   transform: translate(-50%, 0%);
-  top: 23rem;
+  top: 20rem;
   width: 100%;
   text-align: center;
 
@@ -457,18 +457,17 @@ $shadow-color: #f5f4f9;
       cursor: pointer;
     }
   }
-
-  .to-signup {
+}
+.to-signup {
+  color: $dark-color;
+  margin-top: 23rem;
+  font-weight: 400;
+  font-size: 0.75rem;
+  cursor: pointer;
+  a {
     color: $dark-color;
-    margin-top: 23.75rem;
-    font-family: Avenir Next;
+    text-decoration: none;
     font-weight: 600;
-    font-size: 0.75rem;
-    cursor: pointer;
-
-    .to-signup a {
-      text-decoration: none;
-    }
   }
 }
 

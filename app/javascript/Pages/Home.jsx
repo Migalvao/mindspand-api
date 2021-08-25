@@ -95,6 +95,7 @@ function Homepage(props) {
         setPClasses(classes);
       })
       .catch((error) => {
+        console.log(error);
         classes = [];
       });
   };

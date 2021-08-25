@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const SocialCard = ({ newClassData }) => {
   const link = newClassData.teacher.avatar.url + "?tr=w-250,h-300";
@@ -14,6 +15,10 @@ const SocialCard = ({ newClassData }) => {
       <h5 className="card-social-teacher-name">{newClassData.teacher.name}</h5>
     </div>
   );
+};
+
+SocialCard.propTypes = {
+  newClassData: PropTypes.object.isRequired,
 };
 
 export default SocialCard;

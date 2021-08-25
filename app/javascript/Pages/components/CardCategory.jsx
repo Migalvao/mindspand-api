@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const CardCategory = ({ categoryData }) => {
   return (
@@ -9,6 +10,10 @@ const CardCategory = ({ categoryData }) => {
       {categoryData.name}
     </div>
   );
+};
+
+CardCategory.propTypes = {
+  categoryData: PropTypes.object.isRequired,
 };
 
 export default CardCategory;

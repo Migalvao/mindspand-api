@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from "react";
+import PropTypes from "prop-types";
 import { Inertia } from "@inertiajs/inertia";
 import { Head, Link } from "@inertiajs/inertia-react";
 import Navbar from "./components/Navbar/Navbar";
@@ -15,6 +16,9 @@ class Login extends Component {
 
     const handleSubmit = (e) => {
       e.preventDefault();
+
+      let username = document.getElementById("username");
+      let password = document.getElementById("password");
 
       const data = {
         username: username.value,
@@ -71,12 +75,19 @@ class Login extends Component {
           </form>
           <br />
           <div className="to-signup">
-            Don't have an account yet? <Link href="/signup">Sign up</Link>
+            Don&apos;t have an account yet?
+            <Link href="/signup"> Sign up</Link>
           </div>
         </div>
       </main>
     );
   }
 }
+
+Login.propTypes = {
+  error: PropTypes.string,
+  username: PropTypes.object,
+  password: PropTypes.object,
+};
 
 export default Login;

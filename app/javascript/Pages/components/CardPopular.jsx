@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const CardPopular = ({ popularClassData }) => {
   const link = popularClassData.teacher.avatar.url + "?tr=w-250,h-300";
@@ -15,6 +16,10 @@ const CardPopular = ({ popularClassData }) => {
       </div>
     </div>
   );
+};
+
+CardPopular.propTypes = {
+  popularClassData: PropTypes.object.isRequired,
 };
 
 export default CardPopular;

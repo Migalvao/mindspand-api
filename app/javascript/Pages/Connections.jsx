@@ -1,12 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Head, Link } from "@inertiajs/inertia-react";
 import Layout from "./Layout";
 
 export default function Welcome(props) {
-  Inertia.post("/login", data, {
-    headers: window.defaultHeaders,
-  });
-
   const ConnectionsList = (props) => {
     const connectionsListChild = props.connections.map((c) => {
       if (c.match.student) {
@@ -28,9 +25,16 @@ export default function Welcome(props) {
       <p>Teacher connections</p>
       <ConnectionsList connections={props.teacher} />
 
-      <Link href="/home" headers={headers} as="button">
+      <Link href="/home" headers={window.defaultHeaders} as="button">
         Home
       </Link>
     </Layout>
   );
 }
+
+Welcome.propTypes = {
+  connections: PropTypes.object.isRequired,
+  current_user: PropTypes.object.isRequired,
+  student: PropTypes.object.isRequired,
+  teacher: PropTypes.object.isRequired,
+};

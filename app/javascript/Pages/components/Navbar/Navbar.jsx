@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "@inertiajs/inertia-react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
@@ -115,4 +116,9 @@ function Navbar(props) {
     </div>
   );
 }
+
+Navbar.propTypes = {
+  current_user: PropTypes.object,
+};
+
 export default Navbar;
