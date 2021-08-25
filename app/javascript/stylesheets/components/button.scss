@@ -5,6 +5,10 @@
   border: none;
   cursor: pointer;
   white-space: nowrap;
+  &:focus {
+    background: $white-color;
+    color: $primary-color;
+  }
 }
 
 .btn--primary {
@@ -51,9 +55,9 @@
   font-size: 1.25rem;
 
   &:hover {
-    color: $white-color;
+    color: $primary-color;
     background-color: $white-color;
-    transition: all 0.2s ease-out;
+    transition: all 0.3s ease-out;
   }
 }
 

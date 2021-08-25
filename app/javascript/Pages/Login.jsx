@@ -6,6 +6,10 @@ import { Head, Link } from "@inertiajs/inertia-react";
 import Navbar from "./components/Navbar/Navbar";
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { username: "", password: "" };
+  }
   render() {
     const ErrorMessage = () => {
       if (this.props.error) {
@@ -17,14 +21,11 @@ class Login extends Component {
     const handleSubmit = (e) => {
       e.preventDefault();
 
-      let username = document.getElementById("username");
-      let password = document.getElementById("password");
-
       const data = {
-        username: username.value,
-        password: password.value,
+        username: this.state.username,
+        password: this.state.password,
       };
-
+      console.log(data);
       Inertia.post("/login", data, {
         headers: window.defaultHeaders,
       });
@@ -53,6 +54,13 @@ class Login extends Component {
                 name="username"
                 placeholder="Username/Email"
                 className="login-input"
+                onChange={(e) => {
+                  this.setState({
+                    username: e.target.value,
+                    password: this.state.password,
+                  });
+                }}
+                value={this.state.username}
               />
             </label>
 
@@ -66,6 +74,13 @@ class Login extends Component {
                 name="password"
                 placeholder="Password"
                 className="login-input"
+                onChange={(e) => {
+                  this.setState({
+                    username: this.state.username,
+                    password: e.target.value,
+                  });
+                }}
+                value={this.state.password}
               />
             </label>
 

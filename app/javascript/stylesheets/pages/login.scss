@@ -42,6 +42,10 @@
     outline: none;
     border: 1px solid $dark-color;
     border-radius: 0.313rem;
+
+    &:focus {
+      background-color: $shadow-color;
+    }
   }
 
   ::placeholder {
@@ -51,6 +55,7 @@
 
   .login-btn {
     background-color: $primary-color;
+    border-radius: 0.313rem;
     color: $white-color;
     margin-top: 15%;
     padding: 0.625rem 8.563rem;
