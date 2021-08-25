@@ -61,4 +61,21 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Mock ImageKit
+  # https://github.com/imagekit-developer/imagekit-ruby/blob/3a91728eb9882d3cee28cb141dbb9c0eedaa003a/lib/imagekit/imagekit.rb#L15
+  # https://github.com/imagekit-developer/imagekit-ruby/blob/3a91728eb9882d3cee28cb141dbb9c0eedaa003a/lib/carrierwave/storage/ik_file.rb#L9
+  #
+  # This will probably need to be extended if you add tests that use ImageKit
+  config.before :each do
+    allow(ImageKit::ImageKitClient).to receive(:new).and_return(nil)
+  end
+end
+
+# Mock ImageKit config
+# https://github.com/imagekit-developer/imagekit-ruby/blob/3a91728eb9882d3cee28cb141dbb9c0eedaa003a/lib/carrierwave/storage/ik_file.rb#L8
+Rails::Application::Configuration.class_eval do
+  def imagekit
+      {}
+  end
 end
