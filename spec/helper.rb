@@ -12,6 +12,10 @@ module Helper
     def log_in(username, password)
         data = {username: username, password: password}
         post '/login', params: data
+
+        unless response.status == 302
+            puts "\nLOGIN FAILED FOR USER #{username}!\n"
+        end
     end
 
     def create_skill
