@@ -1,13 +1,12 @@
 import React from "react";
-import Layout from "./Layout";
-import { Head, Link } from "@inertiajs/inertia-react";
+import PropTypes from "prop-types";
+import { Link } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
-import "../stylesheets/body.css";
+import Layout from "./Layout";
 
 export default function Profile(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
-
 
     Inertia.put("/users/" + props.user.id + "/avatar", state, {
       headers: window.defaultHeaders,
@@ -19,7 +18,6 @@ export default function Profile(props) {
   const onImageChange = (event) => {
     state.avatar = event.target.files[0];
   };
-
 
   const link = props.curent_avatar + "?tr=w-250,h-300";
 
@@ -50,3 +48,8 @@ export default function Profile(props) {
     </Layout>
   );
 }
+
+Profile.propTypes = {
+  user: PropTypes.object.isRequired,
+  curent_avatar: PropTypes.object.isRequired,
+};

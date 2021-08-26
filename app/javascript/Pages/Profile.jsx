@@ -1,6 +1,7 @@
 import React from "react";
-import Layout from "./Layout";
+import PropTypes from "prop-types";
 import { Link } from "@inertiajs/inertia-react";
+import Layout from "./Layout";
 
 export default function Profile(props) {
   const EditButton = () => {
@@ -37,3 +38,8 @@ export default function Profile(props) {
     </Layout>
   );
 }
+
+Profile.propTypes = {
+  can_edit: PropTypes.bool,
+  user: PropTypes.object.isRequired,
+};

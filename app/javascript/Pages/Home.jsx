@@ -1,37 +1,209 @@
-import React, { Component } from "react";
+import React from "react";
+import axios from "axios";
+import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { Head } from "@inertiajs/inertia-react";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import { Head, Link } from "@inertiajs/inertia-react";
-import "../stylesheets/Home.css";
+import SocialCard from "./components/SocialCard";
+import CardCategory from "./components/CardCategory";
+import CardPopular from "./components/CardPopular";
+import ButtonFilter from "./components/ButtonFilter";
 
-class Homepage extends Component {
-  render() {
-    return (
-      <main>
-        <Navbar current_user={this.props.current_user} />
+function Homepage(props) {
+  const { t } = useTranslation();
+  const [items, setItems] = useState([]);
+  const [cats, setCat] = useState([]);
+  const [pclasses, setPClasses] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [categoryFilter, setCategoryFilter] = useState("");
+  const [difFilter, setDifFilter] = useState("beginner");
+  const dif = ["beginner", "intermediate", "advanced"];
 
-        <img
-          src={require("../images/banner.svg")}
-          alt=""
-          role="presentation"
-          className="hero-img"
-        />
-        <Head title="Welcome" />
-        <p>Hello, welcome to your first Inertia app!</p>
-        <p className="paragraph">This is cool!</p>
+  const fetchClassesDifficulty = () => {
+    let newClassData = [];
+    axios
+      .get(`/api/classes?difficulty=${difFilter}`)
+      .then((response) => {
+        newClassData = response.data;
+        setItems(newClassData);
+      })
+      .catch((error) => {
+        console.log(error);
+        newClassData = [];
+      });
+  };
 
-        <Link
-          href="/logout"
-          method="delete"
-          headers={window.defaultHeaders}
-          as="button"
-        >
-          Logout
-        </Link>
-        <Footer />
-      </main>
-    );
-  }
+  const fetchCategories = () => {
+    let categoryData = [];
+    axios
+      .get("/api/skills")
+      .then((response) => {
+        categoryData = response.data;
+        setCat(categoryData);
+      })
+      .catch((error) => {
+        console.log(error);
+        categoryData = [];
+      });
+  };
+
+  const fetchPopularClasses = () => {
+    let popularClassData = [];
+    axios
+      .get("/api/classes")
+      .then((response) => {
+        popularClassData = response.data;
+        setPClasses(popularClassData);
+      })
+      .catch((error) => {
+        console.log(error);
+        popularClassData = [];
+      });
+  };
+
+  const addCategoryButtons = () => {
+    let categories = [];
+    axios
+      .get(`/api/skills`)
+      .then((response) => {
+        categories = response.data;
+
+        setCategories(categories);
+      })
+      .catch((error) => {
+        console.log(error);
+        categories = [];
+      });
+  };
+
+  const fetchClasses = () => {
+    const params = {};
+
+    if (categoryFilter) {
+      params.category_id = categoryFilter;
+    }
+
+    let url = "/api/classes";
+    let classes = [];
+    axios
+      .get(url, { params: params })
+      .then((response) => {
+        classes = response.data;
+
+        setPClasses(classes);
+      })
+      .catch((error) => {
+        console.log(error);
+        classes = [];
+      });
+  };
+
+  const updateCategory = (category) => {
+    if (category) setCategoryFilter(category);
+    else {
+      setCategoryFilter("");
+    }
+  };
+  useEffect(() => {
+    fetchClasses();
+  }, [categoryFilter]);
+
+  const updateDif = (difficulty) => {
+    if (difficulty) setDifFilter(difficulty);
+    else {
+      setDifFilter("");
+    }
+  };
+
+  useEffect(() => {
+    fetchClassesDifficulty();
+  }, [difFilter]);
+
+  useEffect(() => {
+    fetchCategories();
+    fetchPopularClasses();
+    addCategoryButtons();
+  }, []);
+
+  return (
+    <main>
+      <Head title="Welcome" />
+      <Navbar current_user={props.current_user} />
+      <div className="hero-img">
+        <h1 className="hero-title">{t("hero-title")}</h1>
+      </div>
+      <div className="new-classes">
+        <h1 className="home-title">{t("first-title")}</h1>
+
+        <div className="filter-wrapper">
+          {dif.map((d, index) => {
+            return (
+              <ButtonFilter
+                key={index}
+                onClick={updateDif}
+                params={{ id: d }}
+                id={difFilter}
+              >
+                {d.charAt(0).toUpperCase() + d.slice(1)}
+              </ButtonFilter>
+            );
+          })}
+        </div>
+
+        <div className="new-classes-wrapper">
+          {items.map((item, index) => {
+            return <SocialCard newClassData={item} key={index} />;
+          })}
+        </div>
+      </div>
+
+      <div className="categories">
+        <h1 className="home-title">{t("second-title")}</h1>
+
+        <div className="categories-wrapper">
+          {cats.map((cat, index) => {
+            return <CardCategory categoryData={cat} key={index} />;
+          })}
+        </div>
+      </div>
+
+      <div className="popular">
+        <h1 className="home-title">{t("third-title")}</h1>
+
+        <div className="filter-wrapper">
+          <ButtonFilter onClick={updateCategory} id={categoryFilter}>
+            All categories
+          </ButtonFilter>
+          {categories.map((c, index) => {
+            return (
+              <ButtonFilter
+                key={index}
+                onClick={updateCategory}
+                params={c}
+                id={categoryFilter}
+              >
+                {c.name}
+              </ButtonFilter>
+            );
+          })}
+        </div>
+
+        <div className="popular-wrapper">
+          {pclasses.map((pclass, index) => {
+            return <CardPopular popularClassData={pclass} key={index} />;
+          })}
+        </div>
+      </div>
+
+      <Footer />
+    </main>
+  );
 }
+
+Homepage.propTypes = {
+  current_user: PropTypes.object.isRequired,
+};
 
 export default Homepage;
