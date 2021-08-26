@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import Layout from "./Layout";
 import ButtonFilter from "./components/ButtonFilter";
+import CardClasses from "./components/CardClasses";
 
 const Classes = (props) => {
   const [categories, setCategories] = useState([]);
@@ -118,7 +119,6 @@ const Classes = (props) => {
           All categories
         </ButtonFilter>
         {categories.map((c, index) => {
-          console.log(c.name);
           return (
             <ButtonFilter
               key={index}
@@ -146,8 +146,8 @@ const Classes = (props) => {
         })}
       </div>
       <div>
-        {classes.map((c) => {
-          return c.title;
+        {classes.map((c, index) => {
+          return <CardClasses classesData={c} key={index} />;
         })}
       </div>
       {skills.length ? (

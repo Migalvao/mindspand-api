@@ -1,0 +1,120 @@
+.card-classes {
+  width: 10.25rem;
+  height: 16.88rem;
+  display: flex;
+  border-radius: 0.6rem;
+  margin: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all ease 200ms;
+  position: relative;
+}
+
+.card-class-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.card-class-filter {
+  background-color: rgba(37, 38, 54, 0.4);
+  min-width: 10.25rem;
+  height: 16.88rem;
+  border-radius: 0.6rem;
+  position: relative;
+}
+
+.card-class-chip-new {
+  color: $dark-color;
+  position: absolute;
+  background-color: $shadow-color;
+  padding: 0.125rem 0.688rem;
+  border-radius: 1.25rem;
+  font-size: 0.75rem;
+  margin-top: 0.625rem;
+  margin-left: 0.3rem;
+  font-weight: normal;
+}
+
+.card-class-dif-level {
+  color: $white-color;
+  position: absolute;
+  text-align: left;
+  font-size: 0.625rem;
+  letter-spacing: 0.1rem;
+  margin-top: 0.875rem;
+  right: 0.313rem;
+  text-transform: uppercase;
+}
+
+.card-class-info {
+  width: 100%;
+  height: 6.25rem;
+  background-color: $shadow-color;
+  position: absolute;
+  bottom: 0;
+}
+
+.card-class-skill-name {
+  margin: 0;
+  background-color: $dark-color;
+  color: $white-color;
+  font-weight: 600;
+  font-size: 0.563rem;
+  line-height: 0.75rem;
+  top: 0.313rem;
+  position: relative;
+  text-align: right;
+  float: right;
+  border-radius: 0.31rem 0 0 0.31rem;
+  padding: 0.25rem 0.56rem 0.25rem 0.5rem;
+  border-right: 0.313rem solid var(--colorCategory);
+}
+
+.card-class-duration {
+  position: relative;
+  color: $dark-color;
+  font-weight: 400;
+  font-size: 0.563rem;
+  line-height: 0.75rem;
+  left: 0.625rem;
+  margin: 0;
+  top: 0.6rem;
+
+  .card-class-duration-time {
+    color: $gray-color;
+  }
+}
+
+.card-class-title {
+  position: relative;
+  top: 0.625rem;
+  width: 90%;
+  left: 0.625rem;
+  color: #252636;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.card-class-teacher-name {
+  position: absolute;
+  margin: 0;
+  bottom: 0.425rem;
+  left: 0.625rem;
+  color: #252636;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  text-align: left;
+}
