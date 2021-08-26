@@ -1,9 +1,9 @@
-class ApplicationController < ActionController::Base
+# frozen_string_literal: true
 
-    private 
-    def check_authenticated_user
-        unless @current_user
-            redirect_to '/login'
-        end
-    end
+class ApplicationController < ActionController::Base
+  private
+
+  def check_authenticated_user
+    redirect_to '/login' unless @current_user
+  end
 end

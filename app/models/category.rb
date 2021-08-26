@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: categories
@@ -9,8 +11,8 @@
 #  color      :string           default("")
 #
 class Category < ApplicationRecord
-    has_many :skills
+  has_many :skills
 
-    validates :name, presence: true, uniqueness: true
-    validates :color, presence: true
+  validates :name, presence: true, uniqueness: true
+  validates :color, presence: true
 end

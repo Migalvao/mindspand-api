@@ -26,6 +26,7 @@ export default function Profile(props) {
       <p>Id: {props.user.id}</p>
       <p>Name: {props.user.name}</p>
       <p>Username: {props.user.username}</p>
+      <p>Rating: {props.user.rating}</p>
       <p>Description: {props.user.description}</p>
       <p>Can edit?: {props.can_edit.toString()}</p>
       <EditButton />
