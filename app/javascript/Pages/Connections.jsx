@@ -1,28 +1,19 @@
 import React from "react";
-import Layout from "./Layout";
+import PropTypes from "prop-types";
 import { Head, Link } from "@inertiajs/inertia-react";
-import "../stylesheets/body.css";
+import Layout from "./Layout";
 
 export default function Welcome(props) {
-  const token = document.querySelector(
-    "[name=csrf-token]"
-  ).content;
-  const headers = { "X-CSRF-Token": token };
-
-  const Connections_list = (props) => {
-    const connectionsList = props.connections.map((c) => {
+  const ConnectionsList = (props) => {
+    const connectionsListChild = props.connections.map((c) => {
       if (c.match.student) {
         return <li>Student: {c.match.student.username}</li>;
       } else {
-        return (
-          <li>
-            Teacher: {c.match.skill_class.teacher.username}
-          </li>
-        );
+        return <li>Teacher: {c.match.skill_class.teacher.username}</li>;
       }
     });
 
-    return <ul>{connectionsList}</ul>;
+    return <ul>{connectionsListChild}</ul>;
   };
 
   return (
@@ -30,13 +21,20 @@ export default function Welcome(props) {
       <Head title="Welcome" />
       <h1>Connections</h1>
       <p>Student connections</p>
-      <Connections_list connections={props.student} />
+      <ConnectionsList connections={props.student} />
       <p>Teacher connections</p>
-      <Connections_list connections={props.teacher} />
+      <ConnectionsList connections={props.teacher} />
 
-      <Link href="/home" headers={headers} as="button">
+      <Link href="/home" headers={window.defaultHeaders} as="button">
         Home
       </Link>
     </Layout>
   );
 }
+
+Welcome.propTypes = {
+  connections: PropTypes.object.isRequired,
+  current_user: PropTypes.object.isRequired,
+  student: PropTypes.object.isRequired,
+  teacher: PropTypes.object.isRequired,
+};

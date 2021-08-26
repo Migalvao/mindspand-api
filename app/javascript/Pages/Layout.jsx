@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import Navbar from "./components/Navbar/Navbar";
 
 export default function Layout(props) {
@@ -9,3 +10,8 @@ export default function Layout(props) {
     </main>
   );
 }
+
+Layout.propTypes = {
+  current_user: PropTypes.object.isRequired,
+  children: PropTypes.array,
+};

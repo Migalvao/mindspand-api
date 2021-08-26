@@ -127,3 +127,7 @@ Skill.create({name: "Space Exploration", category: c})
 
 
 
+SkillClass.create({title: "Painting class", description: "Very cool painting class", no_classes: 3, class_duration: 90, method: "synchronous", difficulty: "beginner", regime: "physical", location: "Coimbra", teacher_id: 1, skill_id: 1})
+SkillClass.create({title: "Graphic Design", description: "You'll learn a lot about design", no_classes: 3, class_duration: 90, method: "synchronous", difficulty: "intermediate", regime: "remote", location: "Coimbra", teacher_id: 1, skill_id: 1})
+SkillClass.create({title: "Get a 6 pack", description: "How to get ripped", no_classes: 3, class_duration: 90, method: "synchronous", difficulty: "advanced", regime: "physical", location: "Coimbra", teacher_id: 1, skill_id: 1})
+

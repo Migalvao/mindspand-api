@@ -1,0 +1,86 @@
+.card-social {
+  min-width: 11.75rem;
+  height: 16.88rem;
+  display: flex;
+  border-radius: 0.6rem;
+  margin: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all ease 200ms;
+  position: relative;
+  color: $white-color;
+}
+.card-social-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.card-social-filter {
+  background-color: rgba(37, 38, 54, 0.4);
+  min-width: 11.75rem;
+  height: 16.88rem;
+  border-radius: 0.6rem;
+  position: relative;
+}
+
+.card-social-skill-name {
+  left: 50%;
+  top: 50%;
+  width: 90%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4rem;
+  position: absolute;
+  text-align: center;
+  transition: all ease-in 100ms;
+}
+
+.card-social-class-title {
+  position: absolute;
+  left: 50%;
+  top: 61%;
+  width: 90%;
+  transform: translate(-50%, 0);
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1rem;
+  text-align: center;
+  transition: all ease-in 100ms;
+}
+
+.card-social-teacher-name {
+  font-weight: normal;
+  font-size: 0.75rem;
+  left: 50%;
+  top: 83%;
+  transform: translate(-50%, 0);
+  position: absolute;
+}
+
+.card-social-chip-new {
+  color: $dark-color;
+  position: absolute;
+  background-color: $shadow-color;
+  padding: 0.125rem 0.688rem;
+  border-radius: 1.25rem;
+  font-size: 0.75rem;
+  margin-top: 0.625rem;
+  margin-left: 0.3rem;
+  font-weight: normal;
+}
+
+.card-social-dif-level {
+  position: absolute;
+  text-align: left;
+  font-size: 0.625rem;
+  letter-spacing: 0.1rem;
+  margin-top: 0.875rem;
+  right: 0.313rem;
+  text-transform: uppercase;
+}
