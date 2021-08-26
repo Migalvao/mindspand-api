@@ -39,8 +39,8 @@ module Api
         end
 
         classes = classes.as_json(
-          only: %i[id title description no_classes class_duration method regime
-                   location], include: { skill: { only: %i[id name] }, teacher: { only: %i[id username name] } }
+          only: %i[id title description no_classes class_duration method regime difficulty
+                   location], include: { skill: { only: %i[id name] }, teacher: { only: %i[id username name avatar] } }
         )
         render(json: classes)
      
@@ -52,7 +52,7 @@ module Api
         classes = SkillClass.visible_to_all.where("created_at >= ?", 1.week.ago).where(class_params())
         classes = classes.as_json(
           only: %i[id title description no_classes class_duration method regime
-                   location], include: { skill: { only: %i[id name] }, teacher: { only: %i[id username name] } }
+                   location], include: { skill: { only: %i[id name] }, teacher: { only: %i[id username name avatar] } }
         )
         render(json: classes)
       else
