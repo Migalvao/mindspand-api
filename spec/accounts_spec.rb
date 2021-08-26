@@ -2,53 +2,85 @@ require 'rails_helper'
 require_relative 'helper'
 include Helper
 
-RSpec.describe 'User ', type: :request do
-    it 'signup' do
-        post '/signup', params: { username: TEST_USERNAME, password: TEST_PASSWORD, email: TEST_EMAIL, name:TEST_NAME }
+RSpec.describe 'Accounts', type: :request do
+    describe 'signing up' do
+        context 'correctly' do
+            it 'redirects to home' do
+                post post_signup_path, params: TEST_USER_DATA
 
-        expect(response).to redirect_to('/home')
-        expect(response).to have_http_status(302)   # signup redirects to home 
-    end
-end
-
-RSpec.describe 'User access', type: :request do
-    context 'before login' do
-        it 'is limited' do
-            get "/api/users/1/classes"
-            expect(response).to have_http_status(401)
+                expect(response).to redirect_to('/home')
+                expect(response).to have_http_status(302)   # signup redirects to home 
+            end
         end
     end
 
-    context 'after login' do
-        it 'is allowed' do
+    describe 'fetching user classes' do
 
-            post '/login', params: { username: 'whitesmith', password: 'password' }
-            expect(response).to redirect_to('/home')
+        subject(:get_user_classes) do
+            get get_user_classes_path(user.id)
+        end
 
-            get "/api/users/1/classes"
-            expect(response).to have_http_status(200)
+        let!(:user) { create_default_user}
+        
+
+        context 'when user is not authenticated' do
+            it 'returns unauthorized status code' do
+                get_user_classes
+                expect(response).to have_http_status(401)
+            end
+        end
+    
+        context 'when user is authenticated' do
+            before(:each) { default_login }
+
+            it 'returns success status code' do
+                get_user_classes
+                expect(response).to have_http_status(200)
+            end
         end
     end
-end
 
-RSpec.describe 'Profile', type: :request do
-    before(:all) { default_login }
+    describe 'accessing user profile' do
+        subject(:get_profile) do
+            get get_profile_path(user.id)
+        end
 
-    it 'access' do
-        get "/users/1"
-        expect(response).to have_http_status(200)
+        let!(:user) { create_default_user }
 
+        context 'when user is authenticated' do
+            before(:each) { default_login }
+        
+            it 'returns success status code' do
+                get_profile
+                expect(response).to have_http_status(200)
+        
+            end
+
+        end
     end
 
-    it 'update' do
-        new_name = 'Whitesmith User'
-        put '/users/1', params: { name: new_name }
-        expect(response).to redirect_to("/users/1")
+    describe 'updating user profile' do    
+        subject(:update_profile) do
+            default_login
+            put update_profile_path(user.id), params: { name: new_name }
+            user.reload
+        end
+        
+        let!(:user) { create_default_user }
 
-        # check if object is updated
-        user = User.find(1)
-        expect(user.name).to eq(new_name)
+        context 'correctly' do
+            let!(:new_name) { 'Whitesmith User' }
 
+            it 'updates the user object' do
+                update_profile
+                expect(user.name).to eq(new_name)
+        
+            end
+
+            it 'redirects to the profile' do
+                update_profile
+                expect(response).to redirect_to(get_profile_path(user.id))
+            end
+        end
     end
-
 end
