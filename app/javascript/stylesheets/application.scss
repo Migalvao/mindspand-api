@@ -3,14 +3,14 @@
 @import "./body.scss";
 @import "./base.scss";
 
-@import "./components/footer/footer.scss";
-@import "./components/navbar/navbar.scss";
+@import "./pages/components/footer/footer.scss";
+@import "./pages/components/navbar/navbar.scss";
 
-@import "./components/button.scss";
-@import "./components/buttonChip.scss";
-@import "./components/cardCategory.scss";
-@import "./components/cardPopular.scss";
-@import "./components/socialCard.scss";
+@import "./pages/components/button.scss";
+@import "./pages/components/buttonChip.scss";
+@import "./pages/components/cardCategory.scss";
+@import "./pages/components/cardPopular.scss";
+@import "./pages/components/socialCard.scss";
 
 @import "./pages/login.scss";
 @import "./pages/home.scss";

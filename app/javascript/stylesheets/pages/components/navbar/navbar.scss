@@ -100,12 +100,13 @@
   }
 
   @include mappy-bp(large) {
-    position: relative;
+    display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     text-align: center;
-    left: 10%;
+    left: 0;
     flex-direction: row;
+    padding-right: 12%;
     top: 50%;
     transform: translate(0, -50%);
     height: auto;
