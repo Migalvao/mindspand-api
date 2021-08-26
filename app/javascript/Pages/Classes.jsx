@@ -12,8 +12,8 @@ const Classes = (props) => {
   const [classes, setClasses] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState("");
   const [skillFilter, setSkillFilter] = useState("");
-  const [difficultyFilter, setDifficultyFilter] =
-    useState("");
+  const [difficultyFilter, setDifficultyFilter] = useState("");
+  const dif = ["beginner", "intermediate", "advanced"];
 
   const updateCategory = (category) => {
     if (category.id) {
@@ -71,35 +71,11 @@ const Classes = (props) => {
       });
   };
 
-  const addDifficultyButtons = () => {
-    const buttons = [
-      <ButtonFilter
-        props={{
-          onClick: { setDifficultyFilter },
-          params: "beginner",
-        }}
-      >
-        Beginner
-      </ButtonFilter>,
-      <ButtonFilter
-        props={{
-          onClick: { setDifficultyFilter },
-          params: "intermediate",
-        }}
-      >
-        Intermediate
-      </ButtonFilter>,
-      <ButtonFilter
-        props={{
-          onClick: { setDifficultyFilter },
-          params: "advanced",
-        }}
-      >
-        Advanced
-      </ButtonFilter>,
-    ];
-
-    return buttons;
+  const updateDif = (difficulty) => {
+    if (difficulty.id) setDifficultyFilter(difficulty.id);
+    else {
+      setDifficultyFilter("");
+    }
   };
 
   const skillsPopup = (skills) => {
@@ -138,10 +114,7 @@ const Classes = (props) => {
   return (
     <Layout current_user={props.current_user}>
       <div className="filter-wrapper">
-        <ButtonFilter
-          onClick={updateCategory}
-          id={categoryFilter}
-        >
+        <ButtonFilter onClick={updateCategory} id={categoryFilter}>
           All categories
         </ButtonFilter>
         {categories.map((c, index) => {
@@ -159,14 +132,18 @@ const Classes = (props) => {
         })}
       </div>
       <div className="filter-wrapper">
-        <ButtonFilter
-          props={{
-            onClick: setDifficultyFilter,
-          }}
-        >
-          All
-        </ButtonFilter>
-        {addDifficultyButtons()}
+        {dif.map((d, index) => {
+          return (
+            <ButtonFilter
+              key={index}
+              onClick={updateDif}
+              params={{ id: d }}
+              id={difficultyFilter}
+            >
+              {d.charAt(0).toUpperCase() + d.slice(1)}
+            </ButtonFilter>
+          );
+        })}
       </div>
       <div>
         {classes.map((c) => {
