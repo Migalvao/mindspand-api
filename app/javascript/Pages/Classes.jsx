@@ -145,10 +145,12 @@ const Classes = (props) => {
           );
         })}
       </div>
-      <div>
-        {classes.map((c, index) => {
-          return <CardClasses classesData={c} key={index} />;
-        })}
+      <div className="classes">
+        <div className="classes-wrapper">
+          {classes.map((c, index) => {
+            return <CardClasses classesData={c} key={index} />;
+          })}
+        </div>
       </div>
       {skills.length ? (
         <div>
