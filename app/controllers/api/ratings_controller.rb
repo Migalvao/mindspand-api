@@ -32,6 +32,8 @@ module Api
 
     def check_connection
       @connection = Connection.find_by(id: params[:id])
+      
+      return render_json_400('Connection with that id does not exist') unless @connection
 
       if @connection.in_progress?
         render_json_400("Class can't be rated because it's still in progess")

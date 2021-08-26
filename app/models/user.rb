@@ -21,13 +21,11 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  unless Rails.env.test?
-    has_one_attached :avatar
+  has_one_attached :avatar
 
-    attr_accessor :avatar
+  attr_accessor :avatar
 
-    mount_uploader :avatar, AvatarUploader
-  end
+  mount_uploader :avatar, AvatarUploader
 
   validates :name, presence: true
   validates :username, presence: true, uniqueness: true
