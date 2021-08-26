@@ -34,9 +34,6 @@
     transform: translate(25%, 80%);
     margin-top: 0;
   }
-  @include mappy-bp(large) {
-    margin-top: 2%;
-  }
 }
 
 .navbar-menu-icons {
@@ -84,49 +81,58 @@
 
 .nav-menu {
   display: flex;
-  align-items: center;
-  justify-content: center;
   list-style: none;
-  text-align: center;
-  justify-content: end;
+  flex-direction: column;
+  width: 100%;
+  height: 45.9rem;
+  position: absolute;
+  top: 4.9rem;
+  left: -100%;
+  opacity: 1;
+  transition: all 0.5s ease;
 
-  @include mappy-bp(small) {
-    flex-direction: column;
-    width: 100%;
-    height: 45.9rem;
-    position: absolute;
-    top: 4.9rem;
-    left: -100%;
+  &.active {
+    background: $primary-color;
+    left: 0;
     opacity: 1;
-    transition: all 0.5s ease;
+    transition: all 0.6s ease;
+    z-index: 1;
+  }
 
-    &.active {
-      background: $primary-color;
-      left: 0;
-      opacity: 1;
-      transition: all 0.6s ease;
-      z-index: 1;
-    }
+  @include mappy-bp(large) {
+    position: relative;
+    align-items: center;
+    justify-content: end;
+    text-align: center;
+    left: 10%;
+    flex-direction: row;
+    top: 50%;
+    transform: translate(0, -50%);
+    height: auto;
   }
 }
+
 .nav-btn-lang-group {
   display: table;
   left: 0;
 
-  @include mappy-bp(small large) {
+  @include mappy-bp(small) {
     padding-top: 2rem;
+    padding-left: 2rem;
+  }
+  @include mappy-bp(large) {
+    padding-top: 0;
   }
 
   .nav-btn-lang {
     background: none;
     color: $white-color;
     border: none;
-    padding: 0.2rem;
     cursor: pointer;
     outline: inherit;
 
     @include mappy-bp(small) {
-      padding: 0 0.5rem;
+      padding-right: 0.5rem;
     }
     @include mappy-bp(large) {
       padding: 0.2rem;
@@ -135,18 +141,19 @@
 }
 
 .nav-item {
-  height: 5rem;
-  border-bottom: 2px solid transparent;
+  width: 100%;
 
   &:hover {
-    border-bottom: 4px solid $white-color;
+    border: none;
   }
 
-  @include mappy-bp(small) {
-    width: 100%;
+  @include mappy-bp(large) {
+    width: auto;
+    height: 5rem;
+    border-bottom: 2px solid transparent;
 
     &:hover {
-      border: none;
+      border-bottom: 4px solid $white-color;
     }
   }
 }
@@ -155,31 +162,31 @@
   align-items: center;
   text-decoration: none;
   height: 100%;
+  text-align: left;
+  padding: 2rem;
+  width: 100%;
+  display: table;
+  font-size: 1.3rem;
 
-  @include mappy-bp(small) {
-    text-align: left;
-    padding: 2rem;
-    width: 100%;
-    display: table;
-    font-size: 1.3rem;
+  @include mappy-bp(small large) {
+    &:hover {
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
   }
 
   @include mappy-bp(large) {
     display: flex;
+    text-align: center;
+    align-items: center;
     padding: 0.5rem 2rem;
-  }
-
-  &:hover {
-    font-weight: 600;
-    transition: all 0.3s ease;
   }
 }
 
 .logout {
-  padding: 0.5rem 2rem;
-
-  @include mappy-bp(small) {
-    width: 100%;
+  @include mappy-bp(large) {
+    height: 5rem;
+    padding-left: 1rem;
   }
 
   .btn-logout {
@@ -194,6 +201,12 @@
       padding: 2rem 2rem 2rem 0;
       display: table;
       left: 0;
+    }
+    @include mappy-bp(small) {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      height: 5rem;
     }
   }
 }
