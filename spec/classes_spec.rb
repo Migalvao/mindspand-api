@@ -99,4 +99,37 @@ RSpec.describe 'Class', type: :request do
 
     end
 
+    describe 'editing a class' do
+        subject(:update_class) do
+            put update_class_path(user, skill_class), params: { title: 'Changed class'}
+            skill_class.reload
+        end
+
+        let!(:skill_class) { create_default_class }
+
+
+        it 'updates the class object' do
+
+            expect { update_class }.to change(skill_class, :title).to('Changed class')
+
+        end
+
+    end
+
+    describe 'deleting a class' do
+        subject(:update_class) do
+            delete delete_class_path(user, skill_class)
+            skill_class.reload
+        end
+
+        let!(:skill_class) { create_default_class }
+
+        it 'marks the class object as deleted' do
+            
+            expect { update_class }.to change(skill_class, :deleted).to(true)
+
+        end
+
+    end
+
 end
