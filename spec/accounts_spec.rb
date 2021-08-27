@@ -17,7 +17,7 @@ RSpec.describe 'Accounts', type: :request do
     describe 'fetching user classes' do
 
         subject(:get_user_classes) do
-            get get_user_classes_path(user.id)
+            get get_user_classes_path(user)
         end
 
         let!(:user) { create_default_user}
@@ -42,7 +42,7 @@ RSpec.describe 'Accounts', type: :request do
 
     describe 'accessing user profile' do
         subject(:get_profile) do
-            get get_profile_path(user.id)
+            get get_profile_path(user)
         end
 
         let!(:user) { create_default_user }
@@ -62,7 +62,7 @@ RSpec.describe 'Accounts', type: :request do
     describe 'updating user profile' do    
         subject(:update_profile) do
             default_login
-            put update_profile_path(user.id), params: { name: new_name }
+            put update_profile_path(user), params: { name: new_name }
             user.reload
         end
         
@@ -79,7 +79,7 @@ RSpec.describe 'Accounts', type: :request do
 
             it 'redirects to the profile' do
                 update_profile
-                expect(response).to redirect_to(get_profile_path(user.id))
+                expect(response).to redirect_to(get_profile_path(user))
             end
         end
     end

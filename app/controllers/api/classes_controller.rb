@@ -33,7 +33,6 @@ module Api
 
     def get_classes
       if @current_user
-        # TODO: filters
         classes = SkillClass.visible_to_all.where(class_params())
         classes = classes.as_json(
           only: %i[id title description no_classes class_duration method regime
