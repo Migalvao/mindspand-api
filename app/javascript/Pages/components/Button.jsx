@@ -1,5 +1,5 @@
 import React from "react";
-import "./Button.css";
+import PropTypes from "prop-types";
 
 const STYLES = ["btn--primary", "btn--outline"];
 
@@ -27,4 +27,12 @@ export const Button = ({
       {children}
     </button>
   );
+};
+
+Button.propTypes = {
+  children: PropTypes.string.isRequired,
+  type: PropTypes.object,
+  onClick: PropTypes.func,
+  buttonStyle: PropTypes.string,
+  buttonSize: PropTypes.string,
 };

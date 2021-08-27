@@ -32,17 +32,18 @@ module Api
     end
 
     def get_classes
-      if @current_user
-        classes = SkillClass.visible_to_all.where(class_params())
+      if params[:category_id] and ! params[:skill_id]
+            classes = SkillClass.visible_to_all.where(skill_id: Skill.where(category_id: params[:category_id])).where(class_params())
+        else
+            classes = SkillClass.visible_to_all.where(class_params())
+        end
+
         classes = classes.as_json(
-          only: %i[id title description no_classes class_duration method regime
-                   location], include: { skill: { only: %i[id name] }, teacher: { only: %i[id username name] } }
+          only: %i[id title description no_classes class_duration method regime difficulty
+                   location], include: { skill: { only: %i[id name] }, teacher: { only: %i[id username name avatar] } }
         )
         render(json: classes)
-      else
-        error = { "error": 'User must be authenticated' }
-        render(json: error, status: 401)
-      end
+     
     end
 
     def get_new_classes
@@ -51,7 +52,7 @@ module Api
         classes = SkillClass.visible_to_all.where("created_at >= ?", 1.week.ago).where(class_params())
         classes = classes.as_json(
           only: %i[id title description no_classes class_duration method regime
-                   location], include: { skill: { only: %i[id name] }, teacher: { only: %i[id username name] } }
+                   location], include: { skill: { only: %i[id name] }, teacher: { only: %i[id username name avatar] } }
         )
         render(json: classes)
       else
@@ -62,7 +63,6 @@ module Api
 
     def get_user_classes
       if @current_user
-
         classes = if @current_user.id == params[:id].to_i
                     # own classes, show all classes
                 classes = SkillClass.visible_to_own_user.where(teacher: params[:id])

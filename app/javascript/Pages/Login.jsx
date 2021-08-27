@@ -1,10 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
+import { Component } from "react";
+import PropTypes from "prop-types";
 import { Inertia } from "@inertiajs/inertia";
-import Navbar from "./components/Navbar/Navbar";
 import { Head, Link } from "@inertiajs/inertia-react";
-import "../stylesheets/login.css";
+import Navbar from "./components/Navbar/Navbar";
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { username: "", password: "" };
+  }
   render() {
     const ErrorMessage = () => {
       if (this.props.error) {
@@ -17,10 +22,10 @@ class Login extends Component {
       e.preventDefault();
 
       const data = {
-        username: username.value,
-        password: password.value,
+        username: this.state.username,
+        password: this.state.password,
       };
-
+      console.log(data);
       Inertia.post("/login", data, {
         headers: window.defaultHeaders,
       });
@@ -35,11 +40,11 @@ class Login extends Component {
           role="presentation"
           className="scene-1-login"
         />
-        <div className="login_content">
+        <div className="login-content">
           <Head title="Welcome" />
           <ErrorMessage />
           <h1 className="login-title">Log in to your account</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="login-form">
             <label htmlFor="username" aria-label="Inserir username ou email">
               <br />
               <input
@@ -48,6 +53,14 @@ class Login extends Component {
                 required
                 name="username"
                 placeholder="Username/Email"
+                className="login-input"
+                onChange={(e) => {
+                  this.setState({
+                    username: e.target.value,
+                    password: this.state.password,
+                  });
+                }}
+                value={this.state.username}
               />
             </label>
 
@@ -60,6 +73,14 @@ class Login extends Component {
                 id="password"
                 name="password"
                 placeholder="Password"
+                className="login-input"
+                onChange={(e) => {
+                  this.setState({
+                    username: this.state.username,
+                    password: e.target.value,
+                  });
+                }}
+                value={this.state.password}
               />
             </label>
 
@@ -69,12 +90,19 @@ class Login extends Component {
           </form>
           <br />
           <div className="to-signup">
-            Don't have an account yet? <Link href="/signup">Sign up</Link>
+            Don&apos;t have an account yet?
+            <Link href="/signup"> Sign up</Link>
           </div>
         </div>
       </main>
     );
   }
 }
+
+Login.propTypes = {
+  error: PropTypes.string,
+  username: PropTypes.object,
+  password: PropTypes.object,
+};
 
 export default Login;

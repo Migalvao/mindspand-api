@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "@inertiajs/inertia-react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import "./Navbar.css";
+import { MdNotifications } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 import { Button } from "../Button";
 
 function Navbar(props) {
+  const { i18n } = useTranslation();
+
   const [click, setClick] = useState(false);
   const [button] = useState(true);
 
@@ -15,7 +20,7 @@ function Navbar(props) {
 
   return (
     <div className="navbar">
-      <div className="navbar-container container">
+      <div className="navbar-container">
         <Link href="/home" className="navbar-logo">
           <img
             src={require("../../../images/logo_white.svg")}
@@ -24,12 +29,36 @@ function Navbar(props) {
           />
         </Link>
         {show ? (
-          <div className="menu-icon" onClick={handleClick}>
-            {click ? <FaTimes /> : <FaBars />}
+          <div className="navbar-menu-icons">
+            <div className="navbar-menu-icon-notification">
+              <MdNotifications />
+            </div>
+            <div className="navbar-menu-icon-burger" onClick={handleClick}>
+              {click ? <FaTimes /> : <FaBars />}
+            </div>
           </div>
         ) : null}
         {show ? (
           <ul className={click ? "nav-menu active" : "nav-menu"}>
+            <div className="nav-btn-lang-group">
+              <button
+                className="nav-btn-lang"
+                onClick={() => {
+                  i18n.changeLanguage("pt");
+                }}
+              >
+                PT
+              </button>
+              <button
+                className="nav-btn-lang"
+                onClick={() => {
+                  i18n.changeLanguage("en");
+                }}
+              >
+                EN
+              </button>
+            </div>
+
             <li className="nav-item">
               <Link href="/home" className="nav-links">
                 Homepage
@@ -87,4 +116,9 @@ function Navbar(props) {
     </div>
   );
 }
+
+Navbar.propTypes = {
+  current_user: PropTypes.object,
+};
+
 export default Navbar;

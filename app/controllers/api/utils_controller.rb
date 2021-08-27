@@ -4,7 +4,7 @@ module Api
   class UtilsController < ApiController
     # include AuthenticationConcern
 
-    def check_username
+  def check_username
       username = params['username']
 
       res = if User.where(username: username).exists?
@@ -17,7 +17,7 @@ module Api
     end
 
     def get_all_skills
-      categories = Category.all
+      categories = Category.all.order(:name)
       skills = categories.as_json(only: %i[id name color], include: { skills: { only: %i[id name] } })
 
       render(json: skills)

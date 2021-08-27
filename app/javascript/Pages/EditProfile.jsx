@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import Layout from "./Layout";
+import PropTypes from "prop-types";
 import { Link } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
+import Layout from "./Layout";
 
 export default function Profile(props) {
   const ErrorMessage = () => {
@@ -91,3 +92,8 @@ export default function Profile(props) {
     </Layout>
   );
 }
+
+Profile.propTypes = {
+  user: PropTypes.object.isRequired,
+  error: PropTypes.string,
+};
