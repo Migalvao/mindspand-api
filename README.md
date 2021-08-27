@@ -92,3 +92,11 @@ To setup the ImageKit remote storage, you'll also need to insert your public key
 ```bash
 IMAGEKIT_PRIV_KEY='your private key'
 ```
+
+## To Test
+
+Run, in the project's main directory,
+
+```bash
+bundle exec rspec
+```

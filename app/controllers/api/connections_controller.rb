@@ -95,6 +95,16 @@ module Api
               return render(json: error, status: 500)
             end
 
+            if @request.status_is_accepted?
+              #request was accepted so connection must be created
+              connection = Connection.new(match_id: @request.id)
+
+              if not connection.save
+                  error = {"error": connection.errors.full_messages}
+                  render(json: error, status: 500)
+                  return
+              end
+            end
           end
 
           res = { "request": @request.as_json(only: %i[id status]) }
