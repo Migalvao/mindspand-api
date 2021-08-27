@@ -12,19 +12,19 @@ const Classes = (props) => {
   const [skills, setSkills] = useState([]);
   const [classes, setClasses] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState("");
-  const [skillFilter, setSkillFilter] = useState("");
+  const [skillFilter, setSkillFilter] = useState({});
   const [difficultyFilter, setDifficultyFilter] = useState("");
   const dif = ["beginner", "intermediate", "advanced"];
 
   const updateCategory = (category) => {
     if (category.id) {
-      skillsPopup(category.skills);
+      setSkills(category.skills);
       setCategoryFilter(category.id);
     } else {
       setSkills([]);
       setCategoryFilter("");
     }
-    setSkillFilter("");
+    setSkillFilter({});
   };
 
   const fetchClasses = () => {
@@ -38,8 +38,8 @@ const Classes = (props) => {
       params.difficulty = difficultyFilter;
     }
 
-    if (skillFilter) {
-      params.skill_id = skillFilter;
+    if (skillFilter.id) {
+      params.skill_id = skillFilter.id;
     }
 
     let url = "/api/classes";
@@ -79,31 +79,6 @@ const Classes = (props) => {
     }
   };
 
-  const skillsPopup = (skills) => {
-    const components = skills.map((s, index) => (
-      <p
-        key={index}
-        onClick={() => {
-          setSkillFilter(s.id);
-          setSkills([]);
-        }}
-      >
-        {s.name}
-      </p>
-    ));
-    components.unshift(
-      <p
-        onClick={() => {
-          setSkillFilter("");
-          setSkills([]);
-        }}
-      >
-        All skills
-      </p>
-    );
-    setSkills(components);
-  };
-
   useEffect(() => {
     getCategoryButtons();
   }, []);
@@ -111,7 +86,6 @@ const Classes = (props) => {
   useEffect(() => {
     fetchClasses();
   }, [difficultyFilter, categoryFilter, skillFilter]);
-
   return (
     <Layout current_user={props.current_user}>
       <div className="filter-wrapper">
@@ -145,24 +119,50 @@ const Classes = (props) => {
           );
         })}
       </div>
+      <h1 className="home-title">{skillFilter.name}</h1>
       <div className="classes">
         <div className="classes-wrapper">
-          {classes.map((c, index) => {
-            return <CardClasses classesData={c} key={index} />;
-          })}
+          {classes.length ? (
+            classes.map((c, index) => {
+              return <CardClasses classesData={c} key={index} />;
+            })
+          ) : (
+            <h1 className="home-title">No classes found</h1>
+          )}
         </div>
       </div>
       {skills.length ? (
-        <div>
+        <div className="pop-up--skills">
           <div
-            // className="menu-icon"
+            className="pop-up--skills-exit"
             onClick={() => {
               setSkills([]);
             }}
           >
             <FaTimes />
           </div>
-          <ul>{skills}</ul>
+          <p
+            onClick={() => {
+              setSkillFilter({});
+              setSkills([]);
+            }}
+          >
+            All skills
+          </p>
+          {skills.map((s, index) => {
+            return (
+              <p
+                key={index}
+                onClick={() => {
+                  setSkillFilter({ id: s.id, name: s.name });
+                  setSkills([]);
+                }}
+              >
+                {s.name}
+              </p>
+            );
+          })}
+          ;
         </div>
       ) : null}
     </Layout>
