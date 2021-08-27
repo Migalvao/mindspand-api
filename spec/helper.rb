@@ -12,6 +12,13 @@ module Helper
         name: TEST_NAME
     }
 
+    SECOND_USER_DATA = { 
+        username: 'new_user', 
+        name: 'New User', 
+        email: 'new@whitesmith.co', 
+        password: 'password' 
+    }
+
     TEST_CLASS_DATA = { skill_id: 1, title: 'Example class', description: 'Very normal class.', 
         no_classes: 2, class_duration: 90, method: "asynchronous", 
         difficulty: "beginner", regime: "remote", teacher_id: 1}
