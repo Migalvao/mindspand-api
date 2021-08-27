@@ -1,5 +1,4 @@
 .card-classes {
-  width: 10.25rem;
   height: 16.88rem;
   display: flex;
   border-radius: 0.6rem;
@@ -8,6 +7,10 @@
   cursor: pointer;
   transition: all ease 200ms;
   position: relative;
+
+  @include mappy-bp(large) {
+    height: 21rem;
+  }
 }
 
 .card-class-img {
@@ -22,8 +25,7 @@
 
 .card-class-filter {
   background-color: rgba(37, 38, 54, 0.4);
-  min-width: 10.25rem;
-  height: 16.88rem;
+  width: 100%;
   border-radius: 0.6rem;
   position: relative;
 }

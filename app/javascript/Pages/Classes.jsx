@@ -18,7 +18,7 @@ const Classes = (props) => {
 
   const updateCategory = (category) => {
     if (category.id) {
-      setSkills(category.skills);
+      setSkills(skills);
       setCategoryFilter(category.id);
     } else {
       setSkills([]);
