@@ -11,18 +11,19 @@ const Classes = (props) => {
   const [categories, setCategories] = useState([]);
   const [skills, setSkills] = useState([]);
   const [classes, setClasses] = useState([]);
-  const [categoryFilter, setCategoryFilter] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState({ id: "" });
   const [skillFilter, setSkillFilter] = useState({});
   const [difficultyFilter, setDifficultyFilter] = useState("");
   const dif = ["beginner", "intermediate", "advanced"];
 
   const updateCategory = (category) => {
+    console.log(category);
     if (category.id) {
-      setSkills(skills);
-      setCategoryFilter(category.id);
+      setSkills(category.skills);
+      setCategoryFilter(category);
     } else {
       setSkills([]);
-      setCategoryFilter("");
+      setCategoryFilter({ id: "" });
     }
     setSkillFilter({});
   };
@@ -30,8 +31,8 @@ const Classes = (props) => {
   const fetchClasses = () => {
     const params = {};
 
-    if (categoryFilter) {
-      params.category_id = categoryFilter;
+    if (categoryFilter.id) {
+      params.category_id = categoryFilter.id;
     }
 
     if (difficultyFilter) {
@@ -86,10 +87,11 @@ const Classes = (props) => {
   useEffect(() => {
     fetchClasses();
   }, [difficultyFilter, categoryFilter, skillFilter]);
+
   return (
     <Layout current_user={props.current_user}>
       <div className="filter-wrapper">
-        <ButtonFilter onClick={updateCategory} id={categoryFilter}>
+        <ButtonFilter onClick={updateCategory} id={categoryFilter.id}>
           All categories
         </ButtonFilter>
         {categories.map((c, index) => {
@@ -98,7 +100,7 @@ const Classes = (props) => {
               key={index}
               onClick={updateCategory}
               params={c}
-              id={categoryFilter}
+              id={categoryFilter.id}
             >
               {c.name}
             </ButtonFilter>
@@ -132,7 +134,10 @@ const Classes = (props) => {
         </div>
       </div>
       {skills.length ? (
-        <div className="pop-up--skills">
+        <div
+          className="pop-up--skills"
+          style={{ "--colorCategory": `#${categoryFilter.color}` }}
+        >
           <div
             className="pop-up--skills-exit"
             onClick={() => {
@@ -141,28 +146,29 @@ const Classes = (props) => {
           >
             <FaTimes />
           </div>
-          <p
-            onClick={() => {
-              setSkillFilter({});
-              setSkills([]);
-            }}
-          >
-            All skills
-          </p>
-          {skills.map((s, index) => {
-            return (
-              <p
-                key={index}
-                onClick={() => {
-                  setSkillFilter({ id: s.id, name: s.name });
-                  setSkills([]);
-                }}
-              >
-                {s.name}
-              </p>
-            );
-          })}
-          ;
+          <div className="pop-up--skills-text">
+            <p
+              onClick={() => {
+                setSkillFilter({});
+                setSkills([]);
+              }}
+            >
+              All skills
+            </p>
+            {skills.map((s, index) => {
+              return (
+                <p
+                  key={index}
+                  onClick={() => {
+                    setSkillFilter({ id: s.id, name: s.name });
+                    setSkills([]);
+                  }}
+                >
+                  {s.name}
+                </p>
+              );
+            })}
+          </div>
         </div>
       ) : null}
     </Layout>

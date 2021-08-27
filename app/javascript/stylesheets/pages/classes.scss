@@ -15,21 +15,23 @@
 
 .pop-up--skills {
   //display: flex;
+  border-top: 0.313rem solid var(--colorCategory);
   background: $shadow-color;
   height: auto;
   width: 100%;
-  position: absolute;
+  position: fixed;
   opacity: 1;
-  transition: all 0.5s ease;
   bottom: 0;
-  transition: all 0.6s ease;
   z-index: 1;
 
   .pop-up--skills-exit {
-    margin: 0;
     position: relative;
-    text-align: right;
     float: right;
-    background: red;
+    margin-right: 1rem;
+    margin-top: 1rem;
+  }
+
+  .pop-up--skills-text {
+    padding-top: 5rem;
   }
 }
