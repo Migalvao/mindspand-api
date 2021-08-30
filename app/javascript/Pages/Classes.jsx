@@ -108,6 +108,9 @@ const Classes = (props) => {
         })}
       </div>
       <div className="filter-wrapper">
+        <ButtonFilter onClick={updateDif} id={difficultyFilter.id}>
+          All
+        </ButtonFilter>
         {dif.map((d, index) => {
           return (
             <ButtonFilter
@@ -121,15 +124,18 @@ const Classes = (props) => {
           );
         })}
       </div>
-      <h1 className="home-title">{skillFilter.name}</h1>
       <div className="classes">
+        <div className="classe-titles">
+          <h1 className="home-title">{skillFilter.name} &nbsp;</h1>
+          <h2 className="sub-title">{difficultyFilter}</h2>
+        </div>
         <div className="classes-wrapper">
           {classes.length ? (
             classes.map((c, index) => {
               return <CardClasses classesData={c} key={index} />;
             })
           ) : (
-            <h1 className="home-title">No classes found</h1>
+            <p className="no-classes">No classes found</p>
           )}
         </div>
       </div>
@@ -148,6 +154,7 @@ const Classes = (props) => {
           </div>
           <div className="pop-up--skills-text">
             <p
+              className="pop-up--skills-text-p"
               onClick={() => {
                 setSkillFilter({});
                 setSkills([]);
@@ -158,6 +165,7 @@ const Classes = (props) => {
             {skills.map((s, index) => {
               return (
                 <p
+                  className="pop-up--skills-text-p"
                   key={index}
                   onClick={() => {
                     setSkillFilter({ id: s.id, name: s.name });
