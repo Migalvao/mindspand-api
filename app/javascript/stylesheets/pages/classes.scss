@@ -35,11 +35,12 @@
   }
 
   .pop-up--skills-text {
-    padding: 3rem 0 1.5rem 1.875rem;
+    padding: 3rem 0 0.5rem 1.875rem;
     font-size: 1rem;
+    cursor: pointer;
 
     .pop-up--skills-text-p {
-      padding-bottom: 1.5rem;
+      padding-bottom: 1.3rem;
 
       &:active {
         font-weight: 600;
