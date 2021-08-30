@@ -108,7 +108,7 @@ const Classes = (props) => {
         })}
       </div>
       <div className="filter-wrapper">
-        <ButtonFilter onClick={updateDif} id={difficultyFilter.id}>
+        <ButtonFilter onClick={updateDif} id={difficultyFilter}>
           All
         </ButtonFilter>
         {dif.map((d, index) => {
@@ -126,7 +126,9 @@ const Classes = (props) => {
       </div>
       <div className="classes">
         <div className="classe-titles">
-          <h1 className="home-title">{skillFilter.name} &nbsp;</h1>
+          <h1 className="home-title">
+            {skillFilter.name ? skillFilter.name : "All skills"} &nbsp;
+          </h1>
           <h2 className="sub-title">{difficultyFilter}</h2>
         </div>
         <div className="classes-wrapper">
