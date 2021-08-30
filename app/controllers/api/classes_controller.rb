@@ -82,30 +82,6 @@ module Api
       end
     end
 
-    def get_single_class
-      if @current_user
-
-        c = SkillClass.visible_to_all.find_by(id: params[:id])
-
-        if c
-
-          class_json = c.as_json(
-            only: %i[id title description no_classes class_duration method regime
-                     location], include: { skill: { only: %i[id name] }, teacher: { only: %i[id username name] } }
-          )
-          render(json: class_json)
-        else
-
-          error = { "error": 'Class not found' }
-          render(json: error, status: 404)
-        end
-
-      else
-        error = { "error": 'User must be authenticated' }
-        render(json: error, status: 401)
-      end
-    end
-
     def update_class
 
         begin

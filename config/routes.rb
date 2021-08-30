@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   # Classes
   get '/api/classes', to: 'api/classes#get_classes', as: 'get_classes'
   get '/api/classes/new', to: 'api/classes#get_new_classes', as: 'get_new_classes'
-  get '/api/classes/:id', to: 'api/classes#get_single_class', as: 'get_single_class'
   post '/api/users/:id/classes', to: 'api/classes#post_class', as: 'post_class'
   get '/api/users/:id/classes', to: 'api/classes#get_user_classes', as: 'get_user_classes'
   put '/api/users/:id/classes/:class_id', to: 'api/classes#update_class', as: 'update_class'
@@ -46,6 +45,7 @@ Rails.application.routes.draw do
 
   # classes
   get '/classes', to: 'test#classes'
+  get '/classes/:id', to: 'test#get_single_class', as: 'get_single_class'
   
   # profile
   get '/users/:id', to: 'accounts#get_profile', as: 'get_profile' # Profile

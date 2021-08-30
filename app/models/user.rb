@@ -41,4 +41,17 @@ class User < ApplicationRecord
       DEFAULT_AVATAR_URL
     end
   end
+
+  def rating
+    student_reviews = Review.where(student_teacher: true,
+      connection_id: Connection.where(match_id: MatchRequest.where(student_id: id)))
+    teacher_reviews = Review.where(student_teacher: false,
+          connection_id: Connection.where(match_id: MatchRequest.where(skill_class_id: SkillClass.where(teacher_id: id))))
+
+    # student_reviews = Review.joins(connections: {matches: {student_id: id}})
+    # teacher_reviews = Review.joins(connections: {matches: {skill_classes: {teacher_id: id}}})
+
+    total_reviews = student_reviews.or(teacher_reviews)
+    avg_rating = total_reviews.average(:rating).to_f.round(1) # only one decimal case
+  end
 end
