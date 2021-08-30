@@ -11,8 +11,12 @@ const Classes = (props) => {
   const [categories, setCategories] = useState([]);
   const [skills, setSkills] = useState([]);
   const [classes, setClasses] = useState([]);
-  const [categoryFilter, setCategoryFilter] = useState({ id: "" });
-  const [skillFilter, setSkillFilter] = useState({});
+  const [categoryFilter, setCategoryFilter] = useState({
+    id: props.category_id ? props.category_id : "",
+  });
+  const [skillFilter, setSkillFilter] = useState({
+    id: props.skill_id ? props.skill_id : null,
+  });
   const [difficultyFilter, setDifficultyFilter] = useState("");
   const dif = ["beginner", "intermediate", "advanced"];
 
@@ -29,6 +33,7 @@ const Classes = (props) => {
   };
 
   const fetchClasses = () => {
+    console.log(categoryFilter, skillFilter);
     const params = {};
 
     if (categoryFilter.id) {
@@ -187,6 +192,8 @@ const Classes = (props) => {
 
 Classes.propTypes = {
   current_user: PropTypes.object.isRequired,
+  category_id: PropTypes.string,
+  skill_id: PropTypes.string,
 };
 
 export default Classes;

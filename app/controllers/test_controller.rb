@@ -13,7 +13,7 @@ class TestController < ApplicationController
 
   def classes
     if @current_user
-      render(inertia: 'Classes', props: { "current_user": @current_user.as_json })
+      render(inertia: 'Classes', props: { "current_user": @current_user.as_json, "category_id":params[:category_id], "skill_id":params[:skill_id]})
     else
       redirect_to '/login'
     end
