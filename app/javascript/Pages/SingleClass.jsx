@@ -84,7 +84,7 @@ const SingleClass = (props) => {
   return (
     <Layout current_user={props.current_user}>
       <div className="path-wrapper">
-        <Link rel="stylesheet" href="/home" className="path">
+        <Link href="/home" className="path">
           <img
             src={require("../images/logo_dark.svg")}
             alt="logo"
@@ -92,15 +92,15 @@ const SingleClass = (props) => {
           />
         </Link>
         <p className="path">&nbsp;/&nbsp;</p>
-        <Link rel="stylesheet" href={classes_url_category()} className="path">
+        <Link href={classes_url_category()} className="path">
           {props.class.skill.category.name}
         </Link>
         <p className="path">&nbsp;/&nbsp;</p>
-        <Link rel="stylesheet" href={classes_url_skill()} className="path">
+        <Link href={classes_url_skill()} className="path">
           {props.class.skill.name}
         </Link>
         <p className="path">&nbsp;/&nbsp;</p>
-        <Link rel="stylesheet" href="" className="path">
+        <Link href="" className="path">
           {props.class.teacher.name}
         </Link>
       </div>
@@ -158,9 +158,8 @@ const SingleClass = (props) => {
           </div>
         </div>
         <div className="class-details-sub">
-          {props.class.regime}
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          {props.class.method}
+          <div className="class-details-sub-regime">{props.class.regime}</div>
+          <div className="class-details-sub-method">{props.class.method}</div>
         </div>
         <div className="class-profile-info">
           <img
