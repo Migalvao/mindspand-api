@@ -201,7 +201,6 @@ const SingleClass = (props) => {
           ) : null}
         </div>
       </div>
-
       <div className={click == "review" ? "class-review" : "class-review off"}>
         <div className="class-review-header">
           <h1 className="home-title">What students think about this class?</h1>

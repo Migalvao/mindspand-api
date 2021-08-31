@@ -21,7 +21,6 @@ const Classes = (props) => {
   const dif = ["beginner", "intermediate", "advanced"];
 
   const updateCategory = (category) => {
-    console.log(category);
     if (category.id) {
       setSkills(category.skills);
       setCategoryFilter(category);
@@ -33,7 +32,6 @@ const Classes = (props) => {
   };
 
   const fetchClasses = () => {
-    console.log(categoryFilter, skillFilter);
     const params = {};
 
     if (categoryFilter.id) {
