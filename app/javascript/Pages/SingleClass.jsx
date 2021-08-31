@@ -6,9 +6,9 @@ import { Link } from "@inertiajs/inertia-react";
 import Layout from "./Layout";
 
 const SingleClass = (props) => {
-  const [click_about, setClickA] = useState(true);
+  const [click, setClick] = useState("about");
 
-  const handleClickA = () => setClickA(!click_about);
+  const handleClick = (newState) => setClick(newState);
   const avatar = (image) => {
     return `${image}?tr=w-60,h-60,r-max`;
   };
@@ -81,7 +81,6 @@ const SingleClass = (props) => {
     return `/classes?category_id=${props.class.skill.category.id}&skill_id=${props.class.skill.id}`;
   };
 
-  console.log("about:", click_about);
   return (
     <Layout current_user={props.current_user}>
       <div className="path-wrapper">
@@ -115,25 +114,36 @@ const SingleClass = (props) => {
       <div>
         <ul className="class-menu">
           <li
-            href=""
-            className={click_about ? "class-btn active" : "class-btn"}
-            onClick={handleClickA}
+            className={click == "about" ? "class-btn active" : "class-btn"}
+            onClick={() => handleClick("about")}
             style={{
               "--colorCategory": `#${props.class.skill.category.color}`,
             }}
           >
             About
           </li>
-          <li href="" className="class-btn" onClick={""}>
+          <li
+            className={click == "review" ? "class-btn active" : "class-btn"}
+            onClick={() => handleClick("review")}
+            style={{
+              "--colorCategory": `#${props.class.skill.category.color}`,
+            }}
+          >
             Review
           </li>
-          <li href="" className="class-btn" onClick={""}>
-            Coments
+          <li
+            className={click == "comments" ? "class-btn active" : "class-btn"}
+            onClick={() => handleClick("comments")}
+            style={{
+              "--colorCategory": `#${props.class.skill.category.color}`,
+            }}
+          >
+            Comments
           </li>
         </ul>
       </div>
 
-      <div className={click_about ? "class-about" : "class-about off"}>
+      <div className={click == "about" ? "class-about" : "class-about off"}>
         <div className="class-details">
           <p className="class-difficulty">{props.class.difficulty}</p>
           <div className="class-lessons">
@@ -183,7 +193,7 @@ const SingleClass = (props) => {
               {buttonState == "available"
                 ? "Ask for class"
                 : buttonState == "pending"
-                ? "Request sent!"
+                ? "Cancel Request"
                 : buttonState == "accepted"
                 ? "Connection open"
                 : "Loading..."}
