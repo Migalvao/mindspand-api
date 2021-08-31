@@ -41,7 +41,7 @@
 .class-btn {
   color: $dark-color;
   width: 100%;
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.375rem;
@@ -55,9 +55,6 @@
 
 .class-about {
   display: block;
-  @include mappy-bp(small) {
-    margin-left: 0.5rem;
-  }
   &.off {
     display: none;
   }
@@ -66,16 +63,107 @@
 .class-details {
   display: flex;
   justify-content: center;
-  text-align: center;
+  align-items: center;
   border-bottom: 0.1rem solid $shadow-color;
+  color: $dark-color;
 }
 
 .class-difficulty {
   text-transform: uppercase;
   font-size: 0.875rem;
   letter-spacing: 0.05rem;
+  width: 33%;
+  display: flex;
+  justify-content: center;
+}
+.class-lessons {
+  width: 33%;
+  padding: 1rem 0;
 }
 
-.text1 {
-  overflow-wrap: break-all;
+.class-time {
+  width: 33%;
+  padding: 1rem 0;
+}
+
+.class-details-title {
+  text-align: center;
+  font-size: 1.313rem;
+  line-height: 1.813rem;
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+}
+
+.class-details-subtitle {
+  text-align: center;
+  color: $gray-color;
+  font-size: 1rem;
+  line-height: 1.375rem;
+}
+
+.class-details-sub {
+  padding: 0.313rem 0;
+  margin-left: 1rem;
+  text-transform: uppercase;
+  border-bottom: 0.1rem solid $shadow-color;
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.05rem;
+}
+
+.class-profile-info {
+  border-bottom: 0.1rem solid $shadow-color;
+  display: flex;
+  padding: 0.75rem 0;
+  align-items: center;
+
+  &-avatar {
+    margin: 0 1rem;
+  }
+
+  &-text {
+    justify-content: center;
+    color: $dark-color;
+    font-weight: normal;
+    font-size: 0.875rem;
+    line-height: 1.188rem;
+  }
+}
+
+.class-about-text {
+  margin-left: 0.5rem;
+  padding-top: 1rem;
+  color: $dark-color;
+}
+
+.class-about-description {
+  margin-left: 0.5rem;
+  padding-top: 1rem;
+  font-weight: normal;
+  font-size: 0.875rem;
+  line-height: 1.188rem;
+}
+
+.background-btn {
+  border-top: 0.313rem solid $shadow-color;
+  position: fixed;
+  opacity: 1;
+  bottom: 0;
+  z-index: 1;
+  background-color: $white-color;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding: 1rem 3.325rem 3.125rem 3.325rem;
+}
+.btn-ask-class {
+  background-color: $primary-color;
+  color: $white-color;
+  border: none;
+  border-radius: 0.313rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  min-height: 3rem;
+  min-width: 20rem;
 }

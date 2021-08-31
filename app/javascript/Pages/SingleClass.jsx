@@ -143,36 +143,53 @@ const SingleClass = (props) => {
           <div className="class-time">
             <h1 className="class-details-title">
               {props.class.class_duration}
-            </h1>{" "}
-            <p className="class-details-subtitle">min Time p/ lesson</p>
+            </h1>
+            <p className="class-details-subtitle">Time p/lesson</p>
           </div>
         </div>
-        <div>
-          {props.class.regime} {props.class.method}
+        <div className="class-details-sub">
+          {props.class.regime}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          {props.class.method}
         </div>
-        <div>
-          <img src={avatar(props.class.teacher.avatar.url)} alt="Avatar" />
-          <p>{props.class.teacher.name}</p>
-          <p>Rating: {props.class.teacher.rating}</p>
+        <div className="class-profile-info">
+          <img
+            src={avatar(props.class.teacher.avatar.url)}
+            alt="Avatar"
+            className="class-profile-info-avatar"
+          />
+          <div className="class-profile-info-text">
+            <p className="class-profile-info-teacher-name">
+              {props.class.teacher.name}
+            </p>
+            <p className="class-profile-info-teacher-rating">
+              {props.class.teacher.rating} stars
+            </p>
+          </div>
         </div>
-        <div>
-          <h1>About this class</h1>
-          <div>{props.class.description}</div>
+        <div className="class-about-text">
+          <h1 className="home-title">About this class</h1>
+          <div className="class-about-description">
+            {props.class.description}
+          </div>
         </div>
-        {props.current_user.id != props.class.teacher.id ? (
-          <button
-            disabled={buttonState == "loading" || buttonState == "accepted"}
-            onClick={buttonOnClick}
-          >
-            {buttonState == "available"
-              ? "Ask for class"
-              : buttonState == "pending"
-              ? "Request sent!"
-              : buttonState == "accepted"
-              ? "Connection open"
-              : "Loading..."}
-          </button>
-        ) : null}
+        <div className="background-btn">
+          {props.current_user.id != props.class.teacher.id ? (
+            <button
+              className="btn-ask-class"
+              disabled={buttonState == "loading" || buttonState == "accepted"}
+              onClick={buttonOnClick}
+            >
+              {buttonState == "available"
+                ? "Ask for class"
+                : buttonState == "pending"
+                ? "Request sent!"
+                : buttonState == "accepted"
+                ? "Connection open"
+                : "Loading..."}
+            </button>
+          ) : null}
+        </div>
       </div>
     </Layout>
   );
