@@ -10,7 +10,7 @@ const SingleClass = (props) => {
 
   const handleClick = (newState) => setClick(newState);
   const avatar = (image) => {
-    return `${image}?tr=w-60,h-60,r-max`;
+    return `${image}?tr=,r-max`;
   };
 
   let requestInfo = props.request;
@@ -80,7 +80,7 @@ const SingleClass = (props) => {
   const classes_url_skill = () => {
     return `/classes?category_id=${props.class.skill.category.id}&skill_id=${props.class.skill.id}`;
   };
-
+  console.log(props);
   return (
     <Layout current_user={props.current_user}>
       <div className="path-wrapper">
@@ -193,12 +193,17 @@ const SingleClass = (props) => {
               {buttonState == "available"
                 ? "Ask for class"
                 : buttonState == "pending"
-                ? "Cancel Request"
+                ? "Cancel"
                 : buttonState == "accepted"
-                ? "Connection open"
+                ? "Connected"
                 : "Loading..."}
             </button>
           ) : null}
+        </div>
+      </div>
+      <div className={click == "review" ? "class-review" : "class-review off"}>
+        <div className="class-review-header">
+          <h1 className="home-title">What students think about this class?</h1>
         </div>
       </div>
     </Layout>

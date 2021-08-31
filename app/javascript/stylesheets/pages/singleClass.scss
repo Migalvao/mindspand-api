@@ -60,6 +60,13 @@
   }
 }
 
+.class-review {
+  display: block;
+  &.off {
+    display: none;
+  }
+}
+
 .class-details {
   display: flex;
   justify-content: center;
@@ -131,6 +138,17 @@
   }
 }
 
+.class-profile-info-avatar {
+  @include mappy-bp(small) {
+    width: 3.8rem;
+    height: 3.8rem;
+  }
+  @include mappy-bp(large) {
+    width: 5.8rem;
+    height: 5.8rem;
+  }
+}
+
 .class-about-text {
   margin-left: 0.5rem;
   padding-top: 1rem;
@@ -176,4 +194,12 @@
     width: 30rem;
     margin: 0 100rem;
   }
+}
+
+////////////////////////@include
+
+.class-review-header {
+  width: 70%;
+  margin-left: 0.5rem;
+  padding-top: 1.5rem;
 }
