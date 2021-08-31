@@ -80,7 +80,7 @@ const SingleClass = (props) => {
   const classes_url_skill = () => {
     return `/classes?category_id=${props.class.skill.category.id}&skill_id=${props.class.skill.id}`;
   };
-  console.log(props);
+
   return (
     <Layout current_user={props.current_user}>
       <div className="path-wrapper">
@@ -201,6 +201,7 @@ const SingleClass = (props) => {
           ) : null}
         </div>
       </div>
+
       <div className={click == "review" ? "class-review" : "class-review off"}>
         <div className="class-review-header">
           <h1 className="home-title">What students think about this class?</h1>

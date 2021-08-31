@@ -194,6 +194,10 @@
     width: 30rem;
     margin: 0 100rem;
   }
+
+  &:disabled {
+    background-color: $gray-color;
+  }
 }
 
 ////////////////////////@include
