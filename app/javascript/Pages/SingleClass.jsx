@@ -26,9 +26,7 @@ const SingleClass = (props) => {
       status: "cancelled",
       headers: window.defaultHeaders,
      })
-     .then((response) => {
-      console.log(response.data);
-
+     .then(() => {
       setButtonState("available");
      })
      .catch((error) => {

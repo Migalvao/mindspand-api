@@ -95,6 +95,8 @@ module Api
               return render(json: error, status: 500)
             end
 
+            own_notification = Notification.find_by(match_id: @request.id, person_id: @current_user.id, notification_type: "received_request")
+
             if @request.status_is_accepted?
               #request was accepted so connection must be created
               connection = Connection.new(match_id: @request.id)
@@ -104,6 +106,16 @@ module Api
                   render(json: error, status: 500)
                   return
               end
+
+              # We need to mark the own user's notification as read, should there be one
+              if own_notification and ! own_notification.update(read: true)
+                  return render_json_500(own_notification.errors.full_messages)
+              end
+            
+            else
+              # request was refused so we delete the notification
+              own_notification.destroy
+
             end
           end
 
@@ -154,11 +166,11 @@ module Api
           if @is_student
             # create notification for the teacher
             notification = Notification.new({ text: text, notification_type: 'connection_closed',
-                                              match_id: @connection.match_id, person_id: @connection.match.student_id })
+                                              match_id: @connection.match_id, person_id: skill_class.teacher_id })
           else
             # create notification for the student
             notification = Notification.new({ text: text, notification_type: 'connection_closed',
-                                              match_id: @connection.match_id, person_id: skill_class.teacher_id })
+                                              match_id: @connection.match_id, person_id: @connection.match.student_id })
           end
 
           unless notification.save
@@ -179,20 +191,26 @@ module Api
     end
 
     def get_notifications
-      @unread_notifications = Notification.where(person_id: @current_user.id, read: false).order(created_at: :desc)
-      u_n_json = @unread_notifications.as_json(only: %i[id text notification_type created_at],
-                                               include: { match: {
-                                                 only: %i[id student_id
-                                                          status], include: { connection: { only: %i[id class_status] } }
-                                               } })
-      read_notifications = Notification.where(person_id: @current_user.id, read: true).order(created_at: :desc).as_json(
-        only: %i[id text notification_type
-                 created_at], include: { match: { only: %i[id student_id status], include: { connection: { only: %i[id class_status] } } } }
-      )
+      request_notifications = Notification.where(person_id: @current_user.id, notification_type: "received_request", read: false).order(created_at: :desc)
+      requests_json = request_notifications.as_json(only: %i[id text notification_type created_at],
+                                              include: { match: {
+                                                only: %i[id status], include: { connection: { only: %i[id class_status] } , student: { only: %i[id avatar] } }
+                                              } })
+  
+      other_notifications = Notification.where(person_id: @current_user.id).where.not(notification_type: "received_request")
+      past_request_notifications = Notification.where(person_id: @current_user.id, notification_type: "received_request", read: true)
+  
+      regular_notifications = other_notifications.or(past_request_notifications).order(created_at: :desc).as_json(
+          only: %i[id text notification_type
+                  created_at], include: { match: { only: %i[id student_id status], include: { connection: { only: %i[id class_status person_closed_connection] }, 
+                                                                                            student: { only: %i[id avatar] }, 
+                                                                                            skill_class: { include: { teacher: {only: %i[id avatar] } } }
+                                                                                            } } }
+        )
+  
+      notifications = { "regular": regular_notifications, "requests": requests_json }
 
-      notifications = { "read": read_notifications, "unread": u_n_json }
-
-      render(json: notifications)
+      render(json: {"notifications": notifications })
     end
 
     private
@@ -236,7 +254,7 @@ module Api
     private
     def update_unread_notifications
       # only informative notifications should be marked read
-      @unread_notifications.where(notification_type: %w[match_accepted match_denied]).update_all(read: true)
+      # @unread_notifications.where(notification_type: %w[match_accepted match_denied]).update_all(read: true)
     end
   end
 end

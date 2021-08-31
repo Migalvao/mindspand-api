@@ -33,18 +33,24 @@ class ConnectionsController < ApplicationController
   end
 
   def get_notifications
-    @unread_notifications = Notification.where(person_id: @current_user.id, read: false).order(created_at: :desc)
-    u_n_json = @unread_notifications.as_json(only: %i[id text notification_type created_at],
-                                             include: { match: {
-                                               only: %i[id student_id
-                                                        status], include: { connection: { only: %i[id class_status] } }
-                                             } })
-    read_notifications = Notification.where(person_id: @current_user.id, read: true).order(created_at: :desc).as_json(
-      only: %i[id text notification_type
-               created_at], include: { match: { only: %i[id student_id status], include: { connection: { only: %i[id class_status] } } } }
-    )
+    request_notifications = Notification.where(person_id: @current_user.id, notification_type: "received_request", read: false).order(created_at: :desc)
+    requests_json = request_notifications.as_json(only: %i[id text notification_type created_at],
+                                            include: { match: {
+                                              only: %i[id status], include: { connection: { only: %i[id class_status] } , student: { only: %i[id avatar] } }
+                                            } })
 
-    notifications = { "read": read_notifications, "unread": u_n_json }
+    other_notifications = Notification.where(person_id: @current_user.id).where.not(notification_type: "received_request")
+    past_request_notifications = Notification.where(person_id: @current_user.id, notification_type: "received_request", read: true)
+
+    regular_notifications = other_notifications.or(past_request_notifications).order(created_at: :desc).as_json(
+        only: %i[id text notification_type
+                created_at], include: { match: { only: %i[id student_id status], include: { connection: { only: %i[id class_status person_closed_connection] }, 
+                                                                                          student: { only: %i[id avatar] }, 
+                                                                                          skill_class: { include: { teacher: {only: %i[id avatar] } } }
+                                                                                          } } }
+      )
+
+    notifications = { "regular": regular_notifications, "requests": requests_json }
     user_json = @current_user.as_json(only: %i[id name username])
 
     render(inertia: 'Notifications', props: { "current_user": user_json, "notifications": notifications })
@@ -54,6 +60,6 @@ class ConnectionsController < ApplicationController
 
   def update_unread_notifications
     # only informative notifications should be marked read
-    @unread_notifications.where(notification_type: %w[match_accepted match_denied]).update_all(read: true)
+    # @unread_notifications.where(notification_type: %w[match_accepted match_denied]).update_all(read: true)
   end
 end
