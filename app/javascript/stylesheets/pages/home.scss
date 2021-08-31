@@ -3,7 +3,7 @@
       rgba(37, 38, 54, 0.2),
       rgba(37, 38, 54, 0.2)
     ),
-    url("./../images/banner.svg");
+    url("./../images/banner.png");
   background-position: left;
   background-repeat: no-repeat;
   background-size: cover;
@@ -33,7 +33,7 @@
 
   @include mappy-bp(small) {
     font-size: 1.313rem;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
   }
   @include mappy-bp(large) {
     font-size: 2rem;
@@ -42,7 +42,7 @@
 
 .new-classes {
   @include mappy-bp(small) {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     padding-top: 5rem;
   }
   @include mappy-bp(large) {
@@ -72,10 +72,9 @@
 }
 
 .categories {
-  @include mappy-bp(small) {
-    margin-left: 1rem;
-    padding-top: 5rem;
-  }
+  margin: 0 0.5rem;
+  padding-top: 5rem;
+
   @include mappy-bp(large) {
     margin-left: 9rem;
     padding-top: 7rem;
@@ -84,27 +83,21 @@
   .categories-wrapper {
     display: grid;
     grid-gap: 1rem;
-
-    @include mappy-bp(small) {
-      grid-template-columns: repeat(2, 10.25rem);
-      margin-top: 1rem;
-    }
+    grid-template-columns: repeat(2, 1fr);
+    margin: 1rem 0.5rem 0 0.5rem;
   }
 }
 
 .popular {
-  @include mappy-bp(small) {
-    margin-left: 0;
-    padding-top: 5rem;
-  }
+  margin: 0 0.5rem;
+  padding-top: 5rem;
+
   @include mappy-bp(large) {
     margin-left: 9rem;
     padding-top: 7rem;
   }
 
   .popular-wrapper {
-    @include mappy-bp(small) {
-      margin-left: 1rem;
-    }
+    margin: 0 0.5rem;
   }
 }

@@ -40,7 +40,7 @@ module Api
 
         classes = classes.as_json(
           only: %i[id title description no_classes class_duration method regime difficulty
-                   location], include: { skill: { only: %i[id name] }, teacher: { only: %i[id username name avatar] } }
+                   location], include: { skill: { only: %i[id name], include: { category: { only: %i[id name color] } } }, teacher: { only: %i[id username name avatar] } }
         )
         render(json: classes)
      
