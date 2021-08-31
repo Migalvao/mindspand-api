@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TestController < ApplicationController
+class GeneralController < ApplicationController
   include AuthenticationConcern
 
   def home
