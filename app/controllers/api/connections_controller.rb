@@ -30,7 +30,7 @@ module Api
 
         # create respective notification for the teacher
         data = { match_id: request.id, person_id: request.skill_class.teacher.id, notification_type: 'received_request',
-                 text: "New match request from #{@current_user.username} to class #{request.skill_class.title}" }
+                 text: "#{@current_user.username} wants to have a class with you!" }
         notification = Notification.new(data)
 
         if notification.save
@@ -83,9 +83,9 @@ module Api
             data = { match_id: @request.id, person_id: @request.student_id,
                      notification_type: @request.status_is_accepted? ? 'match_accepted' : 'match_denied',
                      text: if @request.status_is_accepted?
-                             "Match request to class #{@request.skill_class.title} accepted!"
+                             "#{@request.skill_class.teacher.username} accepted your request."
                            else
-                             "Match request to class #{@request.skill_class.title} denied."
+                             "#{@request.skill_class.teacher.username} refused your request."
                            end }
 
             notification = Notification.new(data)
@@ -157,19 +157,19 @@ module Api
           skill_class = @connection.match.skill_class
 
           text = if @connection.given?
-                   "Connection to class #{skill_class.title} was closed. Class was given"
+                   " ended the class!\nGive your feedback!"
                  else
-                   "Connection to class #{skill_class.title} was closed. Class was canceled"
+                   " ended the class!"
                  end
 
 
           if @is_student
             # create notification for the teacher
-            notification = Notification.new({ text: text, notification_type: 'connection_closed',
+            notification = Notification.new({ text: @connection.match.student.username + text, notification_type: 'connection_closed',
                                               match_id: @connection.match_id, person_id: skill_class.teacher_id })
           else
             # create notification for the student
-            notification = Notification.new({ text: text, notification_type: 'connection_closed',
+            notification = Notification.new({ text: skill_class.teacher.username + text, notification_type: 'connection_closed',
                                               match_id: @connection.match_id, person_id: @connection.match.student_id })
           end
 
@@ -204,7 +204,7 @@ module Api
           only: %i[id text notification_type
                   created_at], include: { match: { only: %i[id student_id status], include: { connection: { only: %i[id class_status person_closed_connection] }, 
                                                                                             student: { only: %i[id avatar] }, 
-                                                                                            skill_class: { include: { teacher: {only: %i[id avatar] } } }
+                                                                                            skill_class: { only: %i[title], include: { teacher: {only: %i[id avatar] } } }
                                                                                             } } }
         )
   

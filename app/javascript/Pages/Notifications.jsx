@@ -61,6 +61,7 @@ export default function Welcome(props) {
         src={avatar(notification.match.student.avatar.url)}
        />
        <p>{notification.text}</p>
+       <p>{notification.match.skill_class.title}</p>
        <button
         onClick={() =>
          requestOnClick(notification.match.id, "accepted")
@@ -96,6 +97,7 @@ export default function Welcome(props) {
        />
        ACCEPTED
        <p>{notification.text}</p>
+       <p>{notification.match.skill_class.title}</p>
        {notification.match.connection.class_status ==
        "in_progress" ? (
         <button

@@ -46,7 +46,7 @@ class ConnectionsController < ApplicationController
         only: %i[id text notification_type
                 created_at], include: { match: { only: %i[id student_id status], include: { connection: { only: %i[id class_status person_closed_connection] }, 
                                                                                           student: { only: %i[id avatar] }, 
-                                                                                          skill_class: { include: { teacher: {only: %i[id avatar] } } }
+                                                                                          skill_class: { only: %i[title], include: { teacher: {only: %i[id avatar] } } }
                                                                                           } } }
       )
 
