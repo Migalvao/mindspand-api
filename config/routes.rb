@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root "test#home"
+  root "general#home"
 
   ## API
   get '/api/username/:username', to: 'api/utils#check_username', as: 'check_username' # Check username
@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   # Classes
   get '/api/classes', to: 'api/classes#get_classes', as: 'get_classes'
   get '/api/classes/new', to: 'api/classes#get_new_classes', as: 'get_new_classes'
-  get '/api/classes/:id', to: 'api/classes#get_single_class', as: 'get_single_class'
   post '/api/users/:id/classes', to: 'api/classes#post_class', as: 'post_class'
   get '/api/users/:id/classes', to: 'api/classes#get_user_classes', as: 'get_user_classes'
   put '/api/users/:id/classes/:class_id', to: 'api/classes#update_class', as: 'update_class'
@@ -41,11 +40,12 @@ Rails.application.routes.draw do
   delete '/logout', to: 'accounts#logout', as: 'logout'
 
   # home
-  get '/', to: 'test#home', as: 'home'
-  get '/home', to: 'test#home'
+  get '/', to: 'general#home', as: 'home'
+  get '/home', to: 'general#home'
 
   # classes
-  get '/classes', to: 'test#classes'
+  get '/classes', to: 'general#classes'
+  get '/classes/:id', to: 'general#get_single_class', as: 'get_single_class'
   
   # profile
   get '/users/:id', to: 'accounts#get_profile', as: 'get_profile' # Profile

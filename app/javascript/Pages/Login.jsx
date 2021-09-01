@@ -25,7 +25,6 @@ class Login extends Component {
         username: this.state.username,
         password: this.state.password,
       };
-      console.log(data);
       Inertia.post("/login", data, {
         headers: window.defaultHeaders,
       });
