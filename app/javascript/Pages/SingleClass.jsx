@@ -195,8 +195,8 @@ const SingleClass = (props) => {
       {props.class.description}
      </div>
     </div>
-    <div className="background-btn">
-     {props.current_user.id != props.class.teacher.id ? (
+    {props.current_user.id != props.class.teacher.id ? (
+     <div className="background-btn">
       <button
        className="btn-ask-class"
        disabled={
@@ -213,8 +213,8 @@ const SingleClass = (props) => {
         ? "Connected"
         : "Loading..."}
       </button>
-     ) : null}
-    </div>
+     </div>
+    ) : null}
    </div>
    <div
     className={
