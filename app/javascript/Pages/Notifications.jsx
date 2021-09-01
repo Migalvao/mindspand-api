@@ -52,6 +52,7 @@ export default function Welcome(props) {
       <div className="notifications-requests">
         <h2 className="notifications-requests-title">Classes requests</h2>
         {notifications.requests.map((notification, index) => {
+          console.log(notification.match.student);
           return (
             <div key={index}>
               <div className="notifications-requests-profile-info">
@@ -60,6 +61,10 @@ export default function Welcome(props) {
                   className="notifications-requests-profile-info-avatar"
                 />
                 <p className="notifications-requests-profile-info-text">
+                  <span className="bold">
+                    {notification.match.student.username}
+                  </span>
+                  &nbsp;
                   {notification.text}
                 </p>
                 <p className="notifications-requests-profile-info-skill-name">
@@ -90,15 +95,18 @@ export default function Welcome(props) {
           console.log(notification);
           // There should be a "Talk" button if the connection is still in progress
           return (
-            <div key={index}>
+            <div key={index} className="notifications-talk">
               <img
+                className="notifications-talk-avatar"
                 src={avatar(notification.match.skill_class.teacher.avatar.url)}
               />
-              ACCEPTED
-              <p>{notification.text}</p>
-              <p>{notification.match.skill_class.title}</p>
+              <p className="notifications-talk-text">{notification.text}</p>
+              <p className="notifications-talk-skill-name">
+                {notification.match.skill_class.title}
+              </p>
               {notification.match.connection.class_status == "in_progress" ? (
                 <button
+                  className="notifications-talk-btn"
                   onClick={() =>
                     Inertia.get(
                       `/connections/${notification.match.connection.id}`
@@ -140,18 +148,16 @@ export default function Welcome(props) {
         } else {
           // match_refused or previously accepted match, only text
           return (
-            <div key={index} className="notifications-requests-profile-info">
+            <div key={index} className="notifications-refused">
               <img
-                className="notifications-requests-profile-info-avatar"
+                className="notifications-refused-avatar"
                 src={avatar(
                   notification.notification_type == "match_denied"
                     ? notification.match.skill_class.teacher.avatar.url
                     : notification.match.student.avatar.url
                 )}
               />
-              <p className="notifications-requests-profile-info-text">
-                {notification.text}
-              </p>
+              <p className="notifications-refused-text">{notification.text}</p>
             </div>
           );
         }

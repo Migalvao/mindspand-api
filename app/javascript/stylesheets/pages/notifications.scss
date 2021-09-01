@@ -52,6 +52,10 @@
       line-height: 1rem;
       padding-left: 1rem;
       margin-top: 0.25rem;
+
+      .bold {
+        font-weight: 600;
+      }
     }
 
     &-skill-name {
@@ -94,6 +98,85 @@
         height: 1.875rem;
         width: 45%;
       }
+    }
+  }
+}
+
+.notifications-refused {
+  display: flex;
+  margin-top: 1rem;
+  padding-left: 1rem;
+  color: $dark-color;
+  align-items: center;
+
+  &-avatar {
+    @include mappy-bp(small) {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    @include mappy-bp(large) {
+      width: 5.8rem;
+      height: 5.8rem;
+    }
+  }
+
+  &-text {
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+.notifications-talk {
+  display: flex;
+  margin-top: 1rem;
+  padding-left: 1rem;
+  color: $dark-color;
+
+  &-avatar {
+    @include mappy-bp(small) {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    @include mappy-bp(large) {
+      width: 5.8rem;
+      height: 5.8rem;
+    }
+  }
+
+  &-text {
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    padding-left: 1rem;
+    margin-top: 0.25rem;
+  }
+
+  &-skill-name {
+    margin-top: 1.3rem;
+    padding-left: 3.5rem;
+    position: absolute;
+    color: $gray-color;
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  &-btn {
+    border: none;
+    cursor: pointer;
+    border-radius: 0.3rem;
+    font-weight: 500;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    background-color: $white-color;
+    color: $dark-color;
+
+    @include mappy-bp(small) {
+      justify-content: flex-end;
+      height: 1.875rem;
+      width: 25%;
     }
   }
 }

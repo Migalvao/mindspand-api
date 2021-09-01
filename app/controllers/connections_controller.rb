@@ -36,7 +36,7 @@ class ConnectionsController < ApplicationController
     request_notifications = Notification.where(person_id: @current_user.id, notification_type: "received_request", read: false).order(created_at: :desc)
     requests_json = request_notifications.as_json(only: %i[id text notification_type created_at],
                                                   include: { match: {
-                                                    only: %i[id status], include: { connection: { only: %i[id class_status] } , student: { only: %i[id avatar] },
+                                                    only: %i[id status], include: { connection: { only: %i[id class_status] } , student: { only: %i[id avatar username] },
                                                     skill_class: { only: %i[title], include: { teacher: {only: %i[id avatar] } } } }
                                                   } })
 
@@ -46,7 +46,7 @@ class ConnectionsController < ApplicationController
     regular_notifications = other_notifications.or(past_request_notifications).order(created_at: :desc).as_json(
         only: %i[id text notification_type
                 created_at], include: { match: { only: %i[id student_id status], include: { connection: { only: %i[id class_status person_closed_connection] }, 
-                                                                                          student: { only: %i[id avatar] }, 
+                                                                                          student: { only: %i[id avatar username] }, 
                                                                                           skill_class: { only: %i[title], include: { teacher: {only: %i[id avatar] } } }
                                                                                           } } }
       )
