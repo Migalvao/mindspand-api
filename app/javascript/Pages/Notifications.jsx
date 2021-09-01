@@ -35,30 +35,39 @@ export default function Welcome(props) {
   };
 
   const avatar = (image) => {
-    return `${image}?tr=w-60,h-60,r-max`;
+    return `${image}?tr=,r-max`;
   };
 
   return (
-    <main>
-      <div className="notifications-btn-back">
+    <main className="notifications">
+      <div className="notifications-header">
         <IoIosArrowBack
           onClick={() => {
             Inertia.get("/home");
           }}
         />
-        <h1>Activity</h1>
+        <h1 className="notifications-title">Activity</h1>
       </div>
 
-      <div>
-        <h2>Classes requests</h2>
+      <div className="notifications-requests">
+        <h2 className="notifications-requests-title">Classes requests</h2>
         {notifications.requests.map((notification, index) => {
-          console.log(notification);
           return (
             <div key={index}>
-              <img src={avatar(notification.match.student.avatar.url)} />
-              <p>{notification.text}</p>
-              <p>{notification.match.skill_class.title}</p>
+              <div className="notifications-requests-profile-info">
+                <img
+                  src={avatar(notification.match.student.avatar.url)}
+                  className="notifications-requests-profile-info-avatar"
+                />
+                <p className="notifications-requests-profile-info-text">
+                  {notification.text}
+                </p>
+                <p className="notifications-requests-profile-info-skill-name">
+                  {notification.match.skill_class.title}
+                </p>
+              </div>
               <button
+                className="notifications-requests-profile-info-btn-yes"
                 onClick={() =>
                   requestOnClick(notification.match.id, "accepted")
                 }
@@ -66,6 +75,7 @@ export default function Welcome(props) {
                 Confirm
               </button>
               <button
+                className="notifications-requests-profile-info-btn-no"
                 onClick={() => requestOnClick(notification.match.id, "refused")}
               >
                 Remove
@@ -75,7 +85,6 @@ export default function Welcome(props) {
         })}
       </div>
 
-      <p>_________________________</p>
       {notifications.regular.map((notification, index) => {
         if (notification.notification_type == "match_accepted") {
           console.log(notification);
@@ -131,15 +140,18 @@ export default function Welcome(props) {
         } else {
           // match_refused or previously accepted match, only text
           return (
-            <div key={index}>
+            <div key={index} className="notifications-requests-profile-info">
               <img
+                className="notifications-requests-profile-info-avatar"
                 src={avatar(
                   notification.notification_type == "match_denied"
                     ? notification.match.skill_class.teacher.avatar.url
                     : notification.match.student.avatar.url
                 )}
               />
-              <p>{notification.text}</p>
+              <p className="notifications-requests-profile-info-text">
+                {notification.text}
+              </p>
             </div>
           );
         }
