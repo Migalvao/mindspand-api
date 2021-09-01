@@ -18,6 +18,7 @@ function Navbar(props) {
  const closeMobileMenu = () => setClick(false);
 
  const show = props.current_user;
+ const profileUrl = `/users/${props.current_user.id}`;
 
  return (
   <div className="navbar">
@@ -78,12 +79,12 @@ function Navbar(props) {
        </Link>
       </li>
       <li className="nav-item">
-       <Link href="/" className="nav-links">
+       <Link href="/connections" className="nav-links">
         Messages
        </Link>
       </li>
       <li className="nav-item">
-       <Link href="/" className="nav-links">
+       <Link href={profileUrl} className="nav-links">
         Profile
        </Link>
       </li>
