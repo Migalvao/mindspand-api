@@ -35,9 +35,10 @@ class ConnectionsController < ApplicationController
   def get_notifications
     request_notifications = Notification.where(person_id: @current_user.id, notification_type: "received_request", read: false).order(created_at: :desc)
     requests_json = request_notifications.as_json(only: %i[id text notification_type created_at],
-                                            include: { match: {
-                                              only: %i[id status], include: { connection: { only: %i[id class_status] } , student: { only: %i[id avatar] } }
-                                            } })
+                                                  include: { match: {
+                                                    only: %i[id status], include: { connection: { only: %i[id class_status] } , student: { only: %i[id avatar] },
+                                                    skill_class: { only: %i[title], include: { teacher: {only: %i[id avatar] } } } }
+                                                  } })
 
     other_notifications = Notification.where(person_id: @current_user.id).where.not(notification_type: "received_request")
     past_request_notifications = Notification.where(person_id: @current_user.id, notification_type: "received_request", read: true)

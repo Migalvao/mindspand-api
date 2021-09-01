@@ -108,7 +108,7 @@ module Api
               end
 
               # We need to mark the own user's notification as read, should there be one
-              if own_notification and ! own_notification.update(read: true)
+              if own_notification and ! own_notification.update(read: true, text: "You accepted #{@request.student.username} request")
                   return render_json_500(own_notification.errors.full_messages)
               end
             
@@ -193,9 +193,10 @@ module Api
     def get_notifications
       request_notifications = Notification.where(person_id: @current_user.id, notification_type: "received_request", read: false).order(created_at: :desc)
       requests_json = request_notifications.as_json(only: %i[id text notification_type created_at],
-                                              include: { match: {
-                                                only: %i[id status], include: { connection: { only: %i[id class_status] } , student: { only: %i[id avatar] } }
-                                              } })
+                                                    include: { match: {
+                                                      only: %i[id status], include: { connection: { only: %i[id class_status] } , student: { only: %i[id avatar] },
+                                                      skill_class: { only: %i[title], include: { teacher: {only: %i[id avatar] } } } }
+                                                    } })
   
       other_notifications = Notification.where(person_id: @current_user.id).where.not(notification_type: "received_request")
       past_request_notifications = Notification.where(person_id: @current_user.id, notification_type: "received_request", read: true)
