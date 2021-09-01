@@ -1,4 +1,4 @@
-.scene-1-login {
+.scene-1 {
   position: absolute;
   display: flex;
   top: 8rem;
@@ -7,17 +7,17 @@
   z-index: -1;
 }
 
-.login-content {
+.auth-content {
   padding: 1.5rem;
   position: absolute;
   display: block;
   left: 50%;
   transform: translate(-50%, 0%);
-  top: 20rem;
+  margin-top: 15rem;
   width: 100%;
   text-align: center;
 }
-.login-title {
+.auth-title {
   font-weight: 600;
   font-size: 1.313rem;
   display: flex;
@@ -26,7 +26,7 @@
   justify-content: center;
 }
 
-.login-form {
+.auth-form {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
@@ -34,7 +34,7 @@
   height: auto;
   overflow: hidden;
 
-  .login-input {
+  .auth-input {
     float: left;
     clear: both;
     margin: 0.313rem 0;
@@ -53,7 +53,7 @@
     color: #aaaaaa;
   }
 
-  .login-btn {
+  .auth-btn {
     background-color: $primary-color;
     border-radius: 0.313rem;
     color: $white-color;

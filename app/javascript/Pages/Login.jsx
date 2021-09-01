@@ -38,13 +38,13 @@ class Login extends Component {
           src={require("../images/scene_1.svg")}
           alt=""
           role="presentation"
-          className="scene-1-login"
+          className="scene-1"
         />
-        <div className="login-content">
+        <div className="auth-content">
           <Head title="Welcome" />
           <ErrorMessage />
-          <h1 className="login-title">Log in to your account</h1>
-          <form onSubmit={handleSubmit} className="login-form">
+          <h1 className="auth-title">Log in to your account</h1>
+          <form onSubmit={handleSubmit} className="auth-form">
             <label htmlFor="username" aria-label="Inserir username ou email">
               <br />
               <input
@@ -53,7 +53,7 @@ class Login extends Component {
                 required
                 name="username"
                 placeholder="Username/Email"
-                className="login-input"
+                className="auth-input"
                 onChange={(e) => {
                   this.setState({
                     username: e.target.value,
@@ -73,7 +73,7 @@ class Login extends Component {
                 id="password"
                 name="password"
                 placeholder="Password"
-                className="login-input"
+                className="auth-input"
                 onChange={(e) => {
                   this.setState({
                     username: this.state.username,
@@ -86,7 +86,7 @@ class Login extends Component {
 
             <br />
 
-            <input type="submit" value="Log in" className="login-btn" />
+            <input type="submit" value="Log in" className="auth-btn" />
           </form>
           <br />
           <div className="to-signup">
