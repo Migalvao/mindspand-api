@@ -128,7 +128,7 @@ const SingleClass = (props) => {
        <li
         key={index}
         className={
-         click == elem ? "class-btn active" : "class-btn"
+         "class-btn" + (click == elem ? " active" : "")
         }
         onClick={() => handleClick(elem)}
         style={{
