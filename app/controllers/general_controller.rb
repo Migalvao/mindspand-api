@@ -2,7 +2,7 @@
 
 class GeneralController < ApplicationController
   include AuthenticationConcern
-  before_action :check_authenticated_user
+  before_action :check_authenticated_user, only: :get_single_class
 
   def home
     if @current_user

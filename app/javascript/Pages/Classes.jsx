@@ -12,7 +12,7 @@ const Classes = (props) => {
  const [skills, setSkills] = useState([]);
  const [classes, setClasses] = useState([]);
  const [categoryFilter, setCategoryFilter] = useState({
-  id: props.category_id,
+  id: props.category_id || "",
  });
  const [skillFilter, setSkillFilter] = useState({
   id: props.skill_id,
@@ -202,7 +202,6 @@ Classes.propTypes = {
 };
 
 Classes.defaultProps = {
- category_id: "",
  skill_id: null,
 };
 
