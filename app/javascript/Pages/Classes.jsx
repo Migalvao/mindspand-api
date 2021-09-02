@@ -146,20 +146,20 @@ const Classes = (props) => {
       </div>
       {skills.length ? (
         <div
-          className="pop-up--skills"
+          className="pop-up"
           style={{ "--colorCategory": `#${categoryFilter.color}` }}
         >
           <div
-            className="pop-up--skills-exit"
+            className="pop-up-exit"
             onClick={() => {
               setSkills([]);
             }}
           >
             <FaTimes />
           </div>
-          <div className="pop-up--skills-text">
+          <div className="pop-up-text">
             <p
-              className="pop-up--skills-text-p"
+              className="pop-up-text-p"
               onClick={() => {
                 setSkillFilter({});
                 setSkills([]);
@@ -170,7 +170,7 @@ const Classes = (props) => {
             {skills.map((s, index) => {
               return (
                 <p
-                  className="pop-up--skills-text-p"
+                  className="pop-up-text-p"
                   key={index}
                   onClick={() => {
                     setSkillFilter({ id: s.id, name: s.name });

@@ -8,7 +8,7 @@ import { FaTimes } from "react-icons/fa";
 
 export default function Welcome(props) {
   const avatar = (image) => {
-    return `${image}?tr=w-60,h-60,r-max`;
+    return `${image}?tr=,r-max`;
   };
 
   const endConnectionHandler = (connection_id) => {
@@ -43,48 +43,63 @@ export default function Welcome(props) {
 
   return (
     <Layout current_user={props.current_user}>
-      <h1>Connections</h1>
-      {props.connections.map((c, i) => {
-        return (
-          <div key={i}>
-            <img
-              src={avatar(otherUser(c).avatar.url)}
-              alt="Avatar_Other_User"
-            />
-            <p>{otherUser(c).name}</p>
-            <p>{otherUser(c).username}</p>
-            <button
-              onClick={() =>
-                setSelectedConnection({
-                  id: c.id,
-                  name: otherUser(c).name,
-                })
-              }
-            >
-              Bye!
-            </button>
-          </div>
-        );
-      })}
-
+      <div className="connections">
+        <h1 className="home-title">Connections</h1>
+        {props.connections.map((c, i) => {
+          return (
+            <div key={i} className="connections-card">
+              <img
+                className="connections-card-avatar"
+                src={avatar(otherUser(c).avatar.url)}
+                alt="Avatar_Other_User"
+              />
+              <p className="connections-card-username">
+                {otherUser(c).username}
+              </p>
+              <p className="connections-card-name">{otherUser(c).name}</p>
+              <button
+                className="connections-card-talk-btn"
+                onClick={() =>
+                  setSelectedConnection({
+                    id: c.id,
+                    name: otherUser(c).name,
+                  })
+                }
+              >
+                Bye!
+              </button>
+            </div>
+          );
+        })}
+      </div>
       {selectedConnection.id ? (
-        <div>
+        <div className="pop-up">
           <div
-            className="pop-up--skills-exit"
+            className="pop-up-exit"
             onClick={() => {
               setSelectedConnection({});
             }}
           >
             <FaTimes />
           </div>
-          <p>
-            Are you sure you want to end your connection with{" "}
-            {selectedConnection.name}?
+
+          <p className="pop-up-question">
+            Are you sure you want to end your connection with
+            <span className="bold"> {selectedConnection.name}</span>?
           </p>
-          <button onClick={() => endConnectionHandler(selectedConnection.id)}>
+
+          <button
+            className="pop-up-btn-end"
+            onClick={() => endConnectionHandler(selectedConnection.id)}
+          >
             End Connection
           </button>
-          <button onClick={() => setSelectedConnection({})}>Cancel</button>
+          <button
+            className="pop-up-btn-cancel"
+            onClick={() => setSelectedConnection({})}
+          >
+            Cancel
+          </button>
         </div>
       ) : null}
     </Layout>
