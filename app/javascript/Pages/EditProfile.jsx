@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
-import Layout from "./Layout";
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function Profile(props) {
   const ErrorMessage = () => {
@@ -37,9 +37,17 @@ export default function Profile(props) {
   };
 
   return (
-    <Layout current_user={props.user}>
+    <main className="edit-profile">
       <ErrorMessage />
-      <h1>Edit Profile</h1>
+      <div className="edit-profile-header">
+        <IoIosArrowBack
+          onClick={() => {
+            Inertia.get("/home");
+          }}
+        />
+        <h1 className="edit-profile-title">Edit Profile</h1>
+      </div>
+
       <p>Id: {props.user.id}</p>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>
@@ -89,7 +97,7 @@ export default function Profile(props) {
       >
         Cancel
       </Link>
-    </Layout>
+    </main>
   );
 }
 

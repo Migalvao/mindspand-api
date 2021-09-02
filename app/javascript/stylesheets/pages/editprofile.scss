@@ -1,0 +1,19 @@
+.edit-profile {
+  margin-top: 2rem;
+
+  &-header {
+    display: flex;
+    color: $dark-color;
+    align-items: center;
+    margin-left: 1rem;
+  }
+
+  &-title {
+    font-weight: 400;
+    font-size: 1.3rem;
+    line-height: 1.8rem;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
