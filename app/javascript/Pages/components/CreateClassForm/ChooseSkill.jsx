@@ -9,21 +9,34 @@ export default class ChooseSkill extends Component {
   this.handleChange = props.handleChange;
   this.nextStep = props.nextStep;
   this.previousStep = props.previousStep;
+
   this.state = {
    categories: [],
    skills: [],
-   skill: props.skill || {},
   };
  }
 
  componentDidMount() {
   // same as use effect
-  axios
-   .get("/api/skills")
-   .then((response) =>
-    this.setState({ categories: response.data })
-   );
+  axios.get("/api/skills").then((response) => {
+   const categories = response.data;
+   let skills = [];
+   if (this.props.skill.id) {
+    categories.forEach((c) => {
+     if (this.props.skill.category_id == c.id) {
+      skills = c.skills;
+      return;
+     }
+    });
+   }
+   this.setState({
+    categories: categories,
+    skills: skills,
+   });
+  });
  }
+
+ componentDidUpdate() {}
 
  render() {
   return (
@@ -38,13 +51,13 @@ export default class ChooseSkill extends Component {
        <ButtonFilter
         key={i}
         params={c}
-        onClick={(c) =>
-         this.setState({
-          skills: c.skills,
+        onClick={(c) => {
+         this.setState({ skills: c.skills });
+         this.handleChange({
           skill: { category_id: c.id },
-         })
-        }
-        id={this.state.skill.category_id}
+         });
+        }}
+        id={this.props.skill.category_id}
        >
         {c.name}
        </ButtonFilter>
@@ -58,18 +71,16 @@ export default class ChooseSkill extends Component {
       <div
        key={i}
        onClick={() =>
-        this.handleChange((state) => {
-         return {
-          skill: {
-           category_id: state.skill.category_id,
-           id: s.id,
-          },
-         };
+        this.handleChange({
+         skill: {
+          category_id: this.props.skill.category_id,
+          id: s.id,
+         },
         })
        }
       >
        {s.name +
-        (s.id == this.state.skill.id ? " SELECTED" : "")}
+        (s.id == this.props.skill.id ? " SELECTED" : "")}
       </div>
      );
     })}
@@ -83,5 +94,5 @@ ChooseSkill.propTypes = {
  handleChange: PropTypes.func.isRequired,
  previousStep: PropTypes.func.isRequired,
  nextStep: PropTypes.func.isRequired,
- skill: PropTypes.object,
+ skill: PropTypes.object.isRequired,
 };

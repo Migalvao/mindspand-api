@@ -12,8 +12,6 @@ export default class CreateClass extends Component {
  }
 
  render() {
-  console.log("SKILL");
-  console.log(this.state.skill);
   const nextStep = () => {
    this.setState((state) => {
     return { step: state.step + 1 };
@@ -38,7 +36,9 @@ export default class CreateClass extends Component {
        Inertia.get(`/users/${this.props.current_user.id}`);
       }}
       nextStep={nextStep}
-      handleChange={this.setState}
+      handleChange={(newState) => {
+       this.setState(newState);
+      }}
       skill={this.state.skill}
      />
     );
