@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
@@ -45,10 +46,10 @@ function Navbar(props) {
           </div>
         ) : null}
         {show ? (
-          <ul className={click ? "nav-menu active" : "nav-menu"}>
-            <div className="nav-btn-lang-group">
+          <ul className={click ? "navbar-menu active" : "navbar-menu"}>
+            <div className="navbar-btn-lang">
               <button
-                className="nav-btn-lang"
+                className="navbar-btn-lang-pten"
                 onClick={() => {
                   i18n.changeLanguage("pt");
                 }}
@@ -56,7 +57,7 @@ function Navbar(props) {
                 PT
               </button>
               <button
-                className="nav-btn-lang"
+                className="navbar-btn-lang-pten"
                 onClick={() => {
                   i18n.changeLanguage("en");
                 }}
@@ -65,23 +66,23 @@ function Navbar(props) {
               </button>
             </div>
 
-            <li className="nav-item">
-              <Link href="/home" className="nav-links">
+            <li className="navbar-item">
+              <Link href="/home" className="navbar-links">
                 Homepage
               </Link>
             </li>
-            <li className="nav-item">
-              <Link href="/classes" className="nav-links">
+            <li className="navbar-item">
+              <Link href="/classes" className="navbar-links">
                 Classes
               </Link>
             </li>
-            <li className="nav-item">
-              <Link href="/connections" className="nav-links">
+            <li className="navbar-item">
+              <Link href="/connections" className="navbar-links">
                 Messages
               </Link>
             </li>
-            <li className="nav-item">
-              <Link href={profileUrl} className="nav-links">
+            <li className="navbar-item">
+              <Link href={profileUrl} className="navbar-links">
                 Profile
               </Link>
             </li>

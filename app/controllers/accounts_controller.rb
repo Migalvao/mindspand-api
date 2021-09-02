@@ -17,8 +17,8 @@ class AccountsController < ApplicationController
       session['user_id'] = user.id
       redirect_to '/home'
     else
-      res = { 'errors' => user.errors }
-      render(json: res, status: 400)
+      res = { 'error': user.errors.full_messages }
+      render(inertia: 'Signup', props: res)
     end
   end
 

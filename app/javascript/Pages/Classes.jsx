@@ -12,10 +12,11 @@ const Classes = (props) => {
  const [skills, setSkills] = useState([]);
  const [classes, setClasses] = useState([]);
  const [categoryFilter, setCategoryFilter] = useState({
-  id: props.category_id ? props.category_id : "",
+
+  id: props.category_id || "",
  });
  const [skillFilter, setSkillFilter] = useState({
-  id: props.skill_id ? props.skill_id : null,
+  id: props.skill_id,
  });
  const [difficultyFilter, setDifficultyFilter] =
   useState("");
@@ -151,22 +152,28 @@ const Classes = (props) => {
    </div>
    {skills.length ? (
     <div
+
      className="pop-up"
+
      style={{
       "--colorCategory": `#${categoryFilter.color}`,
      }}
     >
      <div
+
       className="pop-up-exit"
+
       onClick={() => {
        setSkills([]);
       }}
      >
       <FaTimes />
      </div>
+
      <div className="pop-up-text">
       <p
        className="pop-up-text-p"
+
        onClick={() => {
         setSkillFilter({});
         setSkills([]);
@@ -177,7 +184,9 @@ const Classes = (props) => {
       {skills.map((s, index) => {
        return (
         <p
+
          className="pop-up-text-p"
+
          key={index}
          onClick={() => {
           setSkillFilter({ id: s.id, name: s.name });
@@ -199,6 +208,12 @@ Classes.propTypes = {
  current_user: PropTypes.object.isRequired,
  category_id: PropTypes.string,
  skill_id: PropTypes.string,
+
+};
+
+Classes.defaultProps = {
+ skill_id: null,
+
 };
 
 export default Classes;
