@@ -25,8 +25,6 @@ class UserNotifications < ApplicationService
         )
   
       notifications = { "regular": regular_notifications, "requests": requests_json }
-
-      notifications = { "regular": regular_notifications, "requests": requests_json }
     end
   end
   
