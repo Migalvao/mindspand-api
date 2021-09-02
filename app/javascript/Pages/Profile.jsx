@@ -21,8 +21,6 @@ export default function Profile(props) {
 
   return (
     <Layout current_user={props.user}>
-      {/* <Head title="Welcome" /> */}
-      <h1>Profile</h1>
       <p>Id: {props.user.id}</p>
       <p>Name: {props.user.name}</p>
       <p>Username: {props.user.username}</p>
