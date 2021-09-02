@@ -29,8 +29,12 @@ export default function Welcome(props) {
       .catch((error) => alert(error.response.data.error));
   };
 
-  const reviewOnClick = () => {
-    alert("Review connection!");
+  const reviewOnClick = (notification) => {
+    if (
+      notification.match.connection.class_status == "given" &&
+      !notification.read
+    )
+      alert("Review connection!");
   };
 
   const avatar = (image) => {
@@ -121,12 +125,7 @@ export default function Welcome(props) {
             <div
               className="notifications-end"
               key={index}
-              onClick={
-                notification.match.connection.class_status == "given" &&
-                !notification.read
-                  ? () => reviewOnClick()
-                  : null
-              }
+              onClick={() => reviewOnClick(notification)}
             >
               <img
                 className="notifications-end-avatar"
