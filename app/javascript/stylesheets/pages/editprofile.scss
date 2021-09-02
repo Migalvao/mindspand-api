@@ -17,3 +17,20 @@
     transform: translate(-50%, 0);
   }
 }
+
+.edit-profile-avatar {
+  &-img {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin-top: 2rem;
+    @include mappy-bp(small) {
+      width: 10rem;
+      height: 10rem;
+    }
+  }
+
+  &-form-input {
+    display: block;
+  }
+}

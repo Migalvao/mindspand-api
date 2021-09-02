@@ -22,9 +22,13 @@ export default function Profile(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    Inertia.put("/users/" + props.user.id, values, {
+    Inertia.put("/users/" + props.user.id + "/avatar", values, state, {
       headers: window.defaultHeaders,
     });
+  };
+
+  const avatar = (image) => {
+    return `${image}?tr=,r-max`;
   };
 
   const handleChange = (e) => {
@@ -36,19 +40,46 @@ export default function Profile(props) {
     }));
   };
 
+  const state = { avatar: null };
+
+  const onImageChange = (event) => {
+    state.avatar = event.target.files[0];
+  };
+
   return (
     <main className="edit-profile">
       <ErrorMessage />
       <div className="edit-profile-header">
         <IoIosArrowBack
           onClick={() => {
-            Inertia.get("/home");
+            Inertia.get("/users");
           }}
         />
         <h1 className="edit-profile-title">Edit Profile</h1>
       </div>
 
-      <p>Id: {props.user.id}</p>
+      <div className="edit-profile-avatar">
+        <img
+          src={avatar(props.user.avatar.url)}
+          alt="Avatar"
+          className="edit-profile-avatar-img"
+        />
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="image" className="edit-profile-avatar-form-label">
+            Change profile photo
+            <input
+              type="file"
+              name="avatar"
+              accept="image/*"
+              multiple={false}
+              onChange={onImageChange}
+              className="edit-profile-avatar-form-input"
+            />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+      {/*////////(((((((())))))))////////*/}
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>
         <br />
@@ -84,12 +115,6 @@ export default function Profile(props) {
         <br />
         <button type="submit">Save</button>
       </form>
-
-      {/* <p>Name: {props.user.name}</p>
-      <p>Username: {props.user.username}</p>
-      <p>Description: {props.user.description}</p> */}
-      {/* <p>Can edit?: {props.can_edit.toString()}</p> */}
-
       <Link
         href={"/users/" + props.user.id}
         headers={window.defaultHeaders}
