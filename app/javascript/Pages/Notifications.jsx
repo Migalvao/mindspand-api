@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { Inertia } from "@inertiajs/inertia";
 import { IoIosArrowBack } from "react-icons/io";
-// import { Head, Link } from "@inertiajs/inertia-react";
 import { useState } from "react";
 
 export default function Welcome(props) {
@@ -64,7 +63,6 @@ export default function Welcome(props) {
                   <span className="bold">
                     {notification.match.student.username}
                   </span>
-                  &nbsp;
                   {notification.text}
                 </p>
                 <p className="notifications-requests-profile-info-skill-name">
