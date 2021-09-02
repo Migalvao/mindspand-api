@@ -18,7 +18,9 @@ function Navbar(props) {
  const closeMobileMenu = () => setClick(false);
 
  const show = props.current_user;
- const profileUrl = `/users/${props.current_user.id}`;
+ const profileUrl = show
+  ? `/users/${props.current_user.id}`
+  : "/home";
 
  return (
   <div className="navbar">
