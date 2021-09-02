@@ -99,7 +99,7 @@ export default function Welcome(props) {
                 alt="Avatar"
               />
               <p className="notifications-talk-text">{notification.text}</p>
-              <p className="notifications-talk-skill-name">
+              <p className="notifications-talk-class-name">
                 {notification.match.skill_class.title}
               </p>
               {notification.match.connection.class_status == "in_progress" ? (
@@ -119,6 +119,7 @@ export default function Welcome(props) {
         } else if (notification.notification_type == "connection_closed") {
           return (
             <div
+              className="notifications-end"
               key={index}
               onClick={
                 notification.match.connection.class_status == "given" &&
@@ -127,24 +128,23 @@ export default function Welcome(props) {
                   : null
               }
             >
-              {notification.match.connection.person_closed_connection ==
-              "student_closed" ? (
-                <img
-                  src={avatar(notification.match.student.avatar.url)}
-                  alt="Avatar"
-                />
-              ) : (
-                <img
-                  src={avatar(
-                    notification.match.skill_class.teacher.avatar.url
-                  )}
-                  alt="Avatar"
-                />
-              )}
-              {notification.match.connection.class_status == "given"
-                ? "CLASS GIVEN:"
-                : "CLASS CANCELLED"}
-              <p>{notification.text}</p>
+              <img
+                className="notifications-end-avatar"
+                alt="Avatar"
+                src={avatar(
+                  notification.match.connection.person_closed_connection ==
+                    "student_closed"
+                    ? notification.match.student.avatar.url
+                    : notification.match.skill_class.teacher.avatar.url
+                )}
+              />
+
+              <div className="notifications-end-state">
+                {notification.match.connection.class_status == "given"
+                  ? "Class given"
+                  : "Class canceled"}
+              </div>
+              <p className="notifications-end-text">{notification.text}</p>
             </div>
           );
         } else {

@@ -155,7 +155,7 @@
     margin-top: 0.25rem;
   }
 
-  &-skill-name {
+  &-class-name {
     margin-top: 1.3rem;
     padding-left: 3.5rem;
     position: absolute;
@@ -180,5 +180,41 @@
       height: 1.875rem;
       width: 25%;
     }
+  }
+}
+
+.notifications-end {
+  display: flex;
+  margin-top: 1rem;
+  padding-left: 1rem;
+  color: $dark-color;
+
+  &-avatar {
+    @include mappy-bp(small) {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    @include mappy-bp(large) {
+      width: 5.8rem;
+      height: 5.8rem;
+    }
+  }
+
+  &-state {
+    position: absolute;
+    color: $gray-color;
+    font-weight: 400;
+    font-size: 0.75rem;
+    padding-left: 3.5rem;
+    margin-top: 1.3rem;
+    line-height: 1rem;
+  }
+
+  &-text {
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    padding-left: 1rem;
+    margin-top: 0.25rem;
   }
 }
