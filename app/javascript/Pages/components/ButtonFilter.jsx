@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 
 class ButtonFilter extends Component {
  render() {
-  console.log(this.props.params.id, this.props.id);
   return (
    <div>
     <button

@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   # classes
   get '/classes', to: 'general#classes'
   get '/classes/:id', to: 'general#get_single_class', as: 'get_single_class'
+  get '/users/:id/classes/create', to: 'general#get_create_class', as: 'get_create_class'
   
   # profile
   get '/users/:id', to: 'accounts#get_profile', as: 'get_profile' # Profile
