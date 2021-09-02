@@ -26,7 +26,7 @@ export default function Profile(props) {
       {/* <Head title="Welcome" /> */}
       <h1>Upload Avatar</h1>
       <p>Current avatar:</p>
-      <img src={link} />
+      <img src={link} alt="Avatar" />
       <br />
       <form onSubmit={handleSubmit}>
         <label htmlFor="image">

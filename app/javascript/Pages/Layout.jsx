@@ -15,5 +15,5 @@ export default function Layout(props) {
 
 Layout.propTypes = {
   current_user: PropTypes.object.isRequired,
-  children: PropTypes.array,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 };

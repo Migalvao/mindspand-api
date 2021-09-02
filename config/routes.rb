@@ -54,6 +54,7 @@ Rails.application.routes.draw do
 
   # connections
   get '/connections', to: 'connections#get_connections', as: 'get_connections'
+  get '/connections/:id', to: 'connections#get_single_connection', as: 'get_single_connection'
 
   # notifications
   get '/notifications', to: 'connections#get_notifications', as: 'get_notifications'

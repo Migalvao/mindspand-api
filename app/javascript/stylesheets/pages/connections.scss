@@ -1,0 +1,64 @@
+.connections {
+  margin-top: 2rem;
+  margin-left: 0.5rem;
+}
+
+.connections-card {
+  display: flex;
+  margin-top: 1rem;
+  color: $dark-color;
+  margin-left: 0.5rem;
+
+  &-avatar {
+    @include mappy-bp(small) {
+      width: 3.75rem;
+      height: 3.75rem;
+    }
+    @include mappy-bp(large) {
+      width: 5.8rem;
+      height: 5.8rem;
+    }
+  }
+
+  &-username {
+    position: absolute;
+    color: $gray-color;
+    font-weight: 400;
+    font-size: 0.75rem;
+    padding-left: 4.7rem;
+    margin-top: 0.25rem;
+  }
+
+  &-name {
+    font-weight: 400;
+    font-size: 1rem;
+    padding-left: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  &-talk-btn {
+    position: absolute;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.3rem;
+    font-weight: 500;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    background-color: $white-color;
+    color: $dark-color;
+    border: 1px solid $dark-color;
+    border-radius: 0.313rem;
+
+    @include mappy-bp(small) {
+      height: 2.5rem;
+      width: 20%;
+      right: 1rem;
+      margin-top: 0.625rem;
+    }
+
+    &:focus {
+      background-color: $dark-color;
+      color: $white-color;
+    }
+  }
+}

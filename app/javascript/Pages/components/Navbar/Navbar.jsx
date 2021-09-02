@@ -7,6 +7,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import { Button } from "../Button";
+import { Inertia } from "@inertiajs/inertia";
 
 function Navbar(props) {
   const { i18n } = useTranslation();
@@ -18,6 +19,7 @@ function Navbar(props) {
   const closeMobileMenu = () => setClick(false);
 
   const show = props.current_user;
+  const profileUrl = show ? `/users/${props.current_user.id}` : "/home";
 
   return (
     <div className="navbar">
@@ -75,12 +77,12 @@ function Navbar(props) {
               </Link>
             </li>
             <li className="navbar-item">
-              <Link href="/" className="navbar-links">
+              <Link href="/connections" className="navbar-links">
                 Messages
               </Link>
             </li>
             <li className="navbar-item">
-              <Link href="/" className="navbar-links">
+              <Link href={profileUrl} className="navbar-links">
                 Profile
               </Link>
             </li>
@@ -101,21 +103,15 @@ function Navbar(props) {
 
       {!show ? (
         <div>
-          {button ? (
-            <Link href="login" className="btn-link">
-              <Button buttonStyle="btn--outline">Sign in</Button>
-            </Link>
-          ) : (
-            <Link href="/login" className="btn-link">
-              <Button
-                buttonStyle="btn--outline"
-                buttonSize="btn--mobile"
-                onClick={closeMobileMenu}
-              >
-                Sign in
-              </Button>
-            </Link>
-          )}
+          <Link href="/login" className="btn-link">
+            <Button
+              buttonStyle="btn--outline"
+              buttonSize="button ? '' : btn--mobile"
+              onClick={button ? null : closeMobileMenu}
+            >
+              Sign in
+            </Button>
+          </Link>
         </div>
       ) : null}
     </div>
