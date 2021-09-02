@@ -51,13 +51,13 @@ export default function Welcome(props) {
       <div className="notifications-requests">
         <h2 className="notifications-requests-title">Classes requests</h2>
         {notifications.requests.map((notification, index) => {
-          console.log(notification.match.student);
           return (
             <div key={index}>
               <div className="notifications-requests-profile-info">
                 <img
                   src={avatar(notification.match.student.avatar.url)}
                   className="notifications-requests-profile-info-avatar"
+                  alt="Avatar"
                 />
                 <p className="notifications-requests-profile-info-text">
                   <span className="bold">
@@ -90,13 +90,13 @@ export default function Welcome(props) {
 
       {notifications.regular.map((notification, index) => {
         if (notification.notification_type == "match_accepted") {
-          console.log(notification);
           // There should be a "Talk" button if the connection is still in progress
           return (
             <div key={index} className="notifications-talk">
               <img
                 className="notifications-talk-avatar"
                 src={avatar(notification.match.skill_class.teacher.avatar.url)}
+                alt="Avatar"
               />
               <p className="notifications-talk-text">{notification.text}</p>
               <p className="notifications-talk-skill-name">
@@ -129,12 +129,16 @@ export default function Welcome(props) {
             >
               {notification.match.connection.person_closed_connection ==
               "student_closed" ? (
-                <img src={avatar(notification.match.student.avatar.url)} />
+                <img
+                  src={avatar(notification.match.student.avatar.url)}
+                  alt="Avatar"
+                />
               ) : (
                 <img
                   src={avatar(
                     notification.match.skill_class.teacher.avatar.url
                   )}
+                  alt="Avatar"
                 />
               )}
               {notification.match.connection.class_status == "given"
@@ -154,6 +158,7 @@ export default function Welcome(props) {
                     ? notification.match.skill_class.teacher.avatar.url
                     : notification.match.student.avatar.url
                 )}
+                alt="Avatar"
               />
               <p className="notifications-refused-text">{notification.text}</p>
             </div>

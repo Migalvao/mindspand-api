@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const CardClasses = ({ classesData }) => {
-  //console.log(classesData);
   const link = classesData.teacher.avatar.url + "?tr=w-250,h-300";
 
   return (

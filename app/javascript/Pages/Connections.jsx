@@ -47,7 +47,10 @@ export default function Welcome(props) {
       {props.connections.map((c, i) => {
         return (
           <div key={i}>
-            <img src={avatar(otherUser(c).avatar.url)} />
+            <img
+              src={avatar(otherUser(c).avatar.url)}
+              alt="Avatar_Other_User"
+            />
             <p>{otherUser(c).name}</p>
             <p>{otherUser(c).username}</p>
             <button

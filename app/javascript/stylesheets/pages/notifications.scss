@@ -34,71 +34,72 @@
   &-profile-info {
     display: flex;
     padding: 1rem 0;
+  }
 
-    &-avatar {
-      @include mappy-bp(small) {
-        width: 2.5rem;
-        height: 2.5rem;
-      }
-      @include mappy-bp(large) {
-        width: 5.8rem;
-        height: 5.8rem;
-      }
+  &-profile-info-avatar {
+    @include mappy-bp(small) {
+      width: 2.5rem;
+      height: 2.5rem;
     }
 
-    &-text {
-      font-weight: 400;
-      font-size: 0.75rem;
-      line-height: 1rem;
-      padding-left: 1rem;
-      margin-top: 0.25rem;
-
-      .bold {
-        font-weight: 600;
-        padding-right: 0.1rem;
-      }
+    @include mappy-bp(large) {
+      width: 5.8rem;
+      height: 5.8rem;
     }
+  }
 
-    &-skill-name {
-      margin-top: 1.3rem;
-      padding-left: 3.5rem;
-      position: absolute;
-      color: $gray-color;
-      font-weight: 400;
-      font-size: 0.75rem;
-      line-height: 1rem;
+  &-profile-info-text {
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    padding-left: 1rem;
+    margin-top: 0.25rem;
+
+    .bold {
+      font-weight: 600;
+      padding-right: 0.1rem;
     }
+  }
 
-    &-btn-yes {
-      border: none;
-      cursor: pointer;
-      border-radius: 0.3rem;
-      font-weight: 500;
-      font-size: 0.75rem;
-      line-height: 1rem;
-      background-color: $primary-color;
-      color: $white-color;
+  &-profile-info-skill-name {
+    margin-top: 1.3rem;
+    padding-left: 3.5rem;
+    position: absolute;
+    color: $gray-color;
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
 
-      @include mappy-bp(small) {
-        height: 1.875rem;
-        width: 45%;
-      }
+  &-profile-info-btn-yes {
+    border: none;
+    cursor: pointer;
+    border-radius: 0.3rem;
+    font-weight: 500;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    background-color: $primary-color;
+    color: $white-color;
+
+    @include mappy-bp(small) {
+      height: 1.875rem;
+      width: 45%;
     }
+  }
 
-    &-btn-no {
-      border: none;
-      cursor: pointer;
-      border-radius: 0.3rem;
-      font-weight: 500;
-      font-size: 0.75rem;
-      line-height: 1rem;
-      background-color: $white-color;
-      color: $dark-color;
+  &-profile-info-btn-no {
+    border: none;
+    cursor: pointer;
+    border-radius: 0.3rem;
+    font-weight: 500;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    background-color: $white-color;
+    color: $dark-color;
 
-      @include mappy-bp(small) {
-        height: 1.875rem;
-        width: 45%;
-      }
+    @include mappy-bp(small) {
+      height: 1.875rem;
+      width: 45%;
     }
   }
 }
