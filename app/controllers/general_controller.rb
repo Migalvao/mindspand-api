@@ -2,7 +2,7 @@
 
 class GeneralController < ApplicationController
   include AuthenticationConcern
-  before_action :check_authenticated_user, only: :get_single_class
+  before_action :check_authenticated_user, only: [:get_single_class, :get_create_class]
 
   def home
     if @current_user
@@ -51,5 +51,9 @@ class GeneralController < ApplicationController
       error = { "error": 'Class not found' }
       render(inertia: 'NotFound', status: 404)
     end
+  end
+
+  def get_create_class
+    render(inertia: 'CreateClass', props: { "current_user": @current_user.as_json })
   end
 end
