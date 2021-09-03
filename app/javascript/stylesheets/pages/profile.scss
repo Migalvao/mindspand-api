@@ -21,6 +21,7 @@
     margin-left: 6.6rem;
     padding-bottom: 2.5rem;
   }
+
   &-name {
     font-weight: 400;
     font-size: 1rem;
@@ -69,6 +70,7 @@
     line-height: 1.375rem;
     cursor: pointer;
     border-bottom: 0.1rem solid $shadow-color;
+
     &.active {
       border-bottom: 0.3rem solid $secondary-color;
       font-weight: 600;
@@ -113,6 +115,7 @@
   border-radius: 1.25rem;
   border: 1px solid $secondary-color;
   white-space: nowrap;
+
   &.chip--active {
     background-color: $dark-color;
     color: $white-color;
