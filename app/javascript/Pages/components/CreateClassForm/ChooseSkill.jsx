@@ -11,6 +11,7 @@ export default class ChooseSkill extends Component {
   this.previousStep = props.previousStep;
 
   this.state = {
+   error: "",
    categories: [],
    skills: [],
   };
@@ -75,6 +76,7 @@ export default class ChooseSkill extends Component {
          skill: {
           category_id: this.props.skill.category_id,
           id: s.id,
+          name: s.name,
          },
         })
        }
@@ -84,7 +86,16 @@ export default class ChooseSkill extends Component {
       </div>
      );
     })}
-    <div onClick={this.nextStep}>Next</div>
+    <br />
+    <p>{this.state.error}</p>
+    <div
+     onClick={() => {
+      if (this.props.skill.id) this.nextStep();
+      else this.setState({ error: "Skill is mandatory" });
+     }}
+    >
+     Next
+    </div>
    </div>
   );
  }

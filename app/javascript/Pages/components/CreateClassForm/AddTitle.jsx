@@ -7,6 +7,7 @@ export default class AddSkill extends Component {
   this.handleChange = props.handleChange;
   this.nextStep = props.nextStep;
   this.previousStep = props.previousStep;
+  this.state = { error: "" };
  }
 
  render() {
@@ -15,7 +16,7 @@ export default class AddSkill extends Component {
     <br />
     <br />
     <div onClick={this.previousStep}>Back</div>
-    AddSkill
+    <h1>Add title</h1>
     <label htmlFor="text" aria-label="Inserir titulo">
      <br />
      <input
@@ -33,7 +34,15 @@ export default class AddSkill extends Component {
       value={this.props.title}
      />
     </label>
-    <div onClick={this.nextStep}>Next</div>
+    <p>{this.state.error}</p>
+    <div
+     onClick={() => {
+      if (this.props.title) this.nextStep();
+      else this.setState({ error: "Title is mandatory" });
+     }}
+    >
+     Next
+    </div>
    </div>
   );
  }

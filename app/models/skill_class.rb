@@ -50,10 +50,16 @@ class SkillClass < ApplicationRecord
     hybrid: 2
   }
 
-  validates :title, :no_classes, :class_duration, :method, :difficulty, :regime, presence: true
+  validates :title, :no_classes, :class_duration, :difficulty, :regime, presence: true
   validates :location, presence: true, unless: :method_is_remote?
+  validates :method, presence: true, unless: :regime_is_physical?
 
   def method_is_remote?
     regime == :remote.to_s
   end
+
+  def regime_is_physical?
+    regime == :physical.to_s
+  end
+
 end
