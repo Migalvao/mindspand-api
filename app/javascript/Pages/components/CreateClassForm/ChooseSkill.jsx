@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
-import React, { Component } from "react";
 import axios from "axios";
+import React, { Component } from "react";
+import { IoIosArrowBack } from "react-icons/io";
 import ButtonFilter from "../ButtonFilter";
 
 export default class ChooseSkill extends Component {
@@ -41,59 +42,67 @@ export default class ChooseSkill extends Component {
 
   render() {
     return (
-      <main>
-        <br />
-        <br />
-        <div onClick={this.previousStep}>Back</div>
-        Choose Skill
-        {this.state.categories.length ? (
-          this.state.categories.map((c, i) => {
+      <main className="choose-skill">
+        <div className="create-header">
+          <IoIosArrowBack onClick={this.previousStep} />
+          <h1 className="create-title">Add skill</h1>
+          <h1 className="create-tip">Choose one skill at time.</h1>
+        </div>
+        <div className="choose-skill-filter-wrapper">
+          {this.state.categories.length ? (
+            this.state.categories.map((c, i) => {
+              return (
+                <ButtonFilter
+                  key={i}
+                  params={c}
+                  onClick={(c) => {
+                    this.setState({ skills: c.skills });
+                    this.handleChange({
+                      skill: { category_id: c.id },
+                    });
+                  }}
+                  id={this.props.skill.category_id}
+                >
+                  {c.name}
+                </ButtonFilter>
+              );
+            })
+          ) : (
+            <p>Loading...</p>
+          )}
+        </div>
+        <div className="choose-skill-wrapper">
+          {this.state.skills.map((s, i) => {
             return (
-              <ButtonFilter
+              <div
+                className="choose-skill-name"
                 key={i}
-                params={c}
-                onClick={(c) => {
-                  this.setState({ skills: c.skills });
+                onClick={() =>
                   this.handleChange({
-                    skill: { category_id: c.id },
-                  });
-                }}
-                id={this.props.skill.category_id}
+                    skill: {
+                      category_id: this.props.skill.category_id,
+                      id: s.id,
+                      name: s.name,
+                    },
+                  })
+                }
               >
-                {c.name}
-              </ButtonFilter>
+                {s.name + (s.id == this.props.skill.id ? " SELECTED" : "")}
+              </div>
             );
-          })
-        ) : (
-          <p>Loading...</p>
-        )}
-        {this.state.skills.map((s, i) => {
-          return (
-            <div
-              key={i}
-              onClick={() =>
-                this.handleChange({
-                  skill: {
-                    category_id: this.props.skill.category_id,
-                    id: s.id,
-                    name: s.name,
-                  },
-                })
-              }
-            >
-              {s.name + (s.id == this.props.skill.id ? " SELECTED" : "")}
-            </div>
-          );
-        })}
-        <br />
+          })}
+        </div>
         <p>{this.state.error}</p>
-        <div
-          onClick={() => {
-            if (this.props.skill.id) this.nextStep();
-            else this.setState({ error: "Skill is mandatory" });
-          }}
-        >
-          Next
+        <div className="background-btn">
+          <button
+            className="btn-ask-class"
+            onClick={() => {
+              if (this.props.skill.id) this.nextStep();
+              else this.setState({ error: "Skill is mandatory" });
+            }}
+          >
+            Choose
+          </button>
         </div>
       </main>
     );
