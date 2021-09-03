@@ -84,12 +84,12 @@ class AccountsController < ApplicationController
 
       if @current_user.id == user.id
         # own profile, can edit
-        user_json = user.as_json(only: %i[id name username email description])
+        user_json = user.as_json(only: %i[id name username email description avatar])
         render(inertia: 'EditProfile', props: { "user": user_json })
 
       else
         # not own profile, can't edit
-        user_json = user.as_json(only: %i[id name username description])
+        user_json = user.as_json(only: %i[id name username description avatar])
         res = { "can_edit": false, "user": user_json }
 
         redirect_to("/users/#{user.id}")
@@ -111,7 +111,7 @@ class AccountsController < ApplicationController
     rescue StandardError
     end
 
-    redirect_to "/users/#{@current_user.id}/avatar"
+    redirect_to "/users/#{@current_user.id}/edit"
   end
 
   def update_profile
