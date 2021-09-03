@@ -8,7 +8,7 @@ import ClassData from "./components/CreateClassForm/ClassData";
 export default class CreateClass extends Component {
  constructor(props) {
   super(props);
-  this.state = { skill: {}, step: 1 };
+  this.state = { step: 1, skill: {}, title: "" };
  }
 
  render() {
@@ -25,6 +25,8 @@ export default class CreateClass extends Component {
   };
 
   const createClass = () => {
+   console.log("CLASS DATA");
+   console.log(this.state);
    alert("Class Created");
   };
 
@@ -48,7 +50,10 @@ export default class CreateClass extends Component {
      <AddTitle
       previousStep={previousStep}
       nextStep={nextStep}
-      handleChange={this.setState}
+      handleChange={(newState) => {
+       this.setState(newState);
+      }}
+      title={this.state.title}
      />
     );
 
@@ -57,7 +62,9 @@ export default class CreateClass extends Component {
      <ClassData
       previousStep={previousStep}
       nextStep={createClass}
-      handleChange={this.setState}
+      handleChange={(newState) => {
+       this.setState(newState);
+      }}
      />
     );
 

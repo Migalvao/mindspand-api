@@ -15,7 +15,25 @@ export default class AddSkill extends Component {
     <br />
     <br />
     <div onClick={this.previousStep}>Back</div>
-    AddSkill<div onClick={this.nextStep}>Next</div>
+    AddSkill
+    <label htmlFor="text" aria-label="Inserir titulo">
+     <br />
+     <input
+      type="text"
+      id="title"
+      required
+      name="title"
+      placeholder="Title"
+      // className="login-input"
+      onChange={(e) => {
+       this.handleChange({
+        title: e.target.value,
+       });
+      }}
+      value={this.props.title}
+     />
+    </label>
+    <div onClick={this.nextStep}>Next</div>
    </div>
   );
  }
@@ -25,4 +43,5 @@ AddSkill.propTypes = {
  handleChange: PropTypes.func.isRequired,
  previousStep: PropTypes.func.isRequired,
  nextStep: PropTypes.func.isRequired,
+ title: PropTypes.string.isRequired,
 };
