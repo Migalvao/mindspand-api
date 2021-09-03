@@ -21,14 +21,17 @@ class ButtonFilter extends Component {
 }
 
 ButtonFilter.defaultProps = {
-  params: { id: "" },
+ params: { id: "" },
 };
 
 ButtonFilter.propTypes = {
-  params: PropTypes.object,
-  children: PropTypes.string,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onClick: PropTypes.func,
+ params: PropTypes.object,
+ children: PropTypes.string,
+ id: PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number,
+ ]),
+ onClick: PropTypes.func,
 };
 
 export default ButtonFilter;

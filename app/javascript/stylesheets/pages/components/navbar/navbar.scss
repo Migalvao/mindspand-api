@@ -1,5 +1,3 @@
-//////////////////////////////////////////////////////////////////////////
-//NAVBAR
 .navbar {
   background: $primary-color;
   height: 5rem;
@@ -10,168 +8,181 @@
   position: sticky;
   top: 0;
   z-index: 999;
-}
 
-.navbar-container {
-  display: flex;
-  justify-content: space-between;
-  height: 5rem;
-  z-index: 1;
-  width: 100%;
-  max-width: 81.25rem;
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 3.1rem;
-}
-
-.navbar-logo {
-  color: $white-color;
-  justify-self: start;
-  cursor: pointer;
-  @include mappy-bp(small) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(25%, 80%);
-    margin-top: 0;
-  }
-}
-
-.navbar-menu-icons {
-  color: $white-color;
-  @include mappy-bp(small) {
+  &-container {
     display: flex;
-    position: absolute;
-    top: 50%;
-    left: 90%;
-    transform: translate(-100%, -50%);
-    font-size: 1.8rem;
-    z-index: 1; //
+    justify-content: space-between;
+    height: 5rem;
+    z-index: 1;
+    width: 100%;
+    max-width: 81.25rem;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 3.1rem;
   }
-}
 
-.navbar-menu-icon-notification {
-  display: flex;
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  font-size: 1.8rem;
-  &:hover {
-    font-size: 2rem;
-    transition: all 0.2s ease-out;
-  }
-  @include mappy-bp(small) {
-    right: 3rem;
-  }
-  @include mappy-bp(large) {
-    right: 0;
-  }
-}
+  &-logo {
+    color: $white-color;
+    justify-self: start;
+    cursor: pointer;
 
-.navbar-menu-icon-burger {
-  @include mappy-bp(small) {
+    @include mappy-bp(small) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(25%, 80%);
+      margin-top: 0;
+    }
+  }
+
+  &-menu-icons {
+    color: $white-color;
+
+    @include mappy-bp(small) {
+      display: flex;
+      position: absolute;
+      top: 50%;
+      left: 90%;
+      transform: translate(-100%, -50%);
+      font-size: 1.8rem;
+      z-index: 1;
+    }
+  }
+
+  &-menu-icon-notification {
     display: flex;
     cursor: pointer;
-  }
-  @include mappy-bp(large) {
-    display: none;
-  }
-}
-
-.nav-menu {
-  display: flex;
-  list-style: none;
-  flex-direction: column;
-  width: 100%;
-  height: 45.9rem;
-  position: absolute;
-  top: 4.9rem;
-  left: -100%;
-  opacity: 1;
-  transition: all 0.5s ease;
-  &.active {
-    background: $primary-color;
-    left: 0;
-    opacity: 1;
-    transition: all 0.6s ease;
-    z-index: 1;
-  }
-  @include mappy-bp(large) {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    text-align: center;
-    left: 0;
-    flex-direction: row;
-    padding-right: 13%; //
+    position: absolute;
     top: 50%;
     transform: translate(0, -50%);
-    height: auto;
-  }
-}
-
-.nav-btn-lang-group {
-  display: table;
-  left: 0;
-  @include mappy-bp(small) {
-    padding-top: 2rem;
-    padding-left: 2rem;
-  }
-  @include mappy-bp(large) {
-    padding-top: 0;
-  }
-  .nav-btn-lang {
-    background: none;
-    color: $white-color;
-    border: none;
-    cursor: pointer;
-    outline: inherit;
+    font-size: 1.8rem;
+    &:hover {
+      font-size: 2rem;
+      transition: all 0.2s ease-out;
+    }
     @include mappy-bp(small) {
-      padding-right: 0.5rem;
+      right: 3rem;
     }
     @include mappy-bp(large) {
-      padding: 0.2rem;
+      right: 0;
     }
   }
-}
 
-.nav-item {
-  width: 100%;
-  &:hover {
-    border: none;
-  }
-  @include mappy-bp(large) {
-    width: auto;
-    height: 5rem;
-    border-bottom: 2px solid transparent;
-    &:hover {
-      border-bottom: 4px solid $white-color;
+  &-menu-icon-burger {
+    @include mappy-bp(small) {
+      display: flex;
+      cursor: pointer;
+    }
+    @include mappy-bp(large) {
+      display: none;
     }
   }
-}
 
-.nav-links {
-  color: $white-color;
-  align-items: center;
-  text-decoration: none;
-  height: 100%;
-  text-align: left;
-  padding: 2rem;
-  width: 100%;
-  display: table;
-  font-size: 1.3rem;
-  @include mappy-bp(small large) {
-    &:hover {
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-  }
-  @include mappy-bp(large) {
+  &-menu {
     display: flex;
-    text-align: center;
+    list-style: none;
+    flex-direction: column;
+    width: 100%;
+    height: 45.9rem;
+    position: absolute;
+    top: 4.9rem;
+    left: -100%;
+    opacity: 1;
+    transition: all 0.5s ease;
+
+    &.active {
+      background: $primary-color;
+      left: 0;
+      opacity: 1;
+      transition: all 0.6s ease;
+      z-index: 1;
+    }
+
+    @include mappy-bp(large) {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      text-align: center;
+      left: 0;
+      flex-direction: row;
+      padding-right: 13%; //
+      top: 50%;
+      transform: translate(0, -50%);
+      height: auto;
+    }
+  }
+
+  &-btn-lang {
+    display: table;
+    left: 0;
+
+    @include mappy-bp(small) {
+      padding-top: 2rem;
+      padding-left: 2rem;
+    }
+
+    @include mappy-bp(large) {
+      padding-top: 0;
+    }
+
+    &-pten {
+      background: none;
+      color: $white-color;
+      border: none;
+      cursor: pointer;
+      outline: inherit;
+
+      @include mappy-bp(small) {
+        padding-right: 0.5rem;
+      }
+
+      @include mappy-bp(large) {
+        padding: 0.2rem;
+      }
+    }
+  }
+
+  &-item {
+    width: 100%;
+
+    &:hover {
+      border: none;
+    }
+    @include mappy-bp(large) {
+      width: auto;
+      height: 5rem;
+      border-bottom: 2px solid transparent;
+
+      &:hover {
+        border-bottom: 4px solid $white-color;
+      }
+    }
+  }
+
+  &-links {
+    color: $white-color;
     align-items: center;
-    padding: 0.5rem 2rem;
+    text-decoration: none;
+    height: 100%;
+    text-align: left;
+    padding: 2rem;
+    width: 100%;
+    display: table;
+    font-size: 1.3rem;
+
+    @include mappy-bp(small large) {
+      &:hover {
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+    }
+
+    @include mappy-bp(large) {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      padding: 0.5rem 2rem;
+    }
   }
 }
 

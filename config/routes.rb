@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root "test#home"
+  root "general#home"
 
   ## API
   get '/api/username/:username', to: 'api/utils#check_username', as: 'check_username' # Check username
@@ -40,12 +40,12 @@ Rails.application.routes.draw do
   delete '/logout', to: 'accounts#logout', as: 'logout'
 
   # home
-  get '/', to: 'test#home', as: 'home'
-  get '/home', to: 'test#home'
+  get '/', to: 'general#home', as: 'home'
+  get '/home', to: 'general#home'
 
   # classes
-  get '/classes', to: 'test#classes'
-  get '/classes/:id', to: 'test#get_single_class', as: 'get_single_class'
+  get '/classes', to: 'general#classes'
+  get '/classes/:id', to: 'general#get_single_class', as: 'get_single_class'
   
   # profile
   get '/users/:id', to: 'accounts#get_profile', as: 'get_profile' # Profile
