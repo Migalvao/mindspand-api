@@ -80,6 +80,10 @@
   color: $dark-color;
   margin: 2rem 0.5rem 0 0.5rem;
 
+  &.off {
+    display: none;
+  }
+
   &-text {
     padding-top: 0.875rem;
     margin-left: 0.5rem;

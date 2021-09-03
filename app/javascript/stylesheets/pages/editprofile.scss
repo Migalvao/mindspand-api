@@ -19,18 +19,112 @@
 }
 
 .edit-profile-avatar {
+  margin-top: 2rem;
+
   &-img {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-    margin-top: 2rem;
     @include mappy-bp(small) {
       width: 10rem;
       height: 10rem;
     }
   }
 
+  &-form-label {
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding-top: 11.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.18rem;
+    text-align: center;
+    color: $dark-color;
+  }
+
   &-form-input {
-    display: block;
+    display: none;
+  }
+
+  &-form-submit {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin-top: 13.5rem;
+    border: none;
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.3rem;
+    position: absolute;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.18rem;
+    color: $white-color;
+    background-color: $secondary-color;
+  }
+}
+
+.form-2 {
+  //display: grid;
+  margin-top: 20rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  &-row:first-child {
+    border-top: 0.1rem solid $shadow-color;
+  }
+
+  &-row {
+    padding: 1rem 0;
+    border-bottom: 0.1rem solid $shadow-color;
+    position: relative;
+    width: 100%;
+    align-items: center;
+    display: flex;
+  }
+
+  &-label {
+    margin-left: 1rem;
+    display: inline-block;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.18rem;
+    color: $dark-color;
+    width: 30%;
+  }
+
+  &-input {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: left;
+    width: 60%;
+    color: $gray-color;
+
+    &:focus {
+      color: $dark-color;
+    }
+  }
+
+  &-text {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    resize: none;
+    cursor: pointer;
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: left;
+    width: 60%;
+    color: $gray-color;
+
+    &:focus {
+      color: $dark-color;
+    }
   }
 }

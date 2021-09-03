@@ -111,7 +111,7 @@ class AccountsController < ApplicationController
     rescue StandardError
     end
 
-    redirect_to "/users/#{@current_user.id}/avatar"
+    redirect_to "/users/#{@current_user.id}/edit"
   end
 
   def update_profile
