@@ -75,7 +75,10 @@ export default class ChooseSkill extends Component {
           {this.state.skills.map((s, i) => {
             return (
               <div
-                className="choose-skill-name"
+                className={
+                  "choose-skill-name" +
+                  (s.id == this.props.skill.id ? " active" : "")
+                }
                 key={i}
                 onClick={() =>
                   this.handleChange({
@@ -87,7 +90,7 @@ export default class ChooseSkill extends Component {
                   })
                 }
               >
-                {s.name + (s.id == this.props.skill.id ? " SELECTED" : "")}
+                {s.name}
               </div>
             );
           })}

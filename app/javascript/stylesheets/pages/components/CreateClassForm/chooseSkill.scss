@@ -45,6 +45,9 @@
   }
 }
 
+.choose-skill-wrapper {
+  padding-bottom: 10rem;
+}
 .choose-skill-name {
   color: $dark-color;
   font-weight: 400;
@@ -52,4 +55,8 @@
   line-height: 1.375rem;
   margin-left: 1rem;
   padding-bottom: 2rem;
+
+  &.active {
+    font-weight: 600;
+  }
 }
