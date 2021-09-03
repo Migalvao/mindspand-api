@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { Link } from "@inertiajs/inertia-react";
 import Layout from "./Layout";
+import { Inertia } from "@inertiajs/inertia";
 
 const SingleClass = (props) => {
   const [click, setClick] = useState("about");
@@ -163,7 +164,10 @@ const SingleClass = (props) => {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           {props.class.method}
         </div>
-        <div className="class-profile-info">
+        <div
+          className="class-profile-info"
+          onClick={() => Inertia.get(`/users/${props.class.teacher.id}`)}
+        >
           <img
             src={avatar(props.class.teacher.avatar.url)}
             alt="Avatar"

@@ -93,3 +93,28 @@
     line-height: 1.18rem;
   }
 }
+
+.profile-skills {
+  color: $dark-color;
+  margin: 2rem 1rem 0 1rem;
+
+  &.off {
+    display: none;
+  }
+}
+
+.btn-chip-profile {
+  text-decoration: none;
+  padding: 0.25rem 0.6rem;
+  color: $secondary-color;
+  font-size: 0.75rem;
+  background-color: $white-color;
+  cursor: pointer;
+  border-radius: 1.25rem;
+  border: 1px solid $secondary-color;
+  white-space: nowrap;
+  &.chip--active {
+    background-color: $dark-color;
+    color: $white-color;
+  }
+}
