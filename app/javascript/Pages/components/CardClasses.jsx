@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { Inertia } from "@inertiajs/inertia";
 
 const CardClasses = ({ classesData }) => {
- const link =
-  classesData.teacher.avatar.url + "?tr=w-250,h-300";
+
+  const link = classesData.teacher.avatar.url + "?tr=w-250,h-300";
+
 
  return (
   <div

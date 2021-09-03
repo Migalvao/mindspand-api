@@ -3,23 +3,21 @@ import { Component } from "react";
 import PropTypes from "prop-types";
 
 class ButtonFilter extends Component {
- render() {
-  return (
-   <div>
-    <button
-     onClick={() => this.props.onClick(this.props.params)}
-     key={this.key}
-     className={`btn-chip ${
-      this.props.params.id == this.props.id
-       ? "chip--active"
-       : ""
-     }`}
-    >
-     {this.props.children}
-    </button>
-   </div>
-  );
- }
+  render() {
+    return (
+      <div>
+        <button
+          onClick={() => this.props.onClick(this.props.params)}
+          key={this.key}
+          className={`btn-chip ${
+            this.props.params.id == this.props.id ? "chip--active" : ""
+          }`}
+        >
+          {this.props.children}
+        </button>
+      </div>
+    );
+  }
 }
 
 ButtonFilter.defaultProps = {
