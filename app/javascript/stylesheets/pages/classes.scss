@@ -1,23 +1,23 @@
 .classes {
   padding: 0.5rem;
   margin-top: 1.5rem;
-  .classes-wrapper {
-    padding-top: 1rem;
-    max-width: 1200px;
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(2, 1fr);
+}
+.classes-wrapper {
+  padding-top: 1rem;
+  max-width: 1200px;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
 
-    @include mappy-bp(large) {
-      grid-template-columns: repeat(4, 1fr);
-    }
+  @include mappy-bp(large) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
-.pop-up--skills {
+.pop-up {
   //display: flex;
   border-top: 0.625rem solid var(--colorCategory);
-  border-radius: 0.5rem 0.3rem 0 0;
+  border-radius: 0.5rem 0.5rem 0 0;
   color: $dark-color;
   background: $shadow-color;
   height: auto;
@@ -27,25 +27,69 @@
   bottom: 0;
   z-index: 1;
 
-  .pop-up--skills-exit {
+  &-exit {
     position: relative;
     float: right;
     margin-right: 1rem;
     margin-top: 1rem;
   }
 
-  .pop-up--skills-text {
+  &-text {
     padding: 3rem 0 0.5rem 1.875rem;
     font-size: 1rem;
     cursor: pointer;
+  }
 
-    .pop-up--skills-text-p {
-      padding-bottom: 1.3rem;
+  &-text-p {
+    padding-bottom: 1.3rem;
 
-      &:active {
-        font-weight: 600;
-      }
+    &:active {
+      font-weight: 600;
     }
+  }
+
+  &-question {
+    padding: 3rem 1.875rem 0.5rem 1.875rem;
+    font-weight: 400;
+    font-size: 1rem;
+    text-align: center;
+
+    .bold {
+      font-weight: 600;
+    }
+  }
+
+  &-btn-end {
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    width: 75%;
+    height: 2.5rem;
+    border-radius: 0.313rem;
+    margin-top: 2rem;
+    background-color: $primary-color;
+    color: $white-color;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.375rem;
+  }
+
+  &-btn-cancel {
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    width: 75%;
+    height: 2.5rem;
+    border-radius: 0.313rem;
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+    background-color: $shadow-color;
+    color: $dark-color;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.375rem;
   }
 }
 

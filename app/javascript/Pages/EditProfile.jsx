@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
-import Layout from "./Layout";
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function Profile(props) {
   const ErrorMessage = () => {
@@ -27,6 +26,18 @@ export default function Profile(props) {
     });
   };
 
+  const handleSubmitAvatar = (e) => {
+    e.preventDefault();
+
+    Inertia.put("/users/" + props.user.id + "/avatar", state, {
+      headers: window.defaultHeaders,
+    });
+  };
+
+  const avatar = (image) => {
+    return `${image}?tr=,r-max`;
+  };
+
   const handleChange = (e) => {
     const key = e.target.id;
     const value = e.target.value;
@@ -36,60 +47,109 @@ export default function Profile(props) {
     }));
   };
 
+  const state = { avatar: null };
+
+  const onImageChange = (event) => {
+    state.avatar = event.target.files[0];
+  };
+
   return (
-    <Layout current_user={props.user}>
+    <main className="edit-profile">
       <ErrorMessage />
-      <h1>Edit Profile</h1>
-      <p>Id: {props.user.id}</p>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <br />
-        <input
-          id="name"
-          defaultValue={props.user.name}
-          onChange={handleChange}
+      <div className="edit-profile-header">
+        <IoIosArrowBack
+          onClick={() => {
+            Inertia.get(`/users/${props.user.id}`);
+          }}
         />
-        <br />
-        <label htmlFor="username">Username:</label>
-        <br />
-        <input
-          id="username"
-          defaultValue={props.user.username}
-          onChange={handleChange}
+        <h1 className="edit-profile-title">Edit Profile</h1>
+      </div>
+
+      <div className="edit-profile-avatar">
+        <img
+          src={avatar(props.user.avatar.url)}
+          alt="Avatar"
+          className="edit-profile-avatar-img"
         />
-        <br />
-        <label htmlFor="email">Email:</label>
-        <br />
-        <input
-          id="email"
-          defaultValue={props.user.email}
-          onChange={handleChange}
-        />
-        <br />
-        <label htmlFor="description">Description:</label>
-        <br />
-        <textarea
-          id="description"
-          defaultValue={props.user.description}
-          onChange={handleChange}
-        />
-        <br />
-        <button type="submit">Save</button>
+        <form onSubmit={handleSubmitAvatar}>
+          <label
+            htmlFor="imageUploader"
+            className="edit-profile-avatar-form-label"
+          >
+            Change profile photo
+            <input
+              id="imageUploader"
+              type="file"
+              name="avatar"
+              accept="image/*"
+              multiple={false}
+              onChange={onImageChange}
+              className="edit-profile-avatar-form-input"
+            />
+          </label>
+          <input
+            type="submit"
+            value="Submit"
+            className="edit-profile-avatar-form-submit"
+          />
+        </form>
+      </div>
+      <form onSubmit={handleSubmit} className="form-2">
+        <div className="form-2-row">
+          <label className="form-2-label" htmlFor="name">
+            Name
+          </label>
+
+          <input
+            className="form-2-input"
+            id="name"
+            defaultValue={props.user.name}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-2-row">
+          <label className="form-2-label" htmlFor="username">
+            Username
+          </label>
+
+          <input
+            className="form-2-input"
+            id="username"
+            defaultValue={props.user.username}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-2-row">
+          <label className="form-2-label" htmlFor="email">
+            Email
+          </label>
+
+          <input
+            className="form-2-input"
+            id="email"
+            defaultValue={props.user.email}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-2-row">
+          <label className="form-2-label" htmlFor="description">
+            Description
+          </label>
+
+          <textarea
+            className="form-2-text"
+            id="description"
+            defaultValue={props.user.description}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="background-btn">
+          <button className="btn-ask-class" type="submit">
+            Save changes
+          </button>
+        </div>
       </form>
-
-      {/* <p>Name: {props.user.name}</p>
-      <p>Username: {props.user.username}</p>
-      <p>Description: {props.user.description}</p> */}
-      {/* <p>Can edit?: {props.can_edit.toString()}</p> */}
-
-      <Link
-        href={"/users/" + props.user.id}
-        headers={window.defaultHeaders}
-        as="button"
-      >
-        Cancel
-      </Link>
-    </Layout>
+    </main>
   );
 }
 

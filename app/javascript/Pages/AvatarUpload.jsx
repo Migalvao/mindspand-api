@@ -20,13 +20,9 @@ export default function Profile(props) {
   };
 
   const link = props.curent_avatar + "?tr=w-250,h-300";
-
   return (
     <Layout current_user={props.user}>
-      {/* <Head title="Welcome" /> */}
-      <h1>Upload Avatar</h1>
-      <p>Current avatar:</p>
-      <img src={link} />
+      <img src={link} alt="Avatar" />
       <br />
       <form onSubmit={handleSubmit}>
         <label htmlFor="image">
@@ -51,5 +47,5 @@ export default function Profile(props) {
 
 Profile.propTypes = {
   user: PropTypes.object.isRequired,
-  curent_avatar: PropTypes.object.isRequired,
+  curent_avatar: PropTypes.string.isRequired,
 };
